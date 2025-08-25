@@ -1990,9 +1990,8 @@ if 'show_form' in st.session_state and st.session_state.show_form and st.session
             
             # Method 2: Email Client (Outlook, Gmail, etc.)
             st.markdown("#### 📫 **Option 2: Desktop Email Client**")
-            if st.button("📧 Open in Email Client", use_container_width=True, key="email_client"):
-                st.markdown(f'<a href="{email_options["mailto_url"]}" target="_blank" style="color: white; text-decoration: none;">📧 Click here if the email client didn\'t open automatically</a>', unsafe_allow_html=True)
-                st.info("📊 This will open your default email client (Outlook, Gmail, Apple Mail, etc.) with the email pre-filled.")
+            st.markdown(f'<a href="{email_options["mailto_url"]}" target="_blank"><button style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%;">📧 Open in Email Client</button></a>', unsafe_allow_html=True)
+            st.info("📊 This will open your default email client (Outlook, Gmail, Apple Mail, etc.) with the email pre-filled.")
             
             # Method 3: Copy & Paste
             st.markdown("#### 📋 **Option 3: Copy & Paste Email**")
@@ -2257,7 +2256,7 @@ for i, message in enumerate(st.session_state.messages):
                                 days_requested = (end_date - start_date).days + 1
                                 
                                 # Generate email
-                                subject, body = generate_form_email(
+                                email_data = generate_email_alternatives(
                                     'Leave Request',
                                     emp_data['name'],
                                     emp_data['approval_manager'],
@@ -2275,17 +2274,17 @@ for i, message in enumerate(st.session_state.messages):
                                 # Add the email to chat
                                 email_message = f"""✅ **Leave Request Email Generated!**
 
-**To:** lgldubai@gmail.com
-**Subject:** {subject}
+**To:** concessioac@gmail.com
+**Subject:** {email_data['subject']}
 
 **Email Body:**
 ```
-{body}
+{email_data['text_email']}
 ```
 
 📎 **Next Steps:**
 1. Copy the email content above
-2. Send it to lgldubai@gmail.com
+2. Send it to concessioac@gmail.com
 3. Wait for approval from your manager"""
                                 
                                 st.session_state.messages.append({
