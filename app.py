@@ -286,6 +286,12 @@ if 'messages' not in st.session_state:
         'content': '👋 Hello! I am your **LGL Employee Helper**. Ask me anything about the ES Training DMCC Employee Handbook!\n\nI can help you with policies, procedures, benefits, and much more. What would you like to know?'
     })
 
+# Initialize input tracking to prevent loops
+if 'last_input' not in st.session_state:
+    st.session_state.last_input = ""
+if 'processing' not in st.session_state:
+    st.session_state.processing = False
+
 def process_user_question(question):
     """Process user question and return appropriate response"""
     question_lower = question.lower().strip()
@@ -430,7 +436,7 @@ with col3:
         st.session_state.messages.append({'role': 'assistant', 'content': response})
         st.rerun()
 
-# Chat interface
+# Chat input using form to prevent auto-rerun
 st.markdown("### 💬 Chat with LGL Assistant")
 
 # Display chat messages
@@ -450,24 +456,30 @@ for message in st.session_state.messages:
         </div>
         """, unsafe_allow_html=True)
 
-# Chat input
-user_input = st.text_input("💭 Ask me anything about the Employee Handbook...", key="user_input", placeholder="e.g., How do I apply for annual leave?")
-
-# Handle user input
-if user_input and user_input.strip():
-    # Check if this is a new message (prevent duplicates)
-    if not st.session_state.messages or st.session_state.messages[-1]['content'] != user_input:
-        # Add user message
-        st.session_state.messages.append({'role': 'user', 'content': user_input})
-        
-        # Process and add assistant response
-        with st.spinner('🔍 Searching through the handbook...'):
-            time.sleep(1 + random.uniform(0.5, 1.5))  # Simulate processing time
-            response = process_user_question(user_input)
-            st.session_state.messages.append({'role': 'assistant', 'content': response})
-        
-        # Clear the input by rerunning
-        st.rerun()
+# Use form for input to prevent auto-rerun
+with st.form(key='chat_form', clear_on_submit=True):
+    user_input = st.text_input("💭 Ask me anything about the Employee Handbook...", 
+                               placeholder="e.g., How do I apply for annual leave?",
+                               key="chat_input")
+    submit_button = st.form_submit_button("🚀 Send")
+    
+    if submit_button and user_input and user_input.strip():
+        # Prevent duplicate processing
+        if user_input != st.session_state.last_input and not st.session_state.processing:
+            st.session_state.processing = True
+            st.session_state.last_input = user_input
+            
+            # Add user message
+            st.session_state.messages.append({'role': 'user', 'content': user_input})
+            
+            # Process and add assistant response
+            with st.spinner('🔍 Searching through the handbook...'):
+                time.sleep(1 + random.uniform(0.5, 1.5))  # Simulate processing time
+                response = process_user_question(user_input)
+                st.session_state.messages.append({'role': 'assistant', 'content': response})
+            
+            st.session_state.processing = False
+            st.rerun()
 
 # Footer
 st.markdown("---")
