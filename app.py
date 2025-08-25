@@ -528,118 +528,329 @@ FORM_TYPES = {
 }
 st.markdown("""
 <style>
+    /* Import modern font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Root variables - Modern color system */
+    :root {
+        --primary-50: #f0f9ff;
+        --primary-100: #e0f2fe;
+        --primary-500: #0ea5e9;
+        --primary-600: #0284c7;
+        --primary-700: #0369a1;
+        --gray-50: #f8fafc;
+        --gray-100: #f1f5f9;
+        --gray-200: #e2e8f0;
+        --gray-300: #cbd5e1;
+        --gray-500: #64748b;
+        --gray-600: #475569;
+        --gray-700: #334155;
+        --gray-800: #1e293b;
+        --gray-900: #0f172a;
+        --success-50: #f0fdf4;
+        --success-500: #22c55e;
+        --warning-50: #fffbeb;
+        --warning-500: #f59e0b;
+        --error-50: #fef2f2;
+        --error-500: #ef4444;
+    }
+    
+    /* Global styles */
+    .stApp {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(135deg, var(--gray-50) 0%, var(--primary-50) 100%);
+    }
+    
+    /* Main header - Modern card design */
     .main-header {
-        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-        padding: 2rem;
-        border-radius: 20px;
+        background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+        padding: 2.5rem 2rem;
+        border-radius: 16px;
         color: white;
         text-align: center;
         margin-bottom: 2rem;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
+    .main-header h1 {
+        font-weight: 700;
+        font-size: 2.25rem;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.025em;
+    }
+    
+    .main-header p {
+        font-weight: 500;
+        opacity: 0.9;
+        font-size: 1.125rem;
+    }
+    
+    /* Modern message cards */
     .bot-message {
-        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-        padding: 1rem 1.5rem;
-        border-radius: 18px;
-        margin: 1rem 0;
-        border-left: 4px solid #667eea;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 1.5rem 0;
+        border: 1px solid var(--gray-200);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        position: relative;
+    }
+    
+    .bot-message::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+        border-radius: 2px 0 0 2px;
     }
     
     .user-message {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        padding: 1rem 1.5rem;
-        border-radius: 18px;
-        margin: 1rem 0;
+        background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 1.5rem 0 1.5rem 2rem;
         color: white;
-        margin-left: 2rem;
-        box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
-    }
-    
-    .option-button {
-        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-        border: 2px solid #2196f3;
-        padding: 12px 24px;
-        border-radius: 25px;
-        margin: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-weight: 600;
-        color: #1976d2;
-        font-size: 16px;
-        display: inline-block;
-        text-decoration: none;
-        box-shadow: 0 4px 8px rgba(33, 150, 243, 0.2);
-    }
-    
-    .option-button:hover {
-        background: linear-gradient(135deg, #2196f3, #1976d2);
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(33, 150, 243, 0.4);
-    }
-    
-    .quick-action {
-        background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
-        margin: 0.25rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.25), 0 2px 4px -1px rgba(14, 165, 233, 0.1);
         font-weight: 500;
     }
     
-    .quick-action:hover {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        transform: translateY(-2px);
-    }
-    
-    .stTextInput > div > div > input {
-        border-radius: 25px;
-        padding: 1rem;
-        border: 2px solid #e0e0e0;
-        font-size: 1rem;
-    }
-    
-    .stTextInput > div > div > input:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-    
+    /* Modern buttons */
     .stButton > button {
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
         color: white;
         border: none;
-        border-radius: 25px;
-        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
         font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        font-family: 'Inter', sans-serif;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.25);
+        font-size: 0.875rem;
+        letter-spacing: 0.025em;
     }
     
     .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        transform: translateY(-1px);
+        box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.25), 0 4px 6px -2px rgba(14, 165, 233, 0.1);
+        background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
     }
     
-    body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Form inputs - Modern styling */
+    .stTextInput > div > div > input,
+    .stTextArea > div > div > textarea,
+    .stSelectbox > div > div > div,
+    .stDateInput > div > div > input {
+        border-radius: 8px !important;
+        border: 1px solid var(--gray-300) !important;
+        padding: 0.75rem !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.875rem !important;
+        transition: all 0.2s ease !important;
+        background: white !important;
     }
     
-    .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+    .stTextInput > div > div > input:focus,
+    .stTextArea > div > div > textarea:focus,
+    .stSelectbox > div > div > div:focus-within,
+    .stDateInput > div > div > input:focus {
+        border-color: var(--primary-500) !important;
+        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1) !important;
+        outline: none !important;
     }
     
-    .choice-container {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 1rem;
-        border-radius: 15px;
+    /* Quick action cards */
+    .quick-actions {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--gray-200);
         margin: 1rem 0;
-        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .quick-actions h3 {
+        color: var(--gray-800);
+        font-weight: 600;
+        margin-bottom: 1rem;
+        font-size: 1.125rem;
+    }
+    
+    /* Option buttons - Modern card style */
+    .option-button {
+        background: white;
+        border: 1px solid var(--gray-200);
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        margin: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        color: var(--gray-700);
+        font-size: 0.875rem;
+        display: inline-block;
+        text-decoration: none;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+    
+    .option-button:hover {
+        background: var(--primary-50);
+        border-color: var(--primary-200);
+        color: var(--primary-700);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    /* Sidebar styling */
+    .css-1d391kg {
+        background: white;
+        border-right: 1px solid var(--gray-200);
+    }
+    
+    /* Success/Warning/Error states */
+    .stSuccess {
+        background: var(--success-50);
+        border: 1px solid var(--success-500);
+        color: var(--success-500);
+        border-radius: 8px;
+    }
+    
+    .stWarning {
+        background: var(--warning-50);
+        border: 1px solid var(--warning-500);
+        color: var(--warning-500);
+        border-radius: 8px;
+    }
+    
+    .stError {
+        background: var(--error-50);
+        border: 1px solid var(--error-500);
+        color: var(--error-500);
+        border-radius: 8px;
+    }
+    
+    /* Info boxes */
+    .stInfo {
+        background: var(--primary-50);
+        border: 1px solid var(--primary-500);
+        color: var(--primary-700);
+        border-radius: 8px;
+    }
+    
+    /* Metrics styling */
+    .css-1xarl3l {
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--gray-200);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Expander styling */
+    .streamlit-expanderHeader {
+        background: var(--gray-50);
+        border-radius: 8px;
+        border: 1px solid var(--gray-200);
+        font-weight: 500;
+    }
+    
+    /* Code blocks */
+    .stCodeBlock {
+        border-radius: 8px;
+        background: var(--gray-900);
+        border: 1px solid var(--gray-700);
+    }
+    
+    /* Download buttons */
+    .stDownloadButton > button {
+        background: var(--gray-600);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    
+    .stDownloadButton > button:hover {
+        background: var(--gray-700);
+        transform: translateY(-1px);
+    }
+    
+    /* Form containers */
+    .css-1r6slb0 {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--gray-200);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin: 1rem 0;
+    }
+    
+    /* Email option cards */
+    .email-option-card {
+        background: white;
+        border: 1px solid var(--gray-200);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: all 0.2s ease;
+    }
+    
+    .email-option-card:hover {
+        border-color: var(--primary-300);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Modern instruction boxes */
+    .instruction-box {
+        background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--primary-200);
+        color: var(--primary-800);
+        margin: 1.5rem 0;
+        box-shadow: 0 2px 4px -1px rgba(14, 165, 233, 0.1);
+    }
+    
+    .instruction-box strong {
+        color: var(--primary-700);
+        font-weight: 600;
+    }
+    
+    /* Headers and typography */
+    h1, h2, h3 {
+        color: var(--gray-800);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+    }
+    
+    p, div {
+        color: var(--gray-600);
+        line-height: 1.6;
+    }
+    
+    /* Clean scrollbars */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: var(--gray-100);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--gray-300);
+        border-radius: 3px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--gray-400);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -2173,10 +2384,20 @@ if 'show_form' in st.session_state and st.session_state.show_form and st.session
             st.success(f"✅ {form_config['title']} submitted successfully!")
             
             # Display multiple sending options
-            st.markdown("### 📧 **Choose Your Preferred Method to Send Request:**")
+            st.markdown("""
+            <div class="quick-actions">
+                <h3>📧 Choose Your Preferred Method to Send Request</h3>
+                <p style="color: var(--gray-500);">Select the most convenient way to send your request to your manager</p>
+            </div>
+            """)
             
             # Method 1: Web-based Email Services
-            st.markdown("#### 🌍 **Option 1: Web Email Services (Easiest)**")
+            st.markdown("""
+            <div class="email-option-card">
+                <h4 style="color: var(--gray-800); margin-bottom: 0.5rem;">🌍 Web Email Services <span style="background: var(--success-500); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">EASIEST</span></h4>
+                <p style="color: var(--gray-600); margin-bottom: 1rem;">One-click to open pre-filled emails in your favorite email service</p>
+            </div>
+            """)
             col1, col2, col3 = st.columns(3)
             
             with col1:
@@ -2190,13 +2411,23 @@ if 'show_form' in st.session_state and st.session_state.show_form and st.session
             
             st.info("📊 Click any button above to open a new tab with your request pre-filled. Just review and click Send!")
             
-            # Method 2: Email Client (Outlook, Gmail, etc.)
-            st.markdown("#### 📫 **Option 2: Desktop Email Client**")
-            st.markdown(f'<a href="{email_options["mailto_url"]}" target="_blank"><button style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%;">📧 Open in Email Client</button></a>', unsafe_allow_html=True)
-            st.info("📊 This will open your default email client (Outlook, Gmail, Apple Mail, etc.) with the email pre-filled.")
+            # Method 2: Email Client
+            st.markdown("""
+            <div class="email-option-card">
+                <h4 style="color: var(--gray-800); margin-bottom: 0.5rem;">📫 Desktop Email Client</h4>
+                <p style="color: var(--gray-600); margin-bottom: 1rem;">Opens your default email app (Outlook, Gmail, Apple Mail) with pre-filled content</p>
+            </div>
+            """)
+            st.markdown(f'<a href="{email_options["mailto_url"]}" target="_blank"><button style="background: linear-gradient(135deg, var(--primary-500), var(--primary-600)); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600; font-family: Inter, sans-serif;">📧 Open in Email Client</button></a>', unsafe_allow_html=True)
+            st.info("📊 This will open your default email client with the email pre-filled.")
             
             # Method 3: Copy & Paste
-            st.markdown("#### 📋 **Option 3: Copy & Paste Email**")
+            st.markdown("""
+            <div class="email-option-card">
+                <h4 style="color: var(--gray-800); margin-bottom: 0.5rem;">📋 Copy & Paste Method</h4>
+                <p style="color: var(--gray-600); margin-bottom: 1rem;">Copy formatted email content for any email client or webmail service</p>
+            </div>
+            """)
             with st.expander("📝 Click to Copy Email Content", expanded=False):
                 st.code(email_options['text_email'], language=None)
                 st.markdown(f"""
@@ -2208,15 +2439,20 @@ if 'show_form' in st.session_state and st.session_state.show_form and st.session
                 """)
             
             # Method 4: WhatsApp Alternative
-            st.markdown("#### 📱 **Option 4: WhatsApp/SMS Format**")
+            st.markdown("""
+            <div class="email-option-card">
+                <h4 style="color: var(--gray-800); margin-bottom: 0.5rem;">📱 Mobile-Friendly Options</h4>
+                <p style="color: var(--gray-600); margin-bottom: 1rem;">Optimized formats for WhatsApp, SMS, and mobile messaging apps</p>
+            </div>
+            """)
             with st.expander("📱 Mobile-Friendly Format", expanded=False):
                 st.code(email_options['whatsapp_message'], language=None)
                 st.info("Copy this shorter format for WhatsApp, SMS, or other messaging apps.")
             
             # Instructions
             st.markdown("""
-            <div style="background: #e7f3ff; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #2196f3; color: #1565c0; margin-top: 1.5rem;">
-                📎 <strong>Important Instructions:</strong><br>
+            <div class="instruction-box">
+                📎 <strong>Important Instructions:</strong><br><br>
                 • <strong>Email Address:</strong> concessioac@gmail.com<br>
                 • <strong>Response Time:</strong> Your manager will review and respond<br>
                 • <strong>Urgent Requests:</strong> Contact your manager directly<br>
@@ -2237,8 +2473,14 @@ elif 'show_leave_form' in st.session_state and st.session_state.show_leave_form 
     st.session_state.show_leave_form = False
     st.rerun()
 
-# Quick action buttons with icons
-st.markdown("### 🚀 Quick Topics:")
+# Quick action buttons with modern design
+st.markdown("""
+<div class="quick-actions">
+    <h3>🚀 Quick Topics</h3>
+    <p style="color: var(--gray-500); margin-bottom: 1rem;">Get instant answers to common questions</p>
+</div>
+""", unsafe_allow_html=True)
+
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -2307,7 +2549,12 @@ with col3:
 # Employee Data Table Section (for admin/HR view)
 st.markdown("---")
 if st.checkbox("📈 Show Employee Leave Tracking Data (HR View)"):
-    st.markdown("### 📈 Employee Leave Tracking Database")
+    st.markdown("""
+    <div class="quick-actions">
+        <h3>📈 Employee Leave Tracking Database</h3>
+        <p style="color: var(--gray-500);">Comprehensive overview of employee leave balances and usage</p>
+    </div>
+    """)
     
     # Create dataframe for display
     employee_df = []
@@ -2366,7 +2613,12 @@ if st.checkbox("📈 Show Employee Leave Tracking Data (HR View)"):
     )
 
 # Chat input using form to prevent auto-rerun
-st.markdown("### 💬 Chat with LGL Assistant")
+st.markdown("""
+<div class="quick-actions">
+    <h3>💬 Chat with LGL Assistant</h3>
+    <p style="color: var(--gray-500);">Ask me anything about the Employee Handbook policies and procedures</p>
+</div>
+""", unsafe_allow_html=True)
 
 # Display chat messages
 for i, message in enumerate(st.session_state.messages):
@@ -2560,9 +2812,10 @@ with st.form(key='chat_form', clear_on_submit=True):
 # Footer
 st.markdown("---")
 st.markdown("""
-<div style="text-align: center; color: #666; padding: 2rem;">
-    <p>🏢 <strong>Alistar Handbook</strong> - Employee Handbook Assistant</p>
-    <p>📍 605, Park Avenue , Dubai Silicon Oasis</p>
-    <p><em>For additional HR support, please contact the HR Department</em></p>
+<div style="text-align: center; padding: 2rem; background: white; border-radius: 12px; border: 1px solid var(--gray-200); margin-top: 2rem;">
+    <h4 style="color: var(--gray-800); margin-bottom: 0.5rem; font-weight: 600;">🏢 Alistar Personnel</h4>
+    <p style="color: var(--gray-600); margin-bottom: 0.5rem;">Employee Handbook Assistant</p>
+    <p style="color: var(--gray-500); font-size: 0.875rem;">📍 605, Park Avenue, Dubai Silicon Oasis</p>
+    <p style="color: var(--gray-400); font-size: 0.75rem; margin-top: 1rem;"><em>For additional HR support, please contact the HR Department</em></p>
 </div>
 """, unsafe_allow_html=True)
