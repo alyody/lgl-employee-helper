@@ -3,7 +3,7 @@ import re
 import time
 import random
 import pandas as pd
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -1947,6 +1947,208 @@ if 'show_form' in st.session_state and st.session_state.show_form and st.session
                 'justification': justification,
                 'urgency': urgency
             })
+            
+        elif form_type == 'grievance_report':
+            # Grievance Report Form
+            st.warning("⚠️ **Confidential Form** - This information will be handled with strict confidentiality")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                issue_type = st.selectbox(
+                    "Issue Type:",
+                    ['Workplace Harassment', 'Discrimination', 'Unfair Treatment', 'Policy Violation', 
+                     'Safety Concerns', 'Bullying', 'Sexual Harassment', 'Other']
+                )
+                incident_date = st.date_input("Incident Date:", max_value=date.today())
+                
+            with col2:
+                involved_parties = st.text_area(
+                    "Involved Parties:", 
+                    placeholder="Names and roles of people involved (including witnesses)",
+                    height=100
+                )
+            
+            description = st.text_area(
+                "Detailed Description:", 
+                placeholder="Please provide a detailed description of the incident(s). Include dates, times, locations, and specific behaviors or actions.",
+                height=150
+            )
+            
+            witnesses = st.text_area(
+                "Witnesses:", 
+                placeholder="Names and contact information of any witnesses",
+                height=80
+            )
+            
+            previous_reports = st.checkbox("I have previously reported this or similar issues")
+            action_requested = st.text_area(
+                "Outcome/Action Requested:", 
+                placeholder="What resolution or action would you like to see?",
+                height=80
+            )
+            
+            form_data.update({
+                'issue_type': issue_type,
+                'incident_date': incident_date.strftime('%Y-%m-%d'),
+                'involved_parties': involved_parties,
+                'description': description,
+                'witnesses': witnesses,
+                'previous_reports': 'Yes' if previous_reports else 'No',
+                'action_requested': action_requested
+            })
+            
+        elif form_type == 'policy_clarification':
+            # Policy Clarification Request Form
+            col1, col2 = st.columns(2)
+            with col1:
+                policy_area = st.selectbox(
+                    "Policy Area:",
+                    ['Leave Policies', 'Working Hours', 'Disciplinary Procedures', 'Health & Safety',
+                     'Code of Conduct', 'Benefits & Compensation', 'Training & Development', 
+                     'Performance Management', 'Visa & Immigration', 'Other']
+                )
+                urgency = st.selectbox("Urgency Level:", ['Normal', 'Urgent', 'Time-Sensitive'])
+                
+            with col2:
+                situation_context = st.text_area(
+                    "Situation Context:", 
+                    placeholder="Describe the situation that prompted this request",
+                    height=100
+                )
+            
+            specific_question = st.text_area(
+                "Specific Question/Clarification Needed:", 
+                placeholder="Please be as specific as possible about what you need clarified",
+                height=120
+            )
+            
+            handbook_reference = st.text_input(
+                "Handbook Reference (if any):", 
+                placeholder="Page number or section reference if you've already checked the handbook"
+            )
+            
+            form_data.update({
+                'policy_area': policy_area,
+                'specific_question': specific_question,
+                'situation_context': situation_context,
+                'urgency': urgency,
+                'handbook_reference': handbook_reference
+            })
+            
+        elif form_type == 'schedule_change':
+            # Schedule Change Request Form
+            col1, col2 = st.columns(2)
+            with col1:
+                change_type = st.selectbox(
+                    "Type of Change:",
+                    ['Working Hours Adjustment', 'Shift Change', 'Remote Work Request', 
+                     'Flexible Schedule', 'Part-time Request', 'Temporary Schedule Change']
+                )
+                effective_date = st.date_input("Effective Date:", min_value=date.today())
+                
+            with col2:
+                duration = st.selectbox(
+                    "Duration:",
+                    ['Permanent', 'Temporary (1 month)', 'Temporary (3 months)', 
+                     'Temporary (6 months)', 'Other duration']
+                )
+                
+            current_schedule = st.text_area(
+                "Current Schedule:", 
+                placeholder="Describe your current working schedule",
+                height=80
+            )
+            
+            proposed_schedule = st.text_area(
+                "Proposed New Schedule:", 
+                placeholder="Describe the schedule change you are requesting",
+                height=80
+            )
+            
+            reason = st.text_area(
+                "Reason for Change:", 
+                placeholder="Please explain why you need this schedule change",
+                height=100
+            )
+            
+            impact_assessment = st.text_area(
+                "Work Impact Assessment:", 
+                placeholder="How will this change affect your work responsibilities and team collaboration?",
+                height=80
+            )
+            
+            form_data.update({
+                'change_type': change_type,
+                'proposed_schedule': proposed_schedule,
+                'effective_date': effective_date.strftime('%Y-%m-%d'),
+                'reason': reason,
+                'current_schedule': current_schedule,
+                'duration': duration,
+                'impact_assessment': impact_assessment
+            })
+            
+        elif form_type == 'resignation_notice':
+            # Resignation Notice Form
+            st.warning("📝 **Formal Resignation Notice** - Please ensure all information is accurate")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                resignation_type = st.selectbox(
+                    "Resignation Type:",
+                    ['Voluntary Resignation', 'End of Contract', 'Early Resignation', 'Retirement']
+                )
+                last_working_day = st.date_input(
+                    "Last Working Day:", 
+                    min_value=date.today() + timedelta(days=30)
+                )
+                
+            with col2:
+                notice_period = st.selectbox(
+                    "Notice Period:",
+                    ['30 days (Standard)', '60 days', '90 days', 'As per contract', 'Immediate']
+                )
+                
+            reason_category = st.selectbox(
+                "Reason Category:",
+                ['Career Advancement', 'Personal Reasons', 'Relocation', 'Better Opportunity',
+                 'Family Commitments', 'Health Reasons', 'Further Education', 'Retirement', 'Other']
+            )
+            
+            reason = st.text_area(
+                "Detailed Reason (Optional):", 
+                placeholder="You may provide additional details about your decision to resign",
+                height=100
+            )
+            
+            transition_plan = st.text_area(
+                "Transition Plan:", 
+                placeholder="How do you plan to hand over your responsibilities? List key tasks, projects, and contacts.",
+                height=120
+            )
+            
+            feedback = st.text_area(
+                "Feedback for Company (Optional):", 
+                placeholder="Any constructive feedback about your experience working here",
+                height=80
+            )
+            
+            return_company_property = st.checkbox("I acknowledge I must return all company property")
+            forward_email = st.text_input(
+                "Forward Email Address:", 
+                placeholder="Personal email for final communications"
+            )
+            
+            form_data.update({
+                'resignation_type': resignation_type,
+                'last_working_day': last_working_day.strftime('%Y-%m-%d'),
+                'notice_period': notice_period,
+                'reason_category': reason_category,
+                'reason': reason,
+                'transition_plan': transition_plan,
+                'feedback': feedback,
+                'return_company_property': 'Yes' if return_company_property else 'No',
+                'forward_email': forward_email
+            })
         
         # Submit button
         submitted = st.form_submit_button(f"📧 Submit {form_config['title']}", use_container_width=True)
@@ -2010,38 +2212,6 @@ if 'show_form' in st.session_state and st.session_state.show_form and st.session
             with st.expander("📱 Mobile-Friendly Format", expanded=False):
                 st.code(email_options['whatsapp_message'], language=None)
                 st.info("Copy this shorter format for WhatsApp, SMS, or other messaging apps.")
-            
-            # Method 5: Download as file
-            st.markdown("#### 💾 **Option 5: Download Request**")
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                st.download_button(
-                    label="💾 Download as Text File",
-                    data=email_options['text_email'],
-                    file_name=f"{form_config['title'].replace(' ', '_')}_{emp_data['name']}_{datetime.now().strftime('%Y%m%d')}.txt",
-                    mime="text/plain",
-                    use_container_width=True
-                )
-            
-            with col2:
-                # Create JSON format for advanced users
-                json_data = {
-                    'request_type': form_config['title'],
-                    'employee': emp_data['name'],
-                    'manager': emp_data['approval_manager'],
-                    'date_submitted': datetime.now().isoformat(),
-                    'details': form_data,
-                    'email_to': notification_links['manager_email']
-                }
-                
-                st.download_button(
-                    label="💾 Download as JSON",
-                    data=json.dumps(json_data, indent=2),
-                    file_name=f"{form_config['title'].replace(' ', '_')}_{emp_data['name']}_{datetime.now().strftime('%Y%m%d')}.json",
-                    mime="application/json",
-                    use_container_width=True
-                )
             
             # Instructions
             st.markdown("""

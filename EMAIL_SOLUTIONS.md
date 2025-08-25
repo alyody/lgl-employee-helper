@@ -2,7 +2,7 @@
 
 ## 🚨 **Problem Solved: Streamlit Can't Send Emails Directly**
 
-You're absolutely right! Streamlit applications running in the browser cannot directly send emails due to security restrictions. Here are the **5 alternative solutions** I've implemented:
+You're absolutely right! Streamlit applications running in the browser cannot directly send emails due to security restrictions. Here are the **4 alternative solutions** I've implemented:
 
 ---
 
@@ -29,17 +29,12 @@ You're absolutely right! Streamlit applications running in the browser cannot di
 - **SMS Format:** Can be sent via text message
 - **Mobile Email:** Optimized for mobile email apps
 
-### 💾 **5. Download Options**
-- **Text File (.txt):** Download request as text file
-- **JSON File (.json):** Download as structured data for advanced users
-- **Backup:** Keep records for your files
-
 ---
 
 ## 🎯 **How It Works Now:**
 
-1. **Employee Fills Form** → Form generates request content
-2. **Choose Method** → Pick from 5 different sending options
+1. **Employee Fills Comprehensive Form** → Choose from 10 detailed form types including grievance reports and resignation notices
+2. **Choose Method** → Pick from 4 different sending options
 3. **Send Request** → Use preferred method to send to concessioac@gmail.com
 4. **Manager Reviews** → Manager receives and responds
 5. **Employee Gets Response** → Approval/rejection via email
