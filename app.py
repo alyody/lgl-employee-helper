@@ -563,13 +563,13 @@ st.markdown("""
     
     /* Main header - Modern card design */
     .main-header {
-        background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+        background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
         padding: 2.5rem 2rem;
         border-radius: 16px;
         color: white;
         text-align: center;
         margin-bottom: 2rem;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
@@ -578,12 +578,14 @@ st.markdown("""
         font-size: 2.25rem;
         margin-bottom: 0.5rem;
         letter-spacing: -0.025em;
+        color: white;
     }
     
     .main-header p {
         font-weight: 500;
         opacity: 0.9;
         font-size: 1.125rem;
+        color: rgba(255, 255, 255, 0.9);
     }
     
     /* Modern message cards */
@@ -651,6 +653,7 @@ st.markdown("""
         font-size: 0.875rem !important;
         transition: all 0.2s ease !important;
         background: white !important;
+        margin-bottom: 1rem !important;
     }
     
     .stTextInput > div > div > input:focus,
@@ -660,6 +663,63 @@ st.markdown("""
         border-color: var(--primary-500) !important;
         box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1) !important;
         outline: none !important;
+    }
+    
+    /* Selectbox specific styling */
+    .stSelectbox > div {
+        margin-bottom: 1rem !important;
+    }
+    
+    .stSelectbox > div > label {
+        font-weight: 500 !important;
+        color: var(--gray-700) !important;
+        margin-bottom: 0.5rem !important;
+        display: block !important;
+        font-size: 0.875rem !important;
+    }
+    
+    /* Form containers and spacing */
+    .stForm {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--gray-200);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin: 1rem 0;
+    }
+    
+    /* Column spacing fix */
+    .css-ocqkz7 {
+        gap: 1rem !important;
+    }
+    
+    /* Form labels styling */
+    .stTextInput > div > label,
+    .stTextArea > div > label,
+    .stSelectbox > div > label,
+    .stDateInput > div > label {
+        font-weight: 500 !important;
+        color: var(--gray-700) !important;
+        margin-bottom: 0.5rem !important;
+        font-size: 0.875rem !important;
+        line-height: 1.25 !important;
+    }
+    
+    /* Checkbox styling */
+    .stCheckbox {
+        margin: 1rem 0 !important;
+    }
+    
+    .stCheckbox > div {
+        align-items: flex-start !important;
+        gap: 0.5rem !important;
+    }
+    
+    .stCheckbox > div > label {
+        font-weight: 400 !important;
+        color: var(--gray-600) !important;
+        font-size: 0.875rem !important;
+        line-height: 1.5 !important;
     }
     
     /* Quick action cards */
@@ -710,26 +770,52 @@ st.markdown("""
         border-right: 1px solid var(--gray-200);
     }
     
+    /* Sidebar form elements */
+    .css-1d391kg .stSelectbox > div {
+        margin-bottom: 1rem;
+    }
+    
+    .css-1d391kg .stSelectbox > div > label {
+        font-weight: 500;
+        color: var(--gray-700);
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .css-1d391kg .stSelectbox > div > div > div {
+        background: var(--gray-50);
+        border: 1px solid var(--gray-300);
+        border-radius: 8px;
+        padding: 0.5rem;
+    }
+    
     /* Success/Warning/Error states */
     .stSuccess {
-        background: var(--success-50);
-        border: 1px solid var(--success-500);
-        color: var(--success-500);
-        border-radius: 8px;
+        background: var(--success-50) !important;
+        border: 1px solid var(--success-500) !important;
+        color: var(--success-500) !important;
+        border-radius: 8px !important;
+        margin: 1rem 0 !important;
+        padding: 1rem !important;
     }
     
     .stWarning {
-        background: var(--warning-50);
-        border: 1px solid var(--warning-500);
-        color: var(--warning-500);
-        border-radius: 8px;
+        background: var(--warning-50) !important;
+        border: 1px solid var(--warning-500) !important;
+        color: var(--warning-500) !important;
+        border-radius: 8px !important;
+        margin: 1rem 0 !important;
+        padding: 1rem !important;
+        font-weight: 500 !important;
     }
     
     .stError {
-        background: var(--error-50);
-        border: 1px solid var(--error-500);
-        color: var(--error-500);
-        border-radius: 8px;
+        background: var(--error-50) !important;
+        border: 1px solid var(--error-500) !important;
+        color: var(--error-500) !important;
+        border-radius: 8px !important;
+        margin: 1rem 0 !important;
+        padding: 1rem !important;
     }
     
     /* Info boxes */
