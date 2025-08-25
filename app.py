@@ -322,6 +322,407 @@ HANDBOOK_DATA = {
 • 5+ years: No reduction
 
 📋 **Reference:** Section 18 of Employee Handbook"""
+    },
+    
+    # New sub-category entries
+    'health insurance': {
+        'title': 'Health Insurance Coverage',
+        'content': """🏥 **Health Insurance Policy:**
+
+**Coverage Levels:**
+• **Probation Period:** Basic medical coverage (first 6 months)
+• **After 6 Months:** Comprehensive medical coverage
+• **Dependents:** Available upon request (employee covers costs)
+
+**What's Covered:**
+• Medical consultations and treatments
+• Emergency medical services
+• Prescription medications
+• Specialist referrals
+
+**Important Notes:**
+• Coverage begins after probation completion
+• Employee responsible for dependent insurance costs
+• Processing fees apply for dependent coverage
+
+📋 **Reference:** Section 9 of Employee Handbook"""
+    },
+    
+    'visa sponsorship': {
+        'title': 'Visa & Immigration Support',
+        'content': """📋 **Visa Sponsorship Policy:**
+
+**Employee Visa:**
+• Company-sponsored resident visa provided
+• All visa processing handled by company
+• Valid for duration of employment
+
+**Dependent Visas:**
+• Available upon request and line manager agreement
+• Employee covers ALL dependent costs including:
+  - Processing fees
+  - Visa application fees  
+  - Medical insurance for dependents
+  - Emirates ID fees
+
+**Application Process:**
+• Submit request to line manager
+• Provide required documentation
+• Company assists with processing
+
+📋 **Reference:** Section 9 of Employee Handbook"""
+    },
+    
+    'national holidays': {
+        'title': 'National Holidays & Public Days Off',
+        'content': """🎆 **Official National Holidays:**
+
+**Religious Holidays:**
+• Hijiri's New Year's Day (1 day)
+• Eid Al Fitr (2 days)
+• Eid Al Adha (3 days)
+• Prophet Mohammed's Birthday (1 day)
+• Isra and Al Miraj (1 day)
+
+**National Celebrations:**
+• Gregorian New Year's Day (1 day)
+• UAE National Day (1 day)
+
+**Total:** 9 official national holidays per year
+
+**Important Notes:**
+• Holidays are paid time off
+• Dates may vary based on lunar calendar
+• Official announcements will be made
+• No work required on these days
+
+📋 **Reference:** Section 9 of Employee Handbook"""
+    },
+    
+    'administrative hours': {
+        'title': 'Administrative Staff Working Hours',
+        'content': """💼 **Administrative Staff Schedule:**
+
+**Regular Hours:**
+• **Days:** Monday – Friday
+• **Time:** 9:00am – 6:00pm
+• **Break:** Standard lunch break included
+
+**Overtime:**
+• Paid in accordance to confirmed attendance
+• At management's discretion
+• Must be pre-approved
+
+**Ramadan Schedule:**
+• 2 hours reduction per day (if normal hours exceed 8 hours)
+• 1 week notice provided for revised times
+• Applies to administrative staff only
+
+**Attendance:**
+• Punctuality expected
+• Notify manager of any delays
+• Consistent lateness may result in disciplinary action
+
+📋 **Reference:** Section 5 of Employee Handbook"""
+    },
+    
+    'academic hours': {
+        'title': 'Academic Staff Teaching Schedule',
+        'content': """🏫 **Academic Staff Schedule:**
+
+**Teaching Sessions:**
+• **Morning:** 9:00am – 12:00pm
+• **Afternoon:** 12:00pm – 3:00pm  
+• **Evening:** 3:00pm – 6:00pm
+
+**Requirements:**
+• **Minimum:** 2 sessions per day
+• **Days:** Monday to Friday
+• **Flexibility:** Can work additional sessions based on demand
+
+**Schedule Variations:**
+• Can work 3rd session during busy periods (overtime)
+• May reduce to 1 session during quieter periods
+• Schedule adjustments based on student enrollment
+
+**Ramadan:**
+• No special hour reductions for teaching staff
+• Maintain regular session schedule
+
+📋 **Reference:** Section 5 of Employee Handbook"""
+    },
+    
+    'dress code': {
+        'title': 'Professional Dress Code Standards',
+        'content': """👔 **Dress Code Policy:**
+
+**Required Standards:**
+• Smart, professional attire
+• Clean, tidy, and appropriate clothing
+• Professional appearance at all times
+
+**Prohibited Items:**
+• Torn, dirty, or worn clothing/footwear
+• Transparent clothing revealing underwear or midriffs
+• Low-cut necklines
+• Very short skirts or trousers
+• Shorts or beachwear
+• Flip-flops
+
+**Personal Appearance:**
+• **Tattoos:** Should be covered where possible
+• **Piercings:** Only earrings or nose studs permitted
+• **Religious dress:** Appropriate cultural dress permitted unless safety risk
+
+**Compliance:**
+• Managers may address dress code violations
+• Repeated violations may result in disciplinary action
+
+📋 **Reference:** Section 6 of Employee Handbook"""
+    },
+    
+    'safeguarding rules': {
+        'title': 'Student Safeguarding Guidelines',
+        'content': """🛑 **Student Safeguarding Policy:**
+
+**Physical Contact:**
+• **No physical contact** with students
+• Maintain professional distance at all times
+• Avoid situations that could be misinterpreted
+
+**Interaction Guidelines:**
+• Avoid being alone with students
+• Keep classroom doors open
+• Maintain respectable distance
+• No personal conversations with students
+• No advice about personal relationships
+
+**Teaching Environment:**
+• No teaching small groups without another staff member present
+• Be aware of student attachments and maintain distance
+• Report any concerning behavior to management
+
+**Outside Contact:**
+• **No contact outside school**
+• No personal contact details to students
+• No social media following (except official ES forums)
+• No private meetings outside school
+• No vehicle lifts without permission
+• No private parties or social events
+• **No romantic or sexual relationships with students**
+
+**Violations:**
+• Safeguarding violations are considered **gross misconduct**
+• May result in immediate termination
+
+📋 **Reference:** Section 6 of Employee Handbook"""
+    },
+    
+    'minor misconduct': {
+        'title': 'Minor Misconduct Examples & Consequences',
+        'content': """⚠️ **Minor Misconduct Categories:**
+
+**Attendance Issues:**
+• Persistent lateness and poor timekeeping
+• Unauthorized absence without valid reason
+• Abuse of sick leave policies
+
+**Work Performance:**
+• Incompetence in job duties
+• Failure to follow prescribed procedures
+• Failure to observe company regulations
+• Private work during working hours
+
+**Typical Consequences:**
+• **First Offense:** Verbal warning (6 months validity)
+• **Repeated Issues:** First written warning (12 months validity)
+• **Continued Problems:** Final written warning (12 months validity)
+• **Persistent Issues:** Possible termination
+
+**Progressive Discipline:**
+• Warnings build upon each other
+• Each step gives opportunity for improvement
+• Support and training may be provided
+• Right to appeal at each stage
+
+📋 **Reference:** Section 12 of Employee Handbook"""
+    },
+    
+    'gross misconduct': {
+        'title': 'Gross Misconduct & Immediate Consequences',
+        'content': """🚨 **Serious Violations (Gross Misconduct):**
+
+**Criminal/Illegal Acts:**
+• Theft or unauthorized possession of company property
+• Bribery, corruption, or illegal activities
+• Physical assault or threats of violence
+
+**Professional Violations:**
+• Breaches of confidentiality or security
+• Being unfit for duty due to drugs/alcohol
+• False declaration of qualifications
+• Failure to observe safeguarding rules
+
+**Workplace Behavior:**
+• Refusal to carry out management instructions
+• Insulting behavior/insubordination
+• Unlawful discrimination, bullying, or harassment
+• Bringing organization into serious disrepute
+• Willful damage of company property
+• Intimidation of colleagues or students
+
+**Technology Misuse:**
+• Accessing pornographic/offensive material
+• Serious misuse of company IT systems
+
+**Immediate Consequences:**
+• **May result in immediate termination**
+• No progressive warnings required
+• Summary dismissal possible
+• Right to formal hearing and appeal
+
+📋 **Reference:** Section 12 of Employee Handbook"""
+    },
+    
+    'performance appraisal': {
+        'title': 'Performance Appraisal Process',
+        'content': """📊 **Annual Performance Review:**
+
+**Schedule:**
+• **First Review:** After 6-month probation completion
+• **Ongoing:** Annual formal reviews thereafter
+• **Mid-Year:** Optional 6-month verbal review
+• **Notice:** At least 1 week before meeting
+
+**Review Process:**
+• Performance evaluation forms provided in advance
+• Employee self-assessment encouraged
+• Meeting with line manager or senior staff
+• Discussion of achievements and areas for improvement
+• Goal setting for upcoming period
+
+**Confidentiality:**
+• Information shared only with senior management
+• Private and confidential process
+• Professional development focus
+
+**Outcomes:**
+• Performance rating
+• Development plan
+• Training recommendations
+• Career progression discussions
+• Salary review considerations
+
+**Documentation:**
+• Written record of review
+• Signed by both parties
+• Filed in personnel records
+
+📋 **Reference:** Section 11 of Employee Handbook"""
+    },
+    
+    'maternity leave': {
+        'title': 'Maternity Leave Policy',
+        'content': """🤱 **Maternity Leave Entitlement:**
+
+**Total Leave:** 60 days
+• **Full Pay:** First 45 consecutive calendar days
+• **Half Pay:** Following 15 days
+
+**Application Requirements:**
+• **Notice:** 15 weeks before due date
+• **Documentation:** Medical certificate required
+• **Planning:** Coordinate with line manager
+
+**Additional Benefits:**
+• **Feeding Breaks:** Two additional 30-minute breaks each day
+• **Duration:** Available for 18 months post-delivery
+• **Extended Leave:** Up to 100 additional days without pay (consecutive or non-consecutive)
+
+**Return to Work:**
+• Medical clearance required
+• Gradual return options available
+• Job protection during leave period
+
+**Important Notes:**
+• Leave cannot be carried over
+• Available to all female employees
+• Coordinate with HR for smooth transition
+
+📋 **Reference:** Section 9.4 of Employee Handbook"""
+    },
+    
+    'parental leave': {
+        'title': 'Parental Leave Policy',
+        'content': """👶 **Parental Leave Entitlement:**
+
+**For All New Parents:**
+• **Female Employees:** 5 paid days
+• **Male Employees:** 5 paid days
+• **Time Frame:** Must be taken within 6 months of birth
+
+**Application Process:**
+• Submit request to line manager
+• Provide birth certificate/documentation
+• Can be taken consecutively or separately
+• Advance notice preferred
+
+**Purpose:**
+• Support new parent bonding
+• Assist with family adjustment
+• Cover immediate post-birth needs
+• Complement maternity leave for mothers
+
+**Coverage:**
+• Full salary maintained
+• No impact on annual leave entitlement
+• Job protection guaranteed
+• Available for adoptions as well
+
+**Coordination:**
+• Work with team to cover responsibilities
+• Plan ahead for smooth workflow
+• Support available from management
+
+📋 **Reference:** Section 9.5 of Employee Handbook"""
+    },
+    
+    'bereavement leave': {
+        'title': 'Bereavement Leave Policy',
+        'content': """🕊 **Bereavement Leave Entitlement:**
+
+**Spouse/Partner:**
+• **5 paid days** for loss of spouse or life partner
+• Can be taken consecutively or as needed
+• Additional unpaid leave may be granted
+
+**Immediate Family:**
+• **3 paid days** for loss of:
+  - Parent or step-parent
+  - Child or step-child
+  - Sibling
+  - Grandchild
+  - Grandparent
+
+**Application Process:**
+• Notify line manager as soon as possible
+• No formal application required initially
+• Documentation may be requested later
+• Flexible timing based on funeral arrangements
+
+**Additional Support:**
+• Extended unpaid leave available if needed
+• Flexible working arrangements during grief period
+• Employee assistance program access
+• Counseling support available
+
+**Important:**
+• Full salary maintained during paid leave
+• No impact on other leave entitlements
+• Cultural and religious considerations respected
+• Management support available
+
+📋 **Reference:** Section 9.6 of Employee Handbook"""
     }
 }
 
@@ -389,6 +790,72 @@ def process_user_question(question):
             'keywords': ['termination', 'resignation', 'gratuity', 'end of service', 'quit', 'resign', 'leaving', 'end service', 'terminate'],
             'icon': '📋',
             'title': 'Termination & Gratuity'
+        },
+        # New sub-category mappings
+        'health_insurance': {
+            'keywords': ['health insurance', 'medical insurance', 'medical coverage', 'health coverage', 'insurance policy'],
+            'icon': '🏥',
+            'title': 'Health Insurance'
+        },
+        'visa_sponsorship': {
+            'keywords': ['visa sponsorship', 'work visa', 'resident visa', 'visa support', 'immigration'],
+            'icon': '📋',
+            'title': 'Visa Sponsorship'
+        },
+        'national_holidays': {
+            'keywords': ['national holidays', 'public holidays', 'official holidays', 'eid', 'national day'],
+            'icon': '🎆',
+            'title': 'National Holidays'
+        },
+        'administrative_hours': {
+            'keywords': ['administrative hours', 'admin hours', 'office hours', 'admin schedule'],
+            'icon': '💼',
+            'title': 'Administrative Hours'
+        },
+        'academic_hours': {
+            'keywords': ['academic hours', 'teaching hours', 'teaching schedule', 'sessions', 'academic schedule'],
+            'icon': '🏫',
+            'title': 'Academic Hours'
+        },
+        'dress_code': {
+            'keywords': ['dress code', 'attire', 'clothing', 'appearance', 'professional dress'],
+            'icon': '👔',
+            'title': 'Dress Code'
+        },
+        'safeguarding_rules': {
+            'keywords': ['safeguarding', 'student safety', 'protection', 'safeguarding rules'],
+            'icon': '🛑',
+            'title': 'Safeguarding Rules'
+        },
+        'minor_misconduct': {
+            'keywords': ['minor misconduct', 'minor violations', 'lateness', 'attendance issues'],
+            'icon': '⚠️',
+            'title': 'Minor Misconduct'
+        },
+        'gross_misconduct': {
+            'keywords': ['gross misconduct', 'serious violations', 'theft', 'harassment', 'immediate termination'],
+            'icon': '🚨',
+            'title': 'Gross Misconduct'
+        },
+        'performance_appraisal': {
+            'keywords': ['performance appraisal', 'performance review', 'annual review', 'evaluation'],
+            'icon': '📊',
+            'title': 'Performance Appraisal'
+        },
+        'maternity_leave': {
+            'keywords': ['maternity leave', 'maternity', 'pregnancy leave', 'maternity policy'],
+            'icon': '🤱',
+            'title': 'Maternity Leave'
+        },
+        'parental_leave': {
+            'keywords': ['parental leave', 'paternity leave', 'new parent leave'],
+            'icon': '👶',
+            'title': 'Parental Leave'
+        },
+        'bereavement_leave': {
+            'keywords': ['bereavement leave', 'bereavement', 'family death', 'funeral leave'],
+            'icon': '🕊',
+            'title': 'Bereavement Leave'
         }
     }
     
@@ -443,9 +910,92 @@ def process_user_question(question):
 **Please choose which type of leave you'd like to know about:**""",
             'options': [
                 {'text': '🏖️ Annual Leave', 'value': 'annual leave', 'description': 'Vacation days, holidays, and time off'},
-                {'text': '🏥 Sick Leave', 'value': 'sick leave', 'description': 'Medical leave policies and procedures'}
+                {'text': '🏥 Sick Leave', 'value': 'sick leave', 'description': 'Medical leave policies and procedures'},
+                {'text': '🤱 Maternity Leave', 'value': 'maternity leave', 'description': 'Maternity leave policies and procedures'},
+                {'text': '👶 Parental Leave', 'value': 'parental leave', 'description': 'Parental leave for new parents'},
+                {'text': '🕊 Bereavement Leave', 'value': 'bereavement leave', 'description': 'Leave for family bereavement'}
             ],
             'footer': "💡 **Tip:** You can also ask more specifically like 'annual leave' or 'sick leave' for direct answers!\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+        }
+    
+    # Check for ambiguous 'benefits' query - show options
+    if question_lower in ['benefits', 'benefit'] or (len(question_lower.split()) == 1 and any(word in question_lower for word in ['insurance', 'visa', 'perks'])):
+        return {
+            'type': 'options',
+            'content': """🎁 I see you're asking about **employee benefits**. We offer several types of benefits:
+
+**Please choose which benefit you'd like to know about:**""",
+            'options': [
+                {'text': '🏥 Health Insurance', 'value': 'health insurance', 'description': 'Medical insurance coverage and policies'},
+                {'text': '📋 Visa Sponsorship', 'value': 'visa sponsorship', 'description': 'Work visa and dependent visa policies'},
+                {'text': '🏖️ Leave Benefits', 'value': 'leave benefits', 'description': 'All types of leave policies'},
+                {'text': '🎆 National Holidays', 'value': 'national holidays', 'description': 'Official holidays and public days off'}
+            ],
+            'footer': "💡 **Tip:** You can also ask specifically about 'health insurance' or 'visa' for direct answers!\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+        }
+    
+    # Check for ambiguous 'working hours' or 'hours' query - show options
+    if question_lower in ['hours', 'working hours', 'schedule', 'shifts'] or (len(question_lower.split()) <= 2 and any(word in question_lower for word in ['working', 'office', 'schedule'])):
+        return {
+            'type': 'options',
+            'content': """⏰ I see you're asking about **working hours**. We have different schedules for different staff:
+
+**Please choose which schedule you'd like to know about:**""",
+            'options': [
+                {'text': '💼 Administrative Hours', 'value': 'administrative hours', 'description': 'Office hours for administrative staff'},
+                {'text': '🏫 Academic Hours', 'value': 'academic hours', 'description': 'Teaching schedule for academic staff'},
+                {'text': '🕰️ Overtime Policy', 'value': 'overtime policy', 'description': 'Overtime rules and compensation'},
+                {'text': '🌙 Ramadan Hours', 'value': 'ramadan hours', 'description': 'Special working hours during Ramadan'}
+            ],
+            'footer': "💡 **Tip:** You can also ask specifically about 'admin hours' or 'academic schedule' for direct answers!\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+        }
+    
+    # Check for ambiguous 'conduct' or 'code' query - show options
+    if question_lower in ['conduct', 'code', 'behavior', 'behaviour'] or (len(question_lower.split()) <= 2 and any(word in question_lower for word in ['dress', 'professional', 'standards'])):
+        return {
+            'type': 'options',
+            'content': """👔 I see you're asking about **code of conduct**. There are several important areas:
+
+**Please choose which aspect you'd like to know about:**""",
+            'options': [
+                {'text': '👔 Dress Code', 'value': 'dress code', 'description': 'Professional attire and appearance standards'},
+                {'text': '🛑 Safeguarding Rules', 'value': 'safeguarding rules', 'description': 'Student protection and safety guidelines'},
+                {'text': '💼 Professional Standards', 'value': 'professional standards', 'description': 'Employee duties and workplace behavior'},
+                {'text': '🤝 Workplace Behavior', 'value': 'workplace behavior', 'description': 'General conduct and interaction guidelines'}
+            ],
+            'footer': "💡 **Tip:** You can also ask specifically about 'dress code' or 'safeguarding' for direct answers!\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+        }
+    
+    # Check for ambiguous 'disciplinary' query - show options  
+    if question_lower in ['disciplinary', 'discipline', 'warning', 'misconduct'] or (len(question_lower.split()) <= 2 and any(word in question_lower for word in ['punishment', 'violation', 'warnings'])):
+        return {
+            'type': 'options',
+            'content': """⚖️ I see you're asking about **disciplinary procedures**. There are different aspects to understand:
+
+**Please choose which area you'd like to know about:**""",
+            'options': [
+                {'text': '⚠️ Minor Misconduct', 'value': 'minor misconduct', 'description': 'Examples and consequences of minor violations'},
+                {'text': '🚨 Gross Misconduct', 'value': 'gross misconduct', 'description': 'Serious violations and immediate consequences'},
+                {'text': '📋 Warning System', 'value': 'warning system', 'description': 'Types of warnings and their validity periods'},
+                {'text': '⚖️ Disciplinary Process', 'value': 'disciplinary process', 'description': 'Step-by-step procedure and appeal rights'}
+            ],
+            'footer': "💡 **Tip:** You can also ask specifically about 'gross misconduct' or 'warnings' for direct answers!\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+        }
+    
+    # Check for ambiguous 'performance' query - show options
+    if question_lower in ['performance', 'review', 'appraisal', 'evaluation'] or (len(question_lower.split()) <= 2 and any(word in question_lower for word in ['probation', 'assessment'])):
+        return {
+            'type': 'options',
+            'content': """📊 I see you're asking about **performance management**. There are key areas to understand:
+
+**Please choose which aspect you'd like to know about:**""",
+            'options': [
+                {'text': '📊 Performance Appraisal', 'value': 'performance appraisal', 'description': 'Annual review process and procedures'},
+                {'text': '⏳ Probation Period', 'value': 'probation period', 'description': 'Probationary period requirements and review'},
+                {'text': '📅 Review Schedule', 'value': 'review schedule', 'description': 'When and how often reviews take place'},
+                {'text': '📝 Performance Standards', 'value': 'performance standards', 'description': 'Expected standards and evaluation criteria'}
+            ],
+            'footer': "💡 **Tip:** You can also ask specifically about 'probation' or 'appraisal' for direct answers!\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
         }
     
     # Check for topic matches with scoring
@@ -477,7 +1027,21 @@ def process_user_question(question):
             'conduct': 'conduct',
             'disciplinary': 'disciplinary',
             'covid': 'covid',
-            'termination': 'termination'
+            'termination': 'termination',
+            # New sub-category mappings
+            'health_insurance': 'health insurance',
+            'visa_sponsorship': 'visa sponsorship',
+            'national_holidays': 'national holidays',
+            'administrative_hours': 'administrative hours',
+            'academic_hours': 'academic hours',
+            'dress_code': 'dress code',
+            'safeguarding_rules': 'safeguarding rules',
+            'minor_misconduct': 'minor misconduct',
+            'gross_misconduct': 'gross misconduct',
+            'performance_appraisal': 'performance appraisal',
+            'maternity_leave': 'maternity leave',
+            'parental_leave': 'parental leave',
+            'bereavement_leave': 'bereavement leave'
         }
         
         if best_match in handbook_key_mapping and handbook_key_mapping[best_match] in HANDBOOK_DATA:
