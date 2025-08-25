@@ -328,9 +328,14 @@ HANDBOOK_DATA = {
 # Initialize session state
 if 'messages' not in st.session_state:
     st.session_state.messages = []
+    welcome_response = {
+        'type': 'content',
+        'content': '👋 Hello! I am your **LGL Employee Helper**. Ask me anything about the ES Training DMCC Employee Handbook!\n\nI can help you with policies, procedures, benefits, and much more. What would you like to know?'
+    }
     st.session_state.messages.append({
         'role': 'assistant',
-        'content': '👋 Hello! I am your **LGL Employee Helper**. Ask me anything about the ES Training DMCC Employee Handbook!\n\nI can help you with policies, procedures, benefits, and much more. What would you like to know?'
+        'content': welcome_response['content'],
+        'response_data': welcome_response
     })
 
 # Initialize input tracking to prevent loops
@@ -404,7 +409,9 @@ def process_user_question(question):
     for special_word, redirect_topic in special_cases.items():
         if special_word in question_lower:
             if redirect_topic == 'recruitment':
-                return f"""🔍 I understand you're asking about **{special_word}**, but I specialize in providing information about current employee policies from the ES Training DMCC Employee Handbook.
+                return {
+                    'type': 'content',
+                    'content': f"""🔍 I understand you're asking about **{special_word}**, but I specialize in providing information about current employee policies from the ES Training DMCC Employee Handbook.
 
 📧 **For recruitment, hiring, and job applications, please contact:**
 🏢 **HR Department** at ES Training DMCC
@@ -419,22 +426,27 @@ def process_user_question(question):
 • And much more!
 
 *Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
+                }
             elif redirect_topic == 'benefits':
                 data = HANDBOOK_DATA['benefits']
-                return f"🎁 **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+                return {
+                    'type': 'content',
+                    'content': f"🎁 **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+                }
     
     # Check for ambiguous 'leave' query - show options
     if question_lower in ['leave', 'leaves'] or (len(question_lower.split()) == 1 and 'leave' in question_lower):
-        return """🤔 I see you're asking about **leave** policies. There are different types of leave available:
+        return {
+            'type': 'options',
+            'content': """🤔 I see you're asking about **leave** policies. There are different types of leave available:
 
-**Please choose which type of leave you'd like to know about:**
-
-🏖️ **Annual Leave** - Vacation days, holidays, and time off
-🏥 **Sick Leave** - Medical leave policies and procedures
-
-💡 **Tip:** You can also ask more specifically like "annual leave" or "sick leave" for direct answers!
-
-*Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
+**Please choose which type of leave you'd like to know about:**""",
+            'options': [
+                {'text': '🏖️ Annual Leave', 'value': 'annual leave', 'description': 'Vacation days, holidays, and time off'},
+                {'text': '🏥 Sick Leave', 'value': 'sick leave', 'description': 'Medical leave policies and procedures'}
+            ],
+            'footer': "💡 **Tip:** You can also ask more specifically like 'annual leave' or 'sick leave' for direct answers!\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+        }
     
     # Check for topic matches with scoring
     matches = []
@@ -471,34 +483,37 @@ def process_user_question(question):
         if best_match in handbook_key_mapping and handbook_key_mapping[best_match] in HANDBOOK_DATA:
             data = HANDBOOK_DATA[handbook_key_mapping[best_match]]
             icon = matches[0][2]['icon']
-            return f"{icon} **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+            return {
+                'type': 'content',
+                'content': f"{icon} **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+            }
     
     # Check for greeting or general questions
     greetings = ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'thank you', 'thanks']
     if any(greeting in question_lower for greeting in greetings):
-        return """👋 Hello! I am your **LGL Employee Helper**. I'm here to help you with any questions about the ES Training DMCC Employee Handbook.
+        return {
+            'type': 'content',
+            'content': """👋 Hello! I am your **LGL Employee Helper**. I'm here to help you with any questions about the ES Training DMCC Employee Handbook.
 
 ✨ I can assist you with policies, procedures, benefits, and much more. What would you like to know?
 
 *Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
+        }
     
     # Default response for unrecognized questions
-    return f"""🤔 I understand you asked about "{question}", but I couldn't find specific information about that topic in the Employee Handbook.
-
-📚 **I can help you with these topics:**
-
-🏖️ **Annual Leave** - Vacation days and application process
-🏥 **Sick Leave** - Medical leave policies and procedures  
-⏰ **Working Hours** - Schedule for admin and academic staff
-🎁 **Employee Benefits** - Health insurance, visa, holidays
-👔 **Code of Conduct** - Professional standards and dress code
-⚖️ **Disciplinary Procedures** - Warning system and processes
-🦠 **COVID-19 Policy** - Health and safety protocols
-📋 **Termination & Gratuity** - End of service procedures
-
-💡 Could you please rephrase your question or ask about one of these topics?
-
-*Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
+    return {
+        'type': 'options',
+        'content': f"🤔 I understand you asked about '{question}', but I couldn't find specific information about that topic in the Employee Handbook.",
+        'options': [
+            {'text': '🏖️ Annual Leave', 'value': 'annual leave', 'description': 'Vacation days and application process'},
+            {'text': '🏥 Sick Leave', 'value': 'sick leave', 'description': 'Medical leave policies and procedures'},
+            {'text': '⏰ Working Hours', 'value': 'working hours', 'description': 'Schedule for admin and academic staff'},
+            {'text': '🎁 Employee Benefits', 'value': 'benefits', 'description': 'Health insurance, visa, holidays'},
+            {'text': '👔 Code of Conduct', 'value': 'conduct', 'description': 'Professional standards and dress code'},
+            {'text': '⚖️ Disciplinary Procedures', 'value': 'disciplinary', 'description': 'Warning system and processes'}
+        ],
+        'footer': "💡 Could you please choose one of these topics or rephrase your question?\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+    }
 
 # Main header
 st.markdown("""
@@ -517,7 +532,9 @@ with col1:
         question = 'Tell me about annual leave'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('annual leave')
-        st.session_state.messages.append({'role': 'assistant', 'content': response})
+        # Handle the new response format
+        content = response['content'] if isinstance(response, dict) else response
+        st.session_state.messages.append({'role': 'assistant', 'content': content, 'response_data': response})
         st.session_state.processing = False
         st.rerun()
     
@@ -525,7 +542,9 @@ with col1:
         question = 'Tell me about sick leave'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('sick leave')
-        st.session_state.messages.append({'role': 'assistant', 'content': response})
+        # Handle the new response format
+        content = response['content'] if isinstance(response, dict) else response
+        st.session_state.messages.append({'role': 'assistant', 'content': content, 'response_data': response})
         st.session_state.processing = False
         st.rerun()
 
@@ -534,7 +553,9 @@ with col2:
         question = 'Tell me about working hours'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('working hours')
-        st.session_state.messages.append({'role': 'assistant', 'content': response})
+        # Handle the new response format
+        content = response['content'] if isinstance(response, dict) else response
+        st.session_state.messages.append({'role': 'assistant', 'content': content, 'response_data': response})
         st.session_state.processing = False
         st.rerun()
     
@@ -542,7 +563,9 @@ with col2:
         question = 'Tell me about employee benefits'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('benefits')
-        st.session_state.messages.append({'role': 'assistant', 'content': response})
+        # Handle the new response format
+        content = response['content'] if isinstance(response, dict) else response
+        st.session_state.messages.append({'role': 'assistant', 'content': content, 'response_data': response})
         st.session_state.processing = False
         st.rerun()
 
@@ -551,7 +574,9 @@ with col3:
         question = 'Tell me about code of conduct'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('conduct')
-        st.session_state.messages.append({'role': 'assistant', 'content': response})
+        # Handle the new response format
+        content = response['content'] if isinstance(response, dict) else response
+        st.session_state.messages.append({'role': 'assistant', 'content': content, 'response_data': response})
         st.session_state.processing = False
         st.rerun()
     
@@ -559,7 +584,9 @@ with col3:
         question = 'Tell me about disciplinary procedures'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('disciplinary')
-        st.session_state.messages.append({'role': 'assistant', 'content': response})
+        # Handle the new response format
+        content = response['content'] if isinstance(response, dict) else response
+        st.session_state.messages.append({'role': 'assistant', 'content': content, 'response_data': response})
         st.session_state.processing = False
         st.rerun()
 
@@ -567,15 +594,74 @@ with col3:
 st.markdown("### 💬 Chat with LGL Assistant")
 
 # Display chat messages
-for message in st.session_state.messages:
+for i, message in enumerate(st.session_state.messages):
     if message['role'] == 'assistant':
+        # Display the bot message
         st.markdown(f"""
         <div class="bot-message">
             🤖 <strong>LGL Assistant:</strong><br>
             {message['content'].replace('**', '<strong>').replace('**', '</strong>').replace('*', '<em>').replace('*', '</em>').replace('\n', '<br>')}
         </div>
         """, unsafe_allow_html=True)
+        
+        # Check if this message has options to display
+        if 'response_data' in message and isinstance(message['response_data'], dict):
+            response_data = message['response_data']
+            if response_data.get('type') == 'options' and 'options' in response_data:
+                # Display option buttons
+                st.markdown("**Choose an option:**")
+                
+                # Create columns for buttons
+                num_options = len(response_data['options'])
+                if num_options <= 2:
+                    cols = st.columns(num_options)
+                elif num_options <= 4:
+                    cols = st.columns(2)
+                else:
+                    cols = st.columns(3)
+                
+                for j, option in enumerate(response_data['options']):
+                    col_index = j % len(cols)
+                    with cols[col_index]:
+                        # Create unique key for each button
+                        button_key = f"option_{i}_{j}_{option['value'].replace(' ', '_')}"
+                        if st.button(
+                            option['text'],
+                            key=button_key,
+                            help=option.get('description', ''),
+                            use_container_width=True
+                        ):
+                            # Add user message for the selected option
+                            st.session_state.messages.append({
+                                'role': 'user', 
+                                'content': f"Tell me about {option['value']}"
+                            })
+                            
+                            # Process the selected option
+                            with st.spinner('🔍 Searching through the handbook...'):
+                                time.sleep(0.5)
+                                response = process_user_question(option['value'])
+                                content = response['content'] if isinstance(response, dict) else response
+                                st.session_state.messages.append({
+                                    'role': 'assistant', 
+                                    'content': content,
+                                    'response_data': response
+                                })
+                            
+                            st.session_state.processing = False
+                            st.rerun()
+                
+                # Display footer if available
+                if 'footer' in response_data and response_data['footer']:
+                    st.markdown(f"""
+                    <div class="bot-message" style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
+                        {response_data['footer'].replace('**', '<strong>').replace('**', '</strong>').replace('*', '<em>').replace('*', '</em>').replace('\n', '<br>')}
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                st.markdown("---")  # Separator after options
     else:
+        # User message
         st.markdown(f"""
         <div class="user-message">
             👤 <strong>You:</strong><br>
@@ -603,7 +689,13 @@ with st.form(key='chat_form', clear_on_submit=True):
             with st.spinner('🔍 Searching through the handbook...'):
                 time.sleep(1 + random.uniform(0.5, 1.5))  # Simulate processing time
                 response = process_user_question(user_input)
-                st.session_state.messages.append({'role': 'assistant', 'content': response})
+                # Handle the new response format
+                content = response['content'] if isinstance(response, dict) else response
+                st.session_state.messages.append({
+                    'role': 'assistant', 
+                    'content': content,
+                    'response_data': response
+                })
             
             st.session_state.processing = False
             st.rerun()
