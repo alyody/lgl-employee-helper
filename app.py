@@ -288,33 +288,77 @@ if 'messages' not in st.session_state:
 
 def process_user_question(question):
     """Process user question and return appropriate response"""
-    question_lower = question.lower()
+    question_lower = question.lower().strip()
     
-    # Check for topic matches
-    for topic, data in HANDBOOK_DATA.items():
-        if topic in question_lower or any(keyword in question_lower for keyword in [
-            'annual leave' if topic == 'leave' else topic,
-            'vacation' if topic == 'leave' else '',
-            'holiday' if topic == 'leave' else '',
-            'illness' if topic == 'sick' else '',
-            'medical' if topic == 'sick' else '',
-            'schedule' if topic == 'working hours' else '',
-            'time' if topic == 'working hours' else '',
-            'insurance' if topic == 'benefits' else '',
-            'visa' if topic == 'benefits' else '',
-            'dress' if topic == 'conduct' else '',
-            'behavior' if topic == 'conduct' else '',
-            'warning' if topic == 'disciplinary' else '',
-            'misconduct' if topic == 'disciplinary' else '',
-            'coronavirus' if topic == 'covid' else '',
-            'quarantine' if topic == 'covid' else '',
-            'resignation' if topic == 'termination' else '',
-            'gratuity' if topic == 'termination' else ''
-        ]):
-            return f"📖 **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+    # Define specific keyword mappings for better accuracy
+    keyword_mappings = {
+        'leave': ['annual leave', 'vacation', 'holiday', 'time off', 'days off'],
+        'sick': ['sick leave', 'medical leave', 'illness', 'doctor', 'health leave'],
+        'working hours': ['working hours', 'work time', 'schedule', 'shifts', 'office hours'],
+        'benefits': ['benefits', 'insurance', 'health insurance', 'visa', 'perks'],
+        'conduct': ['conduct', 'behavior', 'dress code', 'professional', 'standards'],
+        'disciplinary': ['disciplinary', 'warning', 'misconduct', 'punishment', 'violation'],
+        'covid': ['covid', 'coronavirus', 'quarantine', 'vaccination', 'pandemic'],
+        'termination': ['termination', 'resignation', 'gratuity', 'end of service', 'quit']
+    }
+    
+    # Handle specific queries that might be confusing
+    special_cases = {
+        'interview': 'recruitment',
+        'hiring': 'recruitment', 
+        'job application': 'recruitment',
+        'salary': 'benefits',
+        'pay': 'benefits',
+        'money': 'benefits',
+        'promotion': 'performance',
+        'review': 'performance',
+        'evaluation': 'performance'
+    }
+    
+    # Check for special cases first
+    for special_word, redirect_topic in special_cases.items():
+        if special_word in question_lower:
+            if redirect_topic == 'recruitment':
+                return f"""I understand you're asking about **{special_word}**, but I specialize in providing information about current employee policies from the ES Training DMCC Employee Handbook.
+
+For recruitment, hiring, and job applications, please contact:
+📧 **HR Department** at ES Training DMCC
+📍 **Location:** 15th Floor, Mazaya Business Avenue, BB1, JLT, Dubai, UAE
+
+I can help current employees with:
+• Annual Leave policies
+• Working hours and schedules  
+• Employee benefits
+• Code of conduct
+• Performance management
+• And much more!
+
+*Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
+            elif redirect_topic in HANDBOOK_DATA:
+                data = HANDBOOK_DATA[redirect_topic]
+                return f"📖 **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+    
+    # Check for exact topic matches
+    for topic, keywords in keyword_mappings.items():
+        for keyword in keywords:
+            if keyword in question_lower:
+                if topic in HANDBOOK_DATA:
+                    data = HANDBOOK_DATA[topic]
+                    return f"📖 **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+    
+    # Check for greeting or general questions
+    greetings = ['hello', 'hi', 'hey', 'good morning', 'good afternoon']
+    if any(greeting in question_lower for greeting in greetings):
+        return """👋 Hello! I am your **LGL Employee Helper**. I'm here to help you with any questions about the ES Training DMCC Employee Handbook.
+
+I can assist you with policies, procedures, benefits, and much more. What would you like to know?
+
+*Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
     
     # Default response for unrecognized questions
-    return """I understand you're looking for information from the Employee Handbook. I can help you with:
+    return f"""I understand you asked about "{question}", but I couldn't find specific information about that topic in the Employee Handbook.
+
+I can help you with these topics:
 
 🔹 **Annual Leave** - Vacation days and application process
 🔹 **Sick Leave** - Medical leave policies and procedures  
@@ -325,7 +369,7 @@ def process_user_question(question):
 🔹 **COVID-19 Policy** - Health and safety protocols
 🔹 **Termination & Gratuity** - End of service procedures
 
-Please ask about any of these topics, and I'll provide detailed information!
+Could you please rephrase your question or ask about one of these topics?
 
 *Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
 
@@ -342,37 +386,49 @@ st.markdown("### 🚀 Quick Topics:")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    if st.button("📅 Annual Leave", key="leave_btn"):
-        st.session_state.messages.append({'role': 'user', 'content': 'Tell me about annual leave'})
+    if st.button("📅 Annual Leave", key="leave_btn", help="Learn about annual leave policies"):
+        question = 'Tell me about annual leave'
+        st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('annual leave')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.rerun()
     
-    if st.button("🏥 Sick Leave", key="sick_btn"):
-        st.session_state.messages.append({'role': 'user', 'content': 'Tell me about sick leave'})
+    if st.button("🏥 Sick Leave", key="sick_btn", help="Learn about sick leave policies"):
+        question = 'Tell me about sick leave'
+        st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('sick leave')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.rerun()
 
 with col2:
-    if st.button("⏰ Working Hours", key="hours_btn"):
-        st.session_state.messages.append({'role': 'user', 'content': 'Tell me about working hours'})
+    if st.button("⏰ Working Hours", key="hours_btn", help="Learn about working schedules"):
+        question = 'Tell me about working hours'
+        st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('working hours')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.rerun()
     
-    if st.button("🎁 Benefits", key="benefits_btn"):
-        st.session_state.messages.append({'role': 'user', 'content': 'Tell me about employee benefits'})
+    if st.button("🎁 Benefits", key="benefits_btn", help="Learn about employee benefits"):
+        question = 'Tell me about employee benefits'
+        st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('benefits')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.rerun()
 
 with col3:
-    if st.button("👔 Code of Conduct", key="conduct_btn"):
-        st.session_state.messages.append({'role': 'user', 'content': 'Tell me about code of conduct'})
+    if st.button("👔 Code of Conduct", key="conduct_btn", help="Learn about professional standards"):
+        question = 'Tell me about code of conduct'
+        st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('conduct')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.rerun()
     
-    if st.button("⚖️ Disciplinary", key="disciplinary_btn"):
-        st.session_state.messages.append({'role': 'user', 'content': 'Tell me about disciplinary procedures'})
+    if st.button("⚖️ Disciplinary", key="disciplinary_btn", help="Learn about disciplinary procedures"):
+        question = 'Tell me about disciplinary procedures'
+        st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('disciplinary')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.rerun()
 
 # Chat interface
 st.markdown("### 💬 Chat with LGL Assistant")
@@ -397,18 +453,21 @@ for message in st.session_state.messages:
 # Chat input
 user_input = st.text_input("💭 Ask me anything about the Employee Handbook...", key="user_input", placeholder="e.g., How do I apply for annual leave?")
 
-if user_input:
-    # Add user message
-    st.session_state.messages.append({'role': 'user', 'content': user_input})
-    
-    # Process and add assistant response
-    with st.spinner('🔍 Searching through the handbook...'):
-        time.sleep(1 + random.uniform(0.5, 1.5))  # Simulate processing time
-        response = process_user_question(user_input)
-        st.session_state.messages.append({'role': 'assistant', 'content': response})
-    
-    # Rerun to update the display
-    st.rerun()
+# Handle user input
+if user_input and user_input.strip():
+    # Check if this is a new message (prevent duplicates)
+    if not st.session_state.messages or st.session_state.messages[-1]['content'] != user_input:
+        # Add user message
+        st.session_state.messages.append({'role': 'user', 'content': user_input})
+        
+        # Process and add assistant response
+        with st.spinner('🔍 Searching through the handbook...'):
+            time.sleep(1 + random.uniform(0.5, 1.5))  # Simulate processing time
+            response = process_user_question(user_input)
+            st.session_state.messages.append({'role': 'assistant', 'content': response})
+        
+        # Clear the input by rerunning
+        st.rerun()
 
 # Footer
 st.markdown("---")
