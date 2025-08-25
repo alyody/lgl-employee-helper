@@ -2,6 +2,11 @@ import streamlit as st
 import re
 import time
 import random
+import pandas as pd
+from datetime import datetime, date
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 # Configure the page
 st.set_page_config(
@@ -10,6 +15,189 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed"
 )
+
+# Employee Database - Sample Data for Leave Tracking
+EMPLOYEE_DATA = {
+    'loyed': {
+        'name': 'Loyed',
+        'department': 'Logistics',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP001',
+        'join_date': '2023-01-15',
+        'contract_type': 'Unlimited',
+        'position': 'Logistics Coordinator',
+        'annual_leave_taken': 10,
+        'sick_leave_taken': 2,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.8
+    },
+    'eva': {
+        'name': 'Eva',
+        'department': 'Commercial Services',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP002',
+        'join_date': '2022-08-10',
+        'contract_type': 'Unlimited',
+        'position': 'Commercial Services Specialist',
+        'annual_leave_taken': 12,
+        'sick_leave_taken': 3,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 2.3
+    },
+    'jaq': {
+        'name': 'Jaq',
+        'department': 'Commercial Sales',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP003',
+        'join_date': '2024-01-20',
+        'contract_type': 'Limited',
+        'position': 'Sales Executive',
+        'annual_leave_taken': 5,
+        'sick_leave_taken': 7,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 0.7
+    },
+    'rajeev': {
+        'name': 'Rajeev',
+        'department': 'Vessel Operations',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP004',
+        'join_date': '2021-05-03',
+        'contract_type': 'Unlimited',
+        'position': 'Operations Manager',
+        'annual_leave_taken': 4,
+        'sick_leave_taken': 6,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 5,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 3.6
+    },
+    'sarah': {
+        'name': 'Sarah',
+        'department': 'Human Resources',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP005',
+        'join_date': '2020-11-12',
+        'contract_type': 'Unlimited',
+        'position': 'HR Manager',
+        'annual_leave_taken': 8,
+        'sick_leave_taken': 1,
+        'maternity_leave_taken': 45,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 3,
+        'probation_completed': True,
+        'years_of_service': 4.1
+    },
+    'ahmed': {
+        'name': 'Ahmed',
+        'department': 'Finance',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP006',
+        'join_date': '2023-09-01',
+        'contract_type': 'Limited',
+        'position': 'Financial Analyst',
+        'annual_leave_taken': 6,
+        'sick_leave_taken': 0,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.3
+    }
+}
+
+def calculate_leave_entitlements(employee_data):
+    """Calculate leave entitlements based on employee data and handbook policies"""
+    years_of_service = employee_data['years_of_service']
+    probation_completed = employee_data['probation_completed']
+    
+    # Annual Leave Calculation
+    if years_of_service >= 1:
+        annual_leave_entitlement = 22  # Subsequent years
+    else:
+        annual_leave_entitlement = 20  # First year
+    
+    # Sick Leave Calculation (only after probation)
+    if probation_completed:
+        sick_leave_entitlement = 90  # 90 calendar days per year
+    else:
+        sick_leave_entitlement = 0
+    
+    # Other leave entitlements
+    maternity_leave_entitlement = 60 if employee_data['name'] else 60  # All female employees
+    parental_leave_entitlement = 5  # Both male and female
+    bereavement_leave_entitlement = 5  # Maximum for spouse
+    
+    return {
+        'annual_leave': {
+            'entitlement': annual_leave_entitlement,
+            'taken': employee_data['annual_leave_taken'],
+            'remaining': annual_leave_entitlement - employee_data['annual_leave_taken']
+        },
+        'sick_leave': {
+            'entitlement': sick_leave_entitlement,
+            'taken': employee_data['sick_leave_taken'],
+            'remaining': sick_leave_entitlement - employee_data['sick_leave_taken']
+        },
+        'maternity_leave': {
+            'entitlement': maternity_leave_entitlement,
+            'taken': employee_data['maternity_leave_taken'],
+            'remaining': maternity_leave_entitlement - employee_data['maternity_leave_taken']
+        },
+        'parental_leave': {
+            'entitlement': parental_leave_entitlement,
+            'taken': employee_data['parental_leave_taken'],
+            'remaining': parental_leave_entitlement - employee_data['parental_leave_taken']
+        },
+        'bereavement_leave': {
+            'entitlement': bereavement_leave_entitlement,
+            'taken': employee_data['bereavement_leave_taken'],
+            'remaining': bereavement_leave_entitlement - employee_data['bereavement_leave_taken']
+        }
+    }
+
+def generate_leave_request_email(employee_name, leave_type, start_date, end_date, days_requested, reason, manager_name):
+    """Generate a formatted leave request email"""
+    email_subject = f"Leave Request - {employee_name} - {leave_type}"
+    
+    email_body = f"""Dear {manager_name},
+
+I would like to request {leave_type.lower()} for the following period:
+
+📅 **Leave Details:**
+• Employee Name: {employee_name}
+• Leave Type: {leave_type}
+• Start Date: {start_date}
+• End Date: {end_date}
+• Total Days: {days_requested} days
+• Reason: {reason}
+
+📋 **Request Information:**
+• Date of Request: {datetime.now().strftime('%Y-%m-%d %H:%M')}
+• Status: Pending Approval
+
+Please review and approve this leave request at your earliest convenience.
+
+Thank you for your consideration.
+
+Best regards,
+{employee_name}
+
+---
+This email was generated by the LGL Employee Helper system.
+For any questions, please contact HR at lgldubai@gmail.com"""
+    
+    return email_subject, email_body
 
 # Custom CSS for styling
 st.markdown("""
@@ -739,6 +927,12 @@ if 'messages' not in st.session_state:
         'response_data': welcome_response
     })
 
+# Initialize employee session
+if 'current_employee' not in st.session_state:
+    st.session_state.current_employee = None
+if 'employee_data' not in st.session_state:
+    st.session_state.employee_data = None
+
 # Initialize input tracking to prevent loops
 if 'last_input' not in st.session_state:
     st.session_state.last_input = ""
@@ -748,6 +942,110 @@ if 'processing' not in st.session_state:
 def process_user_question(question):
     """Process user question and return appropriate response"""
     question_lower = question.lower().strip()
+    
+    # Check for employee-specific queries first
+    if st.session_state.current_employee:
+        employee_data = st.session_state.employee_data
+        leave_balances = calculate_leave_entitlements(employee_data)
+        
+        # Check for leave balance queries
+        if any(phrase in question_lower for phrase in ['my leave', 'leave balance', 'leave left', 'remaining leave', 'how many days']):
+            return {
+                'type': 'content',
+                'content': f"""📅 **Your Leave Balance - {employee_data['name']}**
+
+🏖️ **Annual Leave:**
+• Entitled: {leave_balances['annual_leave']['entitlement']} days
+• Used: {leave_balances['annual_leave']['taken']} days
+• **Remaining: {leave_balances['annual_leave']['remaining']} days**
+
+🏥 **Sick Leave:**
+• Entitled: {leave_balances['sick_leave']['entitlement']} days
+• Used: {leave_balances['sick_leave']['taken']} days
+• **Remaining: {leave_balances['sick_leave']['remaining']} days**
+
+🤱 **Maternity Leave:**
+• Entitled: {leave_balances['maternity_leave']['entitlement']} days
+• Used: {leave_balances['maternity_leave']['taken']} days
+• **Remaining: {leave_balances['maternity_leave']['remaining']} days**
+
+👶 **Parental Leave:**
+• Entitled: {leave_balances['parental_leave']['entitlement']} days
+• Used: {leave_balances['parental_leave']['taken']} days
+• **Remaining: {leave_balances['parental_leave']['remaining']} days**
+
+🕊 **Bereavement Leave:**
+• Entitled: {leave_balances['bereavement_leave']['entitlement']} days
+• Used: {leave_balances['bereavement_leave']['taken']} days
+• **Remaining: {leave_balances['bereavement_leave']['remaining']} days**
+
+💼 **Employee Information:**
+• Department: {employee_data['department']}
+• Manager: {employee_data['approval_manager']}
+• Service Years: {employee_data['years_of_service']} years
+
+📧 Would you like to request leave? Just ask me to 'request leave' and I'll help you generate an email!
+
+*Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
+            }
+        
+        # Check for leave request queries
+        if any(phrase in question_lower for phrase in ['request leave', 'apply for leave', 'leave request', 'book leave']):
+            return {
+                'type': 'leave_request',
+                'content': f"""📧 **Leave Request Form - {employee_data['name']}**
+
+I'll help you prepare a leave request email to send to your manager.
+
+📅 **Your Current Leave Balances:**
+• Annual Leave: {leave_balances['annual_leave']['remaining']} days remaining
+• Sick Leave: {leave_balances['sick_leave']['remaining']} days remaining
+• Maternity Leave: {leave_balances['maternity_leave']['remaining']} days remaining
+• Parental Leave: {leave_balances['parental_leave']['remaining']} days remaining
+
+Please use the form below to submit your leave request:""",
+                'employee_data': employee_data,
+                'leave_balances': leave_balances
+            }
+        
+        # Check for specific leave balance queries
+        if 'annual leave' in question_lower and any(word in question_lower for word in ['balance', 'left', 'remaining', 'how many']):
+            remaining = leave_balances['annual_leave']['remaining']
+            return {
+                'type': 'content',
+                'content': f"""🏖️ **Annual Leave Balance - {employee_data['name']}**
+
+You have **{remaining} days** of annual leave remaining this year.
+
+📅 **Details:**
+• Total Entitlement: {leave_balances['annual_leave']['entitlement']} days
+• Already Used: {leave_balances['annual_leave']['taken']} days
+• **Available: {remaining} days**
+
+📧 Would you like to request annual leave? Just ask me to 'request leave'!
+
+*Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
+            }
+            
+        if 'sick leave' in question_lower and any(word in question_lower for word in ['balance', 'left', 'remaining', 'how many']):
+            remaining = leave_balances['sick_leave']['remaining']
+            return {
+                'type': 'content',
+                'content': f"""🏥 **Sick Leave Balance - {employee_data['name']}**
+
+You have **{remaining} days** of sick leave remaining this year.
+
+📅 **Details:**
+• Total Entitlement: {leave_balances['sick_leave']['entitlement']} days
+• Already Used: {leave_balances['sick_leave']['taken']} days
+• **Available: {remaining} days**
+
+⚠️ **Note:** Medical certificate required for absences over 2 days.
+
+📧 Would you like to request sick leave? Just ask me to 'request leave'!
+
+*Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
+            }
     
     # Define intuitive keyword mappings - more flexible matching
     keyword_mappings = {
@@ -1087,6 +1385,141 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# Employee Login Section
+st.sidebar.title("👥 Employee Login")
+st.sidebar.markdown("Select your name to access personalized leave information:")
+
+employee_names = ['Select Employee'] + [emp_data['name'] for emp_data in EMPLOYEE_DATA.values()]
+selected_employee = st.sidebar.selectbox(
+    "Choose your name:",
+    employee_names,
+    index=0
+)
+
+if selected_employee != 'Select Employee':
+    # Find employee data
+    employee_key = None
+    for key, data in EMPLOYEE_DATA.items():
+        if data['name'] == selected_employee:
+            employee_key = key
+            break
+    
+    if employee_key:
+        st.session_state.current_employee = employee_key
+        st.session_state.employee_data = EMPLOYEE_DATA[employee_key]
+        
+        # Show employee info in sidebar
+        emp_data = st.session_state.employee_data
+        leave_balances = calculate_leave_entitlements(emp_data)
+        
+        st.sidebar.success(f"Welcome, {emp_data['name']}!")
+        st.sidebar.markdown(f"""
+        **💼 Employee Details:**
+        • Department: {emp_data['department']}
+        • Position: {emp_data['position']}
+        • Manager: {emp_data['approval_manager']}
+        • Service: {emp_data['years_of_service']} years
+        
+        **📅 Leave Balances:**
+        • Annual: {leave_balances['annual_leave']['remaining']} days
+        • Sick: {leave_balances['sick_leave']['remaining']} days
+        """)
+        
+        # Quick leave request button
+        if st.sidebar.button("📧 Request Leave", use_container_width=True):
+            st.session_state.show_leave_form = True
+else:
+    st.session_state.current_employee = None
+    st.session_state.employee_data = None
+    st.sidebar.info("Please select your name to access personalized features like leave balances and request forms.")
+
+# Leave Request Form
+if 'show_leave_form' in st.session_state and st.session_state.show_leave_form and st.session_state.current_employee:
+    st.markdown("### 📧 Leave Request Form")
+    
+    emp_data = st.session_state.employee_data
+    leave_balances = calculate_leave_entitlements(emp_data)
+    
+    with st.form("leave_request_form"):
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            leave_type = st.selectbox(
+                "Leave Type:",
+                ['Annual Leave', 'Sick Leave', 'Maternity Leave', 'Parental Leave', 'Bereavement Leave']
+            )
+            
+            start_date = st.date_input(
+                "Start Date:",
+                min_value=date.today()
+            )
+            
+            end_date = st.date_input(
+                "End Date:",
+                min_value=date.today()
+            )
+        
+        with col2:
+            reason = st.text_area(
+                "Reason for Leave:",
+                placeholder="Please provide a brief reason for your leave request...",
+                height=100
+            )
+            
+            # Calculate days
+            if start_date and end_date and end_date >= start_date:
+                days_requested = (end_date - start_date).days + 1
+                st.info(f"📅 Total days requested: **{days_requested} days**")
+            else:
+                days_requested = 0
+                st.warning("Please select valid start and end dates.")
+        
+        # Show current balance for selected leave type
+        leave_key = leave_type.lower().replace(' ', '_')
+        if leave_key in leave_balances:
+            remaining = leave_balances[leave_key]['remaining']
+            if days_requested > remaining:
+                st.error(f"⚠️ You only have {remaining} days of {leave_type.lower()} remaining!")
+            else:
+                st.success(f"✅ You have {remaining} days of {leave_type.lower()} available.")
+        
+        submitted = st.form_submit_button("📧 Generate Leave Request Email", use_container_width=True)
+        
+        if submitted and days_requested > 0 and reason.strip():
+            # Generate email
+            subject, body = generate_leave_request_email(
+                emp_data['name'],
+                leave_type,
+                start_date.strftime('%Y-%m-%d'),
+                end_date.strftime('%Y-%m-%d'),
+                days_requested,
+                reason,
+                emp_data['approval_manager']
+            )
+            
+            st.success("✅ Leave request email generated successfully!")
+            
+            # Display email content
+            st.markdown("### 📧 Email Content")
+            st.markdown(f"**To:** lgldubai@gmail.com")
+            st.markdown(f"**Subject:** {subject}")
+            st.text_area("Email Body:", body, height=400)
+            
+            # Copy to clipboard button
+            st.markdown("""
+            <div style="background: #f0f8f0; padding: 1rem; border-radius: 10px; border-left: 4px solid #28a745;">
+                📎 <strong>Next Steps:</strong><br>
+                1. Copy the email content above<br>
+                2. Send it to <strong>lgldubai@gmail.com</strong><br>
+                3. Wait for approval from your manager<br>
+                4. You'll receive confirmation once approved
+            </div>
+            """, unsafe_allow_html=True)
+    
+    if st.button("Close Form"):
+        st.session_state.show_leave_form = False
+        st.rerun()
+
 # Quick action buttons with icons
 st.markdown("### 🚀 Quick Topics:")
 col1, col2, col3 = st.columns(3)
@@ -1154,6 +1587,67 @@ with col3:
         st.session_state.processing = False
         st.rerun()
 
+# Employee Data Table Section (for admin/HR view)
+st.markdown("---")
+if st.checkbox("📈 Show Employee Leave Tracking Data (HR View)"):
+    st.markdown("### 📈 Employee Leave Tracking Database")
+    
+    # Create dataframe for display
+    employee_df = []
+    for emp_key, emp_data in EMPLOYEE_DATA.items():
+        leave_balances = calculate_leave_entitlements(emp_data)
+        employee_df.append({
+            'Name': emp_data['name'],
+            'Employee ID': emp_data['employee_id'],
+            'Department': emp_data['department'],
+            'Manager': emp_data['approval_manager'],
+            'Position': emp_data['position'],
+            'Service Years': f"{emp_data['years_of_service']} years",
+            'Annual Leave Taken': emp_data['annual_leave_taken'],
+            'Annual Leave Remaining': leave_balances['annual_leave']['remaining'],
+            'Sick Leave Taken': emp_data['sick_leave_taken'],
+            'Sick Leave Remaining': leave_balances['sick_leave']['remaining'],
+            'Contract Type': emp_data['contract_type'],
+            'Join Date': emp_data['join_date']
+        })
+    
+    df = pd.DataFrame(employee_df)
+    
+    # Display the table
+    st.dataframe(
+        df,
+        use_container_width=True,
+        hide_index=True
+    )
+    
+    # Summary statistics
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        total_employees = len(EMPLOYEE_DATA)
+        st.metric("👥 Total Employees", total_employees)
+    
+    with col2:
+        avg_annual_taken = df['Annual Leave Taken'].mean()
+        st.metric("🏖️ Avg Annual Leave Taken", f"{avg_annual_taken:.1f} days")
+    
+    with col3:
+        avg_sick_taken = df['Sick Leave Taken'].mean()
+        st.metric("🏥 Avg Sick Leave Taken", f"{avg_sick_taken:.1f} days")
+    
+    with col4:
+        departments = df['Department'].nunique()
+        st.metric("🏢 Departments", departments)
+    
+    # Download option
+    csv = df.to_csv(index=False)
+    st.download_button(
+        label="💾 Download Employee Data as CSV",
+        data=csv,
+        file_name=f"employee_leave_data_{datetime.now().strftime('%Y%m%d')}.csv",
+        mime="text/csv"
+    )
+
 # Chat input using form to prevent auto-rerun
 st.markdown("### 💬 Chat with LGL Assistant")
 
@@ -1171,7 +1665,84 @@ for i, message in enumerate(st.session_state.messages):
         # Check if this message has options to display
         if 'response_data' in message and isinstance(message['response_data'], dict):
             response_data = message['response_data']
-            if response_data.get('type') == 'options' and 'options' in response_data:
+            
+            # Handle leave request form
+            if response_data.get('type') == 'leave_request':
+                emp_data = response_data.get('employee_data')
+                leave_balances = response_data.get('leave_balances')
+                
+                if emp_data and leave_balances:
+                    st.markdown("**📧 Quick Leave Request:**")
+                    
+                    # Quick leave request form
+                    with st.form(f"quick_leave_form_{i}"):
+                        col1, col2 = st.columns(2)
+                        
+                        with col1:
+                            leave_type = st.selectbox(
+                                "Leave Type:",
+                                ['Annual Leave', 'Sick Leave', 'Maternity Leave', 'Parental Leave', 'Bereavement Leave'],
+                                key=f"leave_type_{i}"
+                            )
+                            
+                            start_date = st.date_input(
+                                "Start Date:",
+                                min_value=date.today(),
+                                key=f"start_date_{i}"
+                            )
+                            
+                        with col2:
+                            end_date = st.date_input(
+                                "End Date:",
+                                min_value=date.today(),
+                                key=f"end_date_{i}"
+                            )
+                            
+                            reason = st.text_input(
+                                "Reason:",
+                                placeholder="Brief reason for leave...",
+                                key=f"reason_{i}"
+                            )
+                        
+                        if st.form_submit_button("📧 Generate Email", key=f"submit_{i}"):
+                            if start_date and end_date and end_date >= start_date and reason.strip() and emp_data:
+                                days_requested = (end_date - start_date).days + 1
+                                
+                                # Generate email
+                                subject, body = generate_leave_request_email(
+                                    emp_data['name'],
+                                    leave_type,
+                                    start_date.strftime('%Y-%m-%d'),
+                                    end_date.strftime('%Y-%m-%d'),
+                                    days_requested,
+                                    reason,
+                                    emp_data['approval_manager']
+                                )
+                                
+                                # Add the email to chat
+                                email_message = f"""✅ **Leave Request Email Generated!**
+
+**To:** lgldubai@gmail.com
+**Subject:** {subject}
+
+**Email Body:**
+```
+{body}
+```
+
+📎 **Next Steps:**
+1. Copy the email content above
+2. Send it to lgldubai@gmail.com
+3. Wait for approval from your manager"""
+                                
+                                st.session_state.messages.append({
+                                    'role': 'assistant',
+                                    'content': email_message,
+                                    'response_data': {'type': 'content'}
+                                })
+                                st.rerun()
+                
+            elif response_data.get('type') == 'options' and 'options' in response_data:
                 # Display option buttons
                 st.markdown("**Choose an option:**")
                 
