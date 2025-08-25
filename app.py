@@ -296,16 +296,40 @@ def process_user_question(question):
     """Process user question and return appropriate response"""
     question_lower = question.lower().strip()
     
-    # Define specific keyword mappings for better accuracy
+    # Define intuitive keyword mappings - more flexible matching
     keyword_mappings = {
-        'leave': ['annual leave', 'vacation', 'holiday', 'time off', 'days off'],
-        'sick': ['sick leave', 'medical leave', 'illness', 'doctor', 'health leave'],
-        'working hours': ['working hours', 'work time', 'schedule', 'shifts', 'office hours'],
-        'benefits': ['benefits', 'insurance', 'health insurance', 'visa', 'perks'],
-        'conduct': ['conduct', 'behavior', 'dress code', 'professional', 'standards'],
-        'disciplinary': ['disciplinary', 'warning', 'misconduct', 'punishment', 'violation'],
-        'covid': ['covid', 'coronavirus', 'quarantine', 'vaccination', 'pandemic'],
-        'termination': ['termination', 'resignation', 'gratuity', 'end of service', 'quit']
+        'leave': [
+            'leave', 'annual leave', 'vacation', 'holiday', 'time off', 'days off',
+            'annual', 'holidays', 'vacations'
+        ],
+        'sick': [
+            'sick', 'sick leave', 'medical leave', 'illness', 'doctor', 'health leave',
+            'medical', 'ill', 'sickness'
+        ],
+        'working hours': [
+            'working hours', 'work time', 'schedule', 'shifts', 'office hours',
+            'hours', 'time', 'work schedule', 'working time'
+        ],
+        'benefits': [
+            'benefits', 'insurance', 'health insurance', 'visa', 'perks',
+            'benefit', 'health', 'medical insurance'
+        ],
+        'conduct': [
+            'conduct', 'behavior', 'dress code', 'professional', 'standards',
+            'behaviour', 'dress', 'code', 'professional standards'
+        ],
+        'disciplinary': [
+            'disciplinary', 'warning', 'misconduct', 'punishment', 'violation',
+            'discipline', 'warnings', 'disciplinary action'
+        ],
+        'covid': [
+            'covid', 'coronavirus', 'quarantine', 'vaccination', 'pandemic',
+            'covid-19', 'virus', 'vaccine'
+        ],
+        'termination': [
+            'termination', 'resignation', 'gratuity', 'end of service', 'quit',
+            'resign', 'leaving', 'end service', 'terminate'
+        ]
     }
     
     # Handle specific queries that might be confusing
@@ -344,16 +368,32 @@ I can help current employees with:
                 data = HANDBOOK_DATA[redirect_topic]
                 return f"📖 **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
     
-    # Check for exact topic matches
+    # Check for topic matches with more flexible matching
+    best_match = None
+    best_score = 0
+    
     for topic, keywords in keyword_mappings.items():
+        score = 0
         for keyword in keywords:
             if keyword in question_lower:
-                if topic in HANDBOOK_DATA:
-                    data = HANDBOOK_DATA[topic]
-                    return f"📖 **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+                # Exact match gets higher score
+                if keyword == question_lower:
+                    score += 10
+                # Partial match gets lower score
+                else:
+                    score += len(keyword)  # Longer matches get higher scores
+        
+        if score > best_score:
+            best_score = score
+            best_match = topic
+    
+    # If we found a good match, return the information
+    if best_match and best_match in HANDBOOK_DATA:
+        data = HANDBOOK_DATA[best_match]
+        return f"📖 **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
     
     # Check for greeting or general questions
-    greetings = ['hello', 'hi', 'hey', 'good morning', 'good afternoon']
+    greetings = ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'thank you', 'thanks']
     if any(greeting in question_lower for greeting in greetings):
         return """👋 Hello! I am your **LGL Employee Helper**. I'm here to help you with any questions about the ES Training DMCC Employee Handbook.
 
