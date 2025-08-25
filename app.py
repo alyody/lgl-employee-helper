@@ -43,6 +43,29 @@ st.markdown("""
         box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
     }
     
+    .option-button {
+        background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+        border: 2px solid #2196f3;
+        padding: 12px 24px;
+        border-radius: 25px;
+        margin: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        color: #1976d2;
+        font-size: 16px;
+        display: inline-block;
+        text-decoration: none;
+        box-shadow: 0 4px 8px rgba(33, 150, 243, 0.2);
+    }
+    
+    .option-button:hover {
+        background: linear-gradient(135deg, #2196f3, #1976d2);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(33, 150, 243, 0.4);
+    }
+    
     .quick-action {
         background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
         border: none;
@@ -72,6 +95,22 @@ st.markdown("""
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     }
     
+    .stButton > button {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    }
+    
     body {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
@@ -79,6 +118,14 @@ st.markdown("""
     .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
+    }
+    
+    .choice-container {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        border-radius: 15px;
+        margin: 1rem 0;
+        backdrop-filter: blur(10px);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -298,38 +345,46 @@ def process_user_question(question):
     
     # Define intuitive keyword mappings - more flexible matching
     keyword_mappings = {
-        'leave': [
-            'leave', 'annual leave', 'vacation', 'holiday', 'time off', 'days off',
-            'annual', 'holidays', 'vacations'
-        ],
-        'sick': [
-            'sick', 'sick leave', 'medical leave', 'illness', 'doctor', 'health leave',
-            'medical', 'ill', 'sickness'
-        ],
-        'working hours': [
-            'working hours', 'work time', 'schedule', 'shifts', 'office hours',
-            'hours', 'time', 'work schedule', 'working time'
-        ],
-        'benefits': [
-            'benefits', 'insurance', 'health insurance', 'visa', 'perks',
-            'benefit', 'health', 'medical insurance'
-        ],
-        'conduct': [
-            'conduct', 'behavior', 'dress code', 'professional', 'standards',
-            'behaviour', 'dress', 'code', 'professional standards'
-        ],
-        'disciplinary': [
-            'disciplinary', 'warning', 'misconduct', 'punishment', 'violation',
-            'discipline', 'warnings', 'disciplinary action'
-        ],
-        'covid': [
-            'covid', 'coronavirus', 'quarantine', 'vaccination', 'pandemic',
-            'covid-19', 'virus', 'vaccine'
-        ],
-        'termination': [
-            'termination', 'resignation', 'gratuity', 'end of service', 'quit',
-            'resign', 'leaving', 'end service', 'terminate'
-        ]
+        'annual_leave': {
+            'keywords': ['annual leave', 'vacation', 'holiday', 'time off', 'days off', 'annual', 'holidays', 'vacations'],
+            'icon': '🏖️',
+            'title': 'Annual Leave'
+        },
+        'sick_leave': {
+            'keywords': ['sick leave', 'medical leave', 'illness', 'doctor', 'health leave', 'medical', 'ill', 'sickness', 'sick'],
+            'icon': '🏥',
+            'title': 'Sick Leave'
+        },
+        'working_hours': {
+            'keywords': ['working hours', 'work time', 'schedule', 'shifts', 'office hours', 'hours', 'time', 'work schedule', 'working time'],
+            'icon': '⏰',
+            'title': 'Working Hours'
+        },
+        'benefits': {
+            'keywords': ['benefits', 'insurance', 'health insurance', 'visa', 'perks', 'benefit', 'health', 'medical insurance'],
+            'icon': '🎁',
+            'title': 'Employee Benefits'
+        },
+        'conduct': {
+            'keywords': ['conduct', 'behavior', 'dress code', 'professional', 'standards', 'behaviour', 'dress', 'code', 'professional standards'],
+            'icon': '👔',
+            'title': 'Code of Conduct'
+        },
+        'disciplinary': {
+            'keywords': ['disciplinary', 'warning', 'misconduct', 'punishment', 'violation', 'discipline', 'warnings', 'disciplinary action'],
+            'icon': '⚖️',
+            'title': 'Disciplinary Procedures'
+        },
+        'covid': {
+            'keywords': ['covid', 'coronavirus', 'quarantine', 'vaccination', 'pandemic', 'covid-19', 'virus', 'vaccine'],
+            'icon': '🦠',
+            'title': 'COVID-19 Policy'
+        },
+        'termination': {
+            'keywords': ['termination', 'resignation', 'gratuity', 'end of service', 'quit', 'resign', 'leaving', 'end service', 'terminate'],
+            'icon': '📋',
+            'title': 'Termination & Gratuity'
+        }
     }
     
     # Handle specific queries that might be confusing
@@ -349,73 +404,99 @@ def process_user_question(question):
     for special_word, redirect_topic in special_cases.items():
         if special_word in question_lower:
             if redirect_topic == 'recruitment':
-                return f"""I understand you're asking about **{special_word}**, but I specialize in providing information about current employee policies from the ES Training DMCC Employee Handbook.
+                return f"""🔍 I understand you're asking about **{special_word}**, but I specialize in providing information about current employee policies from the ES Training DMCC Employee Handbook.
 
-For recruitment, hiring, and job applications, please contact:
-📧 **HR Department** at ES Training DMCC
+📧 **For recruitment, hiring, and job applications, please contact:**
+🏢 **HR Department** at ES Training DMCC
 📍 **Location:** 15th Floor, Mazaya Business Avenue, BB1, JLT, Dubai, UAE
 
-I can help current employees with:
-• Annual Leave policies
-• Working hours and schedules  
-• Employee benefits
-• Code of conduct
-• Performance management
+✨ **I can help current employees with:**
+• 🏖️ Annual Leave policies
+• ⏰ Working hours and schedules  
+• 🎁 Employee benefits
+• 👔 Code of conduct
+• 📊 Performance management
 • And much more!
 
 *Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
-            elif redirect_topic in HANDBOOK_DATA:
-                data = HANDBOOK_DATA[redirect_topic]
-                return f"📖 **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+            elif redirect_topic == 'benefits':
+                data = HANDBOOK_DATA['benefits']
+                return f"🎁 **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
     
-    # Check for topic matches with more flexible matching
-    best_match = None
-    best_score = 0
+    # Check for ambiguous 'leave' query - show options
+    if question_lower in ['leave', 'leaves'] or (len(question_lower.split()) == 1 and 'leave' in question_lower):
+        return """🤔 I see you're asking about **leave** policies. There are different types of leave available:
+
+**Please choose which type of leave you'd like to know about:**
+
+🏖️ **Annual Leave** - Vacation days, holidays, and time off
+🏥 **Sick Leave** - Medical leave policies and procedures
+
+💡 **Tip:** You can also ask more specifically like "annual leave" or "sick leave" for direct answers!
+
+*Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
     
-    for topic, keywords in keyword_mappings.items():
+    # Check for topic matches with scoring
+    matches = []
+    for topic_key, topic_data in keyword_mappings.items():
         score = 0
-        for keyword in keywords:
+        for keyword in topic_data['keywords']:
             if keyword in question_lower:
-                # Exact match gets higher score
                 if keyword == question_lower:
-                    score += 10
-                # Partial match gets lower score
+                    score += 10  # Exact match
                 else:
-                    score += len(keyword)  # Longer matches get higher scores
+                    score += len(keyword)  # Partial match
         
-        if score > best_score:
-            best_score = score
-            best_match = topic
+        if score > 0:
+            matches.append((topic_key, score, topic_data))
     
-    # If we found a good match, return the information
-    if best_match and best_match in HANDBOOK_DATA:
-        data = HANDBOOK_DATA[best_match]
-        return f"📖 **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
+    # Sort matches by score
+    matches.sort(key=lambda x: x[1], reverse=True)
+    
+    # If we found a clear best match
+    if matches and matches[0][1] > 0:
+        best_match = matches[0][0]
+        # Map to HANDBOOK_DATA keys
+        handbook_key_mapping = {
+            'annual_leave': 'leave',
+            'sick_leave': 'sick',
+            'working_hours': 'working hours',
+            'benefits': 'benefits',
+            'conduct': 'conduct',
+            'disciplinary': 'disciplinary',
+            'covid': 'covid',
+            'termination': 'termination'
+        }
+        
+        if best_match in handbook_key_mapping and handbook_key_mapping[best_match] in HANDBOOK_DATA:
+            data = HANDBOOK_DATA[handbook_key_mapping[best_match]]
+            icon = matches[0][2]['icon']
+            return f"{icon} **{data['title']}**\n\n{data['content']}\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
     
     # Check for greeting or general questions
     greetings = ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'thank you', 'thanks']
     if any(greeting in question_lower for greeting in greetings):
         return """👋 Hello! I am your **LGL Employee Helper**. I'm here to help you with any questions about the ES Training DMCC Employee Handbook.
 
-I can assist you with policies, procedures, benefits, and much more. What would you like to know?
+✨ I can assist you with policies, procedures, benefits, and much more. What would you like to know?
 
 *Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
     
     # Default response for unrecognized questions
-    return f"""I understand you asked about "{question}", but I couldn't find specific information about that topic in the Employee Handbook.
+    return f"""🤔 I understand you asked about "{question}", but I couldn't find specific information about that topic in the Employee Handbook.
 
-I can help you with these topics:
+📚 **I can help you with these topics:**
 
-🔹 **Annual Leave** - Vacation days and application process
-🔹 **Sick Leave** - Medical leave policies and procedures  
-🔹 **Working Hours** - Schedule for admin and academic staff
-🔹 **Employee Benefits** - Health insurance, visa, holidays
-🔹 **Code of Conduct** - Professional standards and dress code
-🔹 **Disciplinary Procedures** - Warning system and processes
-🔹 **COVID-19 Policy** - Health and safety protocols
-🔹 **Termination & Gratuity** - End of service procedures
+🏖️ **Annual Leave** - Vacation days and application process
+🏥 **Sick Leave** - Medical leave policies and procedures  
+⏰ **Working Hours** - Schedule for admin and academic staff
+🎁 **Employee Benefits** - Health insurance, visa, holidays
+👔 **Code of Conduct** - Professional standards and dress code
+⚖️ **Disciplinary Procedures** - Warning system and processes
+🦠 **COVID-19 Policy** - Health and safety protocols
+📋 **Termination & Gratuity** - End of service procedures
 
-Could you please rephrase your question or ask about one of these topics?
+💡 Could you please rephrase your question or ask about one of these topics?
 
 *Have a great day! I am always here to guide you. Do you want to know more?* 😊"""
 
@@ -427,53 +508,59 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Quick action buttons
+# Quick action buttons with icons
 st.markdown("### 🚀 Quick Topics:")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    if st.button("📅 Annual Leave", key="leave_btn", help="Learn about annual leave policies"):
+    if st.button("🏖️ Annual Leave", key="leave_btn", help="Learn about annual leave policies and vacation days"):
         question = 'Tell me about annual leave'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('annual leave')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.session_state.processing = False
         st.rerun()
     
-    if st.button("🏥 Sick Leave", key="sick_btn", help="Learn about sick leave policies"):
+    if st.button("🏥 Sick Leave", key="sick_btn", help="Learn about sick leave policies and medical procedures"):
         question = 'Tell me about sick leave'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('sick leave')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.session_state.processing = False
         st.rerun()
 
 with col2:
-    if st.button("⏰ Working Hours", key="hours_btn", help="Learn about working schedules"):
+    if st.button("⏰ Working Hours", key="hours_btn", help="Learn about working schedules and time policies"):
         question = 'Tell me about working hours'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('working hours')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.session_state.processing = False
         st.rerun()
     
-    if st.button("🎁 Benefits", key="benefits_btn", help="Learn about employee benefits"):
+    if st.button("🎁 Benefits", key="benefits_btn", help="Learn about employee benefits and insurance"):
         question = 'Tell me about employee benefits'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('benefits')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.session_state.processing = False
         st.rerun()
 
 with col3:
-    if st.button("👔 Code of Conduct", key="conduct_btn", help="Learn about professional standards"):
+    if st.button("👔 Code of Conduct", key="conduct_btn", help="Learn about professional standards and dress code"):
         question = 'Tell me about code of conduct'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('conduct')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.session_state.processing = False
         st.rerun()
     
-    if st.button("⚖️ Disciplinary", key="disciplinary_btn", help="Learn about disciplinary procedures"):
+    if st.button("⚖️ Disciplinary", key="disciplinary_btn", help="Learn about disciplinary procedures and warnings"):
         question = 'Tell me about disciplinary procedures'
         st.session_state.messages.append({'role': 'user', 'content': question})
         response = process_user_question('disciplinary')
         st.session_state.messages.append({'role': 'assistant', 'content': response})
+        st.session_state.processing = False
         st.rerun()
 
 # Chat input using form to prevent auto-rerun
