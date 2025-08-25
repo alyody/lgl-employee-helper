@@ -330,7 +330,7 @@ if 'messages' not in st.session_state:
     st.session_state.messages = []
     welcome_response = {
         'type': 'content',
-        'content': '👋 Hello! I am your **LGL Employee Helper**. Ask me anything about the ES Training DMCC Employee Handbook!\n\nI can help you with policies, procedures, benefits, and much more. What would you like to know?'
+        'content': '👋 Hello! I am your **LGL Employee Helper**. Ask me anything about the Alistar Personnel Employee Handbook!\n\nI can help you with policies, procedures, benefits, and much more. What would you like to know?'
     }
     st.session_state.messages.append({
         'role': 'assistant',
@@ -411,11 +411,11 @@ def process_user_question(question):
             if redirect_topic == 'recruitment':
                 return {
                     'type': 'content',
-                    'content': f"""🔍 I understand you're asking about **{special_word}**, but I specialize in providing information about current employee policies from the ES Training DMCC Employee Handbook.
+                    'content': f"""🔍 I understand you're asking about **{special_word}**, but I specialize in providing information about current employee policies from the Alistar Personnel Employee Handbook.
 
 📧 **For recruitment, hiring, and job applications, please contact:**
-🏢 **HR Department** at ES Training DMCC
-📍 **Location:** 15th Floor, Mazaya Business Avenue, BB1, JLT, Dubai, UAE
+🏢 **HR Department** at Alistar Personnel
+📍 **Location:** 605, Park Avenue , Dubai Silicon Oasis
 
 ✨ **I can help current employees with:**
 • 🏖️ Annual Leave policies
@@ -493,7 +493,7 @@ def process_user_question(question):
     if any(greeting in question_lower for greeting in greetings):
         return {
             'type': 'content',
-            'content': """👋 Hello! I am your **LGL Employee Helper**. I'm here to help you with any questions about the ES Training DMCC Employee Handbook.
+            'content': """👋 Hello! I am your **LGL Employee Helper**. I'm here to help you with any questions about the Alistar Personnel Employee Handbook.
 
 ✨ I can assist you with policies, procedures, benefits, and much more. What would you like to know?
 
@@ -519,7 +519,7 @@ def process_user_question(question):
 st.markdown("""
 <div class="main-header">
     <h1>🤖 LGL Employee Helper</h1>
-    <p style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.9;">Your intelligent guide to the ES Training DMCC Employee Handbook</p>
+    <p style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.9;">Alistar's Personnel Employee Handbook</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -704,8 +704,8 @@ with st.form(key='chat_form', clear_on_submit=True):
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #666; padding: 2rem;">
-    <p>🏢 <strong>ES Training DMCC</strong> - Employee Handbook Assistant</p>
-    <p>📍 15th Floor, Mazaya Business Avenue, BB1, JLT, Dubai, UAE</p>
+    <p>🏢 <strong>Alistar Handbook</strong> - Employee Handbook Assistant</p>
+    <p>📍 605, Park Avenue , Dubai Silicon Oasis</p>
     <p><em>For additional HR support, please contact the HR Department</em></p>
 </div>
 """, unsafe_allow_html=True)
