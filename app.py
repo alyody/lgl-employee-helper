@@ -18,6 +18,278 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# Enhanced CSS styling with ALL UI improvements
+st.markdown("""
+<style>
+    /* Main header styling with blue background and white text */
+    .main-header {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        padding: 2rem;
+        border-radius: 15px;
+        color: white !important;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .main-header h1 {
+        color: white !important;
+        font-size: 2.5rem !important;
+        margin: 0 !important;
+    }
+    
+    .main-header p {
+        color: white !important;
+        opacity: 0.9 !important;
+    }
+    
+    /* Button styling - blue background with white text and bigger size */
+    .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: 12px !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        width: 100% !important;
+        height: 70px !important;
+        box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3) !important;
+        transition: all 0.3s ease !important;
+        text-align: center !important;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #2980b9 0%, #1f4e79 100%) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4) !important;
+    }
+    
+    .stButton > button:focus {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5) !important;
+    }
+    
+    /* Main content selectbox styling */
+    .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        margin-bottom: 1rem !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Selectbox dropdown styling */
+    .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Sidebar selectbox styling - FIXED ALIGNMENT */
+    div[data-testid="stSidebar"] .stSelectbox > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 6px !important;
+        padding: 0.375rem 0.75rem !important;
+        font-size: 0.875rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 500 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Sidebar selectbox dropdown options */
+    div[data-testid="stSidebar"] .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Text input styling */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Text area styling */
+    .stTextArea > div > div > textarea {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextArea label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Date input styling */
+    .stDateInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stDateInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Chat message styling */
+    .bot-message {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border-left: 4px solid #3498db !important;
+        margin: 1rem 0 !important;
+        color: #2c3e50 !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1) !important;
+    }
+    
+    .user-message {
+        background: linear-gradient(135deg, #3498db, #2980b9) !important;
+        color: white !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        margin: 1rem 0 !important;
+        text-align: right !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2) !important;
+    }
+    
+    /* Form styling */
+    .stForm {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border: 2px solid #e9ecef !important;
+        margin: 1rem 0 !important;
+    }
+    
+    /* Metric styling */
+    .stMetric {
+        background: white !important;
+        padding: 1rem !important;
+        border-radius: 8px !important;
+        border: 1px solid #e9ecef !important;
+        text-align: center !important;
+    }
+    
+    .stMetric label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stMetric [data-testid="metric-value"] {
+        color: #3498db !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Sidebar button styling */
+    .css-1d391kg .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        width: 100% !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Responsive and alignment fixes */
+    .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix column overflow issues */
+    .row-widget {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Ensure sidebar elements don't overflow */
+    div[data-testid="stSidebar"] .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .stSelectbox > div > div,
+        .stTextInput > div > div > input,
+        .stTextArea > div > div > textarea {
+            font-size: 0.875rem !important;
+        }
+        
+        .main-header h1 {
+            font-size: 2rem !important;
+        }
+        
+        .stButton > button {
+            height: 60px !important;
+            font-size: 1rem !important;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # Employee Database - Sample Data for Leave Tracking
 EMPLOYEE_DATA = {
     'loyed': {
@@ -290,6 +562,660 @@ _Generated by LGL Employee Helper_"""
         'mailto_url': mailto_url,
         'whatsapp_message': whatsapp_message
     }
+    """Generate a formatted email for various form types with HTML formatting"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # HTML Email Template
+    html_template = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }}
+        .container {{ max-width: 600px; margin: 0 auto; background-color: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; }}
+        .header {{ background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 30px; text-align: center; }}
+        .header h1 {{ margin: 0; font-size: 24px; }}
+        .header p {{ margin: 5px 0 0 0; opacity: 0.9; }}
+        .content {{ padding: 30px; }}
+        .form-details {{ background-color: #f8f9fa; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #3498db; }}
+        .detail-row {{ margin: 10px 0; display: flex; }}
+        .detail-label {{ font-weight: bold; min-width: 150px; color: #2c3e50; }}
+        .detail-value {{ color: #34495e; }}
+        .action-buttons {{ text-align: center; margin: 30px 0; }}
+        .approve-btn {{ background-color: #27ae60; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .reject-btn {{ background-color: #e74c3c; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .footer {{ background-color: #34495e; color: white; padding: 20px; text-align: center; font-size: 12px; }}
+        .status {{ display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; background-color: #f39c12; color: white; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Alistar Personnel</h1>
+            <p>{form_type} Request Approval</p>
+        </div>
+        
+        <div class="content">
+            <h2>Dear {manager_name},</h2>
+            <p>You have received a new <strong>{form_type}</strong> request that requires your approval.</p>
+            
+            <div class="form-details">
+                <h3>📋 Request Details</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Employee:</span>
+                    <span class="detail-value">{employee_name}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Request Type:</span>
+                    <span class="detail-value">{form_type}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date Submitted:</span>
+                    <span class="detail-value">{datetime.now().strftime('%B %d, %Y at %I:%M %p')}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="status">Pending Approval</span>
+                </div>
+"""
+    
+    # Add form-specific details
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            html_template += f"""
+                <div class="detail-row">
+                    <span class="detail-label">{formatted_key}:</span>
+                    <span class="detail-value">{value}</span>
+                </div>"""
+    
+    html_template += f"""
+            </div>
+            
+            <div class="action-buttons">
+                <a href="mailto:concessioac@gmail.com?subject=APPROVED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been APPROVED.%0A%0AApproval Details:%0A• Approved by: {manager_name}%0A• Approval Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Comments: [Add any comments here]%0A%0APlease contact HR if you have any questions.%0A%0ABest regards,%0A{manager_name}" class="approve-btn">✅ APPROVE</a>
+                
+                <a href="mailto:concessioac@gmail.com?subject=REJECTED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been REJECTED.%0A%0ARejection Details:%0A• Rejected by: {manager_name}%0A• Rejection Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Reason: [Please provide reason here]%0A%0APlease contact me if you have any questions or would like to discuss this further.%0A%0ABest regards,%0A{manager_name}" class="reject-btn">❌ REJECT</a>
+            </div>
+            
+            <p><strong>Instructions:</strong></p>
+            <ul>
+                <li>Click the appropriate button above to approve or reject this request</li>
+                <li>An email will be automatically generated to notify the employee</li>
+                <li>Please add any additional comments before sending</li>
+                <li>For questions, contact HR at concessioac@gmail.com</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>📧 This request was generated by the LGL Employee Helper System</p>
+            <p>Alistar Personnel | 605, Park Avenue, Dubai Silicon Oasis</p>
+        </div>
+    </div>
+</body>
+</html>"""
+    
+    return email_subject, html_template
+
+# Form Types Configuration
+FORM_TYPES = {
+    'leave_request': {
+        'title': '🏖️ Leave Request',
+        'description': 'Request time off for vacation, sick leave, maternity, etc.',
+        'icon': '🏖️',
+        'fields': ['leave_type', 'start_date', 'end_date', 'reason', 'emergency_contact']
+    },
+    'visa_request': {
+        'title': '📋 Visa & Immigration Request',
+        'description': 'Request visa sponsorship or dependent visa support',
+        'icon': '📋',
+        'fields': ['visa_type', 'dependent_details', 'urgency', 'reason']
+    },
+    'health_insurance': {
+        'title': '🏥 Health Insurance Request',
+        'description': 'Request health insurance changes or dependent coverage',
+        'icon': '🏥',
+        'fields': ['insurance_type', 'dependent_info', 'medical_history', 'preferred_provider']
+    },
+    'performance_review': {
+        'title': '📈 Performance Review Request',
+        'description': 'Request performance appraisal or schedule review meeting',
+        'icon': '📈',
+        'fields': ['review_type', 'preferred_date', 'self_assessment', 'goals']
+    },
+    'training_request': {
+        'title': '🎓 Training & Development Request',
+        'description': 'Request professional development or training opportunities',
+        'icon': '🎓',
+        'fields': ['training_type', 'course_name', 'provider', 'cost_estimate', 'justification']
+    },
+    'grievance_report': {
+        'title': '⚠️ Grievance Report',
+        'description': 'Report workplace issues or file a formal complaint',
+        'icon': '⚠️',
+        'fields': ['issue_type', 'incident_date', 'involved_parties', 'description', 'witnesses']
+    },
+    'equipment_request': {
+        'title': '💻 Equipment Request',
+        'description': 'Request office equipment, technology, or supplies',
+        'icon': '💻',
+        'fields': ['equipment_type', 'specification', 'justification', 'urgency']
+    },
+    'policy_clarification': {
+        'title': '📜 Policy Clarification Request',
+        'description': 'Request clarification on company policies or procedures',
+        'icon': '📜',
+        'fields': ['policy_area', 'specific_question', 'situation_context']
+    },
+    'schedule_change': {
+        'title': '⏰ Schedule Change Request',
+        'description': 'Request changes to working hours or schedule',
+        'icon': '⏰',
+        'fields': ['change_type', 'proposed_schedule', 'effective_date', 'reason']
+    },
+    'resignation_notice': {
+        'title': '📝 Resignation Notice',
+        'description': 'Submit formal resignation and notice period',
+        'icon': '📝',
+        'fields': ['last_working_day', 'notice_period', 'reason', 'transition_plan']
+    }
+}
+
+# Employee Handbook Data
+HANDBOOK_DATA = {
+    'leave': {
+        'title': 'Annual Leave Policy',
+        'content': """📅 **Annual Leave Entitlement:**
+
+```
+import streamlit as st
+import re
+import time
+import random
+import pandas as pd
+from datetime import datetime, date, timedelta
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import urllib.parse
+import json
+
+# Configure the page
+st.set_page_config(
+    page_title="LGL Employee Helper",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# Enhanced CSS styling with ALL UI improvements
+st.markdown("""
+<style>
+    /* Main header styling with blue background and white text */
+    .main-header {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        padding: 2rem;
+        border-radius: 15px;
+        color: white !important;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .main-header h1 {
+        color: white !important;
+        font-size: 2.5rem !important;
+        margin: 0 !important;
+    }
+    
+    .main-header p {
+        color: white !important;
+        opacity: 0.9 !important;
+    }
+    
+    /* Button styling - blue background with white text and bigger size */
+    .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: 12px !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        width: 100% !important;
+        height: 70px !important;
+        box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3) !important;
+        transition: all 0.3s ease !important;
+        text-align: center !important;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #2980b9 0%, #1f4e79 100%) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4) !important;
+    }
+    
+    .stButton > button:focus {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5) !important;
+    }
+    
+    /* Main content selectbox styling */
+    .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        margin-bottom: 1rem !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Selectbox dropdown styling */
+    .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Sidebar selectbox styling - FIXED ALIGNMENT */
+    div[data-testid="stSidebar"] .stSelectbox > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 6px !important;
+        padding: 0.375rem 0.75rem !important;
+        font-size: 0.875rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 500 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Sidebar selectbox dropdown options */
+    div[data-testid="stSidebar"] .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Text input styling */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Text area styling */
+    .stTextArea > div > div > textarea {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextArea label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Date input styling */
+    .stDateInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stDateInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Chat message styling */
+    .bot-message {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border-left: 4px solid #3498db !important;
+        margin: 1rem 0 !important;
+        color: #2c3e50 !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1) !important;
+    }
+    
+    .user-message {
+        background: linear-gradient(135deg, #3498db, #2980b9) !important;
+        color: white !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        margin: 1rem 0 !important;
+        text-align: right !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2) !important;
+    }
+    
+    /* Form styling */
+    .stForm {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border: 2px solid #e9ecef !important;
+        margin: 1rem 0 !important;
+    }
+    
+    /* Metric styling */
+    .stMetric {
+        background: white !important;
+        padding: 1rem !important;
+        border-radius: 8px !important;
+        border: 1px solid #e9ecef !important;
+        text-align: center !important;
+    }
+    
+    .stMetric label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stMetric [data-testid="metric-value"] {
+        color: #3498db !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Sidebar button styling */
+    .css-1d391kg .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        width: 100% !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Responsive and alignment fixes */
+    .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix column overflow issues */
+    .row-widget {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Ensure sidebar elements don't overflow */
+    div[data-testid="stSidebar"] .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .stSelectbox > div > div,
+        .stTextInput > div > div > input,
+        .stTextArea > div > div > textarea {
+            font-size: 0.875rem !important;
+        }
+        
+        .main-header h1 {
+            font-size: 2rem !important;
+        }
+        
+        .stButton > button {
+            height: 60px !important;
+            font-size: 1rem !important;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Employee Database - Sample Data for Leave Tracking
+EMPLOYEE_DATA = {
+    'loyed': {
+        'name': 'Loyed',
+        'department': 'Logistics',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP001',
+        'join_date': '2023-01-15',
+        'contract_type': 'Unlimited',
+        'position': 'Logistics Coordinator',
+        'annual_leave_taken': 10,
+        'sick_leave_taken': 2,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.8
+    },
+    'eva': {
+        'name': 'Eva',
+        'department': 'Commercial Services',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP002',
+        'join_date': '2022-08-10',
+        'contract_type': 'Unlimited',
+        'position': 'Commercial Services Specialist',
+        'annual_leave_taken': 12,
+        'sick_leave_taken': 3,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 2.3
+    },
+    'jaq': {
+        'name': 'Jaq',
+        'department': 'Commercial Sales',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP003',
+        'join_date': '2024-01-20',
+        'contract_type': 'Limited',
+        'position': 'Sales Executive',
+        'annual_leave_taken': 5,
+        'sick_leave_taken': 7,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 0.7
+    },
+    'rajeev': {
+        'name': 'Rajeev',
+        'department': 'Vessel Operations',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP004',
+        'join_date': '2021-05-03',
+        'contract_type': 'Unlimited',
+        'position': 'Operations Manager',
+        'annual_leave_taken': 4,
+        'sick_leave_taken': 6,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 5,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 3.6
+    },
+    'sarah': {
+        'name': 'Sarah',
+        'department': 'Human Resources',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP005',
+        'join_date': '2020-11-12',
+        'contract_type': 'Unlimited',
+        'position': 'HR Manager',
+        'annual_leave_taken': 8,
+        'sick_leave_taken': 1,
+        'maternity_leave_taken': 45,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 3,
+        'probation_completed': True,
+        'years_of_service': 4.1
+    },
+    'ahmed': {
+        'name': 'Ahmed',
+        'department': 'Finance',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP006',
+        'join_date': '2023-09-01',
+        'contract_type': 'Limited',
+        'position': 'Financial Analyst',
+        'annual_leave_taken': 6,
+        'sick_leave_taken': 0,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.3
+    }
+}
+
+def calculate_leave_entitlements(employee_data):
+    """Calculate leave entitlements based on employee data and handbook policies"""
+    years_of_service = employee_data['years_of_service']
+    probation_completed = employee_data['probation_completed']
+    
+    # Annual Leave Calculation
+    if years_of_service >= 1:
+        annual_leave_entitlement = 22  # Subsequent years
+    else:
+        annual_leave_entitlement = 20  # First year
+    
+    # Sick Leave Calculation (only after probation)
+    if probation_completed:
+        sick_leave_entitlement = 90  # 90 calendar days per year
+    else:
+        sick_leave_entitlement = 0
+    
+    # Other leave entitlements
+    maternity_leave_entitlement = 60 if employee_data['name'] else 60  # All female employees
+    parental_leave_entitlement = 5  # Both male and female
+    bereavement_leave_entitlement = 5  # Maximum for spouse
+    
+    return {
+        'annual_leave': {
+            'entitlement': annual_leave_entitlement,
+            'taken': employee_data['annual_leave_taken'],
+            'remaining': annual_leave_entitlement - employee_data['annual_leave_taken']
+        },
+        'sick_leave': {
+            'entitlement': sick_leave_entitlement,
+            'taken': employee_data['sick_leave_taken'],
+            'remaining': sick_leave_entitlement - employee_data['sick_leave_taken']
+        },
+        'maternity_leave': {
+            'entitlement': maternity_leave_entitlement,
+            'taken': employee_data['maternity_leave_taken'],
+            'remaining': maternity_leave_entitlement - employee_data['maternity_leave_taken']
+        },
+        'parental_leave': {
+            'entitlement': parental_leave_entitlement,
+            'taken': employee_data['parental_leave_taken'],
+            'remaining': parental_leave_entitlement - employee_data['parental_leave_taken']
+        },
+        'bereavement_leave': {
+            'entitlement': bereavement_leave_entitlement,
+            'taken': employee_data['bereavement_leave_taken'],
+            'remaining': bereavement_leave_entitlement - employee_data['bereavement_leave_taken']
+        }
+    }
+
+def create_notification_links(form_type, employee_name, manager_name, form_data):
+    """Create various notification service links for sending requests"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # Create email body
+    email_body = f"""Dear {manager_name},
+
+I would like to submit a {form_type} request:
+
+REQUEST DETAILS:
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date: {datetime.now().strftime('%B %d, %Y')}
+"""
+    
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            email_body += f"• {formatted_key}: {value}\n"
+    
+    email_body += f"""
+
+Please review and approve this request.
+
+Best regards,
+{employee_name}
+
+Generated by LGL Employee Helper
+Alistar Personnel"""
+    
+    # URL encode for links
+    subject_encoded = urllib.parse.quote(email_subject)
+    body_encoded = urllib.parse.quote(email_body)
+    manager_email = "concessioac@gmail.com"
+    
+    return {
+        'gmail_url': f"https://mail.google.com/mail/?view=cm&to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'outlook_url': f"https://outlook.live.com/mail/0/deeplink/compose?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'yahoo_url': f"https://compose.mail.yahoo.com/?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'subject': email_subject,
+        'body': email_body,
+        'manager_email': manager_email
+    }
+
+def generate_email_alternatives(form_type, employee_name, manager_name, form_data):
     """Generate multiple email alternatives for form submission"""
     email_subject = f"{form_type} Request - {employee_name}"
     
@@ -526,420 +1452,6 @@ FORM_TYPES = {
         'fields': ['last_working_day', 'notice_period', 'reason', 'transition_plan']
     }
 }
-st.markdown("""
-<style>
-    /* Import modern font */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    
-    /* Root variables - Modern color system */
-    :root {
-        --primary-50: #f0f9ff;
-        --primary-100: #e0f2fe;
-        --primary-500: #0ea5e9;
-        --primary-600: #0284c7;
-        --primary-700: #0369a1;
-        --gray-50: #f8fafc;
-        --gray-100: #f1f5f9;
-        --gray-200: #e2e8f0;
-        --gray-300: #cbd5e1;
-        --gray-500: #64748b;
-        --gray-600: #475569;
-        --gray-700: #334155;
-        --gray-800: #1e293b;
-        --gray-900: #0f172a;
-        --success-50: #f0fdf4;
-        --success-500: #22c55e;
-        --warning-50: #fffbeb;
-        --warning-500: #f59e0b;
-        --error-50: #fef2f2;
-        --error-500: #ef4444;
-    }
-    
-    /* Global styles */
-    .stApp {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        background: linear-gradient(135deg, var(--gray-50) 0%, var(--primary-50) 100%);
-    }
-    
-    /* Main header - Modern card design */
-    .main-header {
-        background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
-        padding: 2.5rem 2rem;
-        border-radius: 16px;
-        color: white;
-        text-align: center;
-        margin-bottom: 2rem;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .main-header h1 {
-        font-weight: 700;
-        font-size: 2.25rem;
-        margin-bottom: 0.5rem;
-        letter-spacing: -0.025em;
-        color: white;
-    }
-    
-    .main-header p {
-        font-weight: 500;
-        opacity: 0.9;
-        font-size: 1.125rem;
-        color: rgba(255, 255, 255, 0.9);
-    }
-    
-    /* Modern message cards */
-    .bot-message {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin: 1.5rem 0;
-        border: 1px solid var(--gray-200);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        position: relative;
-    }
-    
-    .bot-message::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 4px;
-        background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
-        border-radius: 2px 0 0 2px;
-    }
-    
-    .user-message {
-        background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin: 1.5rem 0 1.5rem 2rem;
-        color: white;
-        box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.25), 0 2px 4px -1px rgba(14, 165, 233, 0.1);
-        font-weight: 500;
-    }
-    
-    /* Modern buttons */
-    .stButton > button {
-        background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 0.75rem 1.5rem;
-        font-weight: 600;
-        font-family: 'Inter', sans-serif;
-        transition: all 0.2s ease;
-        box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.25);
-        font-size: 0.875rem;
-        letter-spacing: 0.025em;
-    }
-    
-    .stButton > button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.25), 0 4px 6px -2px rgba(14, 165, 233, 0.1);
-        background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
-    }
-    
-    /* Form inputs - Modern styling */
-    .stTextInput > div > div > input,
-    .stTextArea > div > div > textarea,
-    .stSelectbox > div > div > div,
-    .stDateInput > div > div > input {
-        border-radius: 8px !important;
-        border: 1px solid var(--gray-300) !important;
-        padding: 0.75rem !important;
-        font-family: 'Inter', sans-serif !important;
-        font-size: 0.875rem !important;
-        transition: all 0.2s ease !important;
-        background: white !important;
-        margin-bottom: 1rem !important;
-    }
-    
-    .stTextInput > div > div > input:focus,
-    .stTextArea > div > div > textarea:focus,
-    .stSelectbox > div > div > div:focus-within,
-    .stDateInput > div > div > input:focus {
-        border-color: var(--primary-500) !important;
-        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1) !important;
-        outline: none !important;
-    }
-    
-    /* Selectbox specific styling */
-    .stSelectbox > div {
-        margin-bottom: 1rem !important;
-    }
-    
-    .stSelectbox > div > label {
-        font-weight: 500 !important;
-        color: var(--gray-700) !important;
-        margin-bottom: 0.5rem !important;
-        display: block !important;
-        font-size: 0.875rem !important;
-    }
-    
-    /* Form containers and spacing */
-    .stForm {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 12px;
-        border: 1px solid var(--gray-200);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        margin: 1rem 0;
-    }
-    
-    /* Column spacing fix */
-    .css-ocqkz7 {
-        gap: 1rem !important;
-    }
-    
-    /* Form labels styling */
-    .stTextInput > div > label,
-    .stTextArea > div > label,
-    .stSelectbox > div > label,
-    .stDateInput > div > label {
-        font-weight: 500 !important;
-        color: var(--gray-700) !important;
-        margin-bottom: 0.5rem !important;
-        font-size: 0.875rem !important;
-        line-height: 1.25 !important;
-    }
-    
-    /* Checkbox styling */
-    .stCheckbox {
-        margin: 1rem 0 !important;
-    }
-    
-    .stCheckbox > div {
-        align-items: flex-start !important;
-        gap: 0.5rem !important;
-    }
-    
-    .stCheckbox > div > label {
-        font-weight: 400 !important;
-        color: var(--gray-600) !important;
-        font-size: 0.875rem !important;
-        line-height: 1.5 !important;
-    }
-    
-    /* Quick action cards */
-    .quick-actions {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 12px;
-        border: 1px solid var(--gray-200);
-        margin: 1rem 0;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-    
-    .quick-actions h3 {
-        color: var(--gray-800);
-        font-weight: 600;
-        margin-bottom: 1rem;
-        font-size: 1.125rem;
-    }
-    
-    /* Option buttons - Modern card style */
-    .option-button {
-        background: white;
-        border: 1px solid var(--gray-200);
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        margin: 0.5rem;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        font-weight: 500;
-        color: var(--gray-700);
-        font-size: 0.875rem;
-        display: inline-block;
-        text-decoration: none;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    }
-    
-    .option-button:hover {
-        background: var(--primary-50);
-        border-color: var(--primary-200);
-        color: var(--primary-700);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-    
-    /* Sidebar styling */
-    .css-1d391kg {
-        background: white;
-        border-right: 1px solid var(--gray-200);
-    }
-    
-    /* Sidebar form elements */
-    .css-1d391kg .stSelectbox > div {
-        margin-bottom: 1rem;
-    }
-    
-    .css-1d391kg .stSelectbox > div > label {
-        font-weight: 500;
-        color: var(--gray-700);
-        margin-bottom: 0.5rem;
-        font-size: 0.875rem;
-    }
-    
-    .css-1d391kg .stSelectbox > div > div > div {
-        background: var(--gray-50);
-        border: 1px solid var(--gray-300);
-        border-radius: 8px;
-        padding: 0.5rem;
-    }
-    
-    /* Success/Warning/Error states */
-    .stSuccess {
-        background: var(--success-50) !important;
-        border: 1px solid var(--success-500) !important;
-        color: var(--success-500) !important;
-        border-radius: 8px !important;
-        margin: 1rem 0 !important;
-        padding: 1rem !important;
-    }
-    
-    .stWarning {
-        background: var(--warning-50) !important;
-        border: 1px solid var(--warning-500) !important;
-        color: var(--warning-500) !important;
-        border-radius: 8px !important;
-        margin: 1rem 0 !important;
-        padding: 1rem !important;
-        font-weight: 500 !important;
-    }
-    
-    .stError {
-        background: var(--error-50) !important;
-        border: 1px solid var(--error-500) !important;
-        color: var(--error-500) !important;
-        border-radius: 8px !important;
-        margin: 1rem 0 !important;
-        padding: 1rem !important;
-    }
-    
-    /* Info boxes */
-    .stInfo {
-        background: var(--primary-50);
-        border: 1px solid var(--primary-500);
-        color: var(--primary-700);
-        border-radius: 8px;
-    }
-    
-    /* Metrics styling */
-    .css-1xarl3l {
-        background: white;
-        padding: 1rem;
-        border-radius: 8px;
-        border: 1px solid var(--gray-200);
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Expander styling */
-    .streamlit-expanderHeader {
-        background: var(--gray-50);
-        border-radius: 8px;
-        border: 1px solid var(--gray-200);
-        font-weight: 500;
-    }
-    
-    /* Code blocks */
-    .stCodeBlock {
-        border-radius: 8px;
-        background: var(--gray-900);
-        border: 1px solid var(--gray-700);
-    }
-    
-    /* Download buttons */
-    .stDownloadButton > button {
-        background: var(--gray-600);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 0.75rem 1.5rem;
-        font-weight: 500;
-        transition: all 0.2s ease;
-    }
-    
-    .stDownloadButton > button:hover {
-        background: var(--gray-700);
-        transform: translateY(-1px);
-    }
-    
-    /* Form containers */
-    .css-1r6slb0 {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 12px;
-        border: 1px solid var(--gray-200);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        margin: 1rem 0;
-    }
-    
-    /* Email option cards */
-    .email-option-card {
-        background: white;
-        border: 1px solid var(--gray-200);
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin: 1rem 0;
-        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        transition: all 0.2s ease;
-    }
-    
-    .email-option-card:hover {
-        border-color: var(--primary-300);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Modern instruction boxes */
-    .instruction-box {
-        background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
-        padding: 1.5rem;
-        border-radius: 12px;
-        border: 1px solid var(--primary-200);
-        color: var(--primary-800);
-        margin: 1.5rem 0;
-        box-shadow: 0 2px 4px -1px rgba(14, 165, 233, 0.1);
-    }
-    
-    .instruction-box strong {
-        color: var(--primary-700);
-        font-weight: 600;
-    }
-    
-    /* Headers and typography */
-    h1, h2, h3 {
-        color: var(--gray-800);
-        font-weight: 600;
-        letter-spacing: -0.025em;
-    }
-    
-    p, div {
-        color: var(--gray-600);
-        line-height: 1.6;
-    }
-    
-    /* Clean scrollbars */
-    ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: var(--gray-100);
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: var(--gray-300);
-        border-radius: 3px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: var(--gray-400);
-    }
-</style>
-""", unsafe_allow_html=True)
 
 # Employee Handbook Data
 HANDBOOK_DATA = {
@@ -947,6 +1459,4053 @@ HANDBOOK_DATA = {
         'title': 'Annual Leave Policy',
         'content': """📅 **Annual Leave Entitlement:**
 
+```
+import streamlit as st
+import re
+import time
+import random
+import pandas as pd
+from datetime import datetime, date, timedelta
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import urllib.parse
+import json
+
+# Configure the page
+st.set_page_config(
+    page_title="LGL Employee Helper",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# Enhanced CSS styling with ALL UI improvements
+st.markdown("""
+<style>
+    /* Main header styling with blue background and white text */
+    .main-header {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        padding: 2rem;
+        border-radius: 15px;
+        color: white !important;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .main-header h1 {
+        color: white !important;
+        font-size: 2.5rem !important;
+        margin: 0 !important;
+    }
+    
+    .main-header p {
+        color: white !important;
+        opacity: 0.9 !important;
+    }
+    
+    /* Button styling - blue background with white text and bigger size */
+    .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: 12px !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        width: 100% !important;
+        height: 70px !important;
+        box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3) !important;
+        transition: all 0.3s ease !important;
+        text-align: center !important;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #2980b9 0%, #1f4e79 100%) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4) !important;
+    }
+    
+    .stButton > button:focus {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5) !important;
+    }
+    
+    /* Main content selectbox styling */
+    .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        margin-bottom: 1rem !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Selectbox dropdown styling */
+    .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Sidebar selectbox styling - FIXED ALIGNMENT */
+    div[data-testid="stSidebar"] .stSelectbox > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 6px !important;
+        padding: 0.375rem 0.75rem !important;
+        font-size: 0.875rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 500 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Sidebar selectbox dropdown options */
+    div[data-testid="stSidebar"] .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Text input styling */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Text area styling */
+    .stTextArea > div > div > textarea {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextArea label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Date input styling */
+    .stDateInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stDateInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Chat message styling */
+    .bot-message {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border-left: 4px solid #3498db !important;
+        margin: 1rem 0 !important;
+        color: #2c3e50 !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1) !important;
+    }
+    
+    .user-message {
+        background: linear-gradient(135deg, #3498db, #2980b9) !important;
+        color: white !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        margin: 1rem 0 !important;
+        text-align: right !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2) !important;
+    }
+    
+    /* Form styling */
+    .stForm {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border: 2px solid #e9ecef !important;
+        margin: 1rem 0 !important;
+    }
+    
+    /* Metric styling */
+    .stMetric {
+        background: white !important;
+        padding: 1rem !important;
+        border-radius: 8px !important;
+        border: 1px solid #e9ecef !important;
+        text-align: center !important;
+    }
+    
+    .stMetric label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stMetric [data-testid="metric-value"] {
+        color: #3498db !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Sidebar button styling */
+    .css-1d391kg .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        width: 100% !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Responsive and alignment fixes */
+    .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix column overflow issues */
+    .row-widget {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Ensure sidebar elements don't overflow */
+    div[data-testid="stSidebar"] .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .stSelectbox > div > div,
+        .stTextInput > div > div > input,
+        .stTextArea > div > div > textarea {
+            font-size: 0.875rem !important;
+        }
+        
+        .main-header h1 {
+            font-size: 2rem !important;
+        }
+        
+        .stButton > button {
+            height: 60px !important;
+            font-size: 1rem !important;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Employee Database - Sample Data for Leave Tracking
+EMPLOYEE_DATA = {
+    'loyed': {
+        'name': 'Loyed',
+        'department': 'Logistics',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP001',
+        'join_date': '2023-01-15',
+        'contract_type': 'Unlimited',
+        'position': 'Logistics Coordinator',
+        'annual_leave_taken': 10,
+        'sick_leave_taken': 2,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.8
+    },
+    'eva': {
+        'name': 'Eva',
+        'department': 'Commercial Services',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP002',
+        'join_date': '2022-08-10',
+        'contract_type': 'Unlimited',
+        'position': 'Commercial Services Specialist',
+        'annual_leave_taken': 12,
+        'sick_leave_taken': 3,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 2.3
+    },
+    'jaq': {
+        'name': 'Jaq',
+        'department': 'Commercial Sales',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP003',
+        'join_date': '2024-01-20',
+        'contract_type': 'Limited',
+        'position': 'Sales Executive',
+        'annual_leave_taken': 5,
+        'sick_leave_taken': 7,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 0.7
+    },
+    'rajeev': {
+        'name': 'Rajeev',
+        'department': 'Vessel Operations',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP004',
+        'join_date': '2021-05-03',
+        'contract_type': 'Unlimited',
+        'position': 'Operations Manager',
+        'annual_leave_taken': 4,
+        'sick_leave_taken': 6,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 5,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 3.6
+    },
+    'sarah': {
+        'name': 'Sarah',
+        'department': 'Human Resources',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP005',
+        'join_date': '2020-11-12',
+        'contract_type': 'Unlimited',
+        'position': 'HR Manager',
+        'annual_leave_taken': 8,
+        'sick_leave_taken': 1,
+        'maternity_leave_taken': 45,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 3,
+        'probation_completed': True,
+        'years_of_service': 4.1
+    },
+    'ahmed': {
+        'name': 'Ahmed',
+        'department': 'Finance',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP006',
+        'join_date': '2023-09-01',
+        'contract_type': 'Limited',
+        'position': 'Financial Analyst',
+        'annual_leave_taken': 6,
+        'sick_leave_taken': 0,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.3
+    }
+}
+
+def calculate_leave_entitlements(employee_data):
+    """Calculate leave entitlements based on employee data and handbook policies"""
+    years_of_service = employee_data['years_of_service']
+    probation_completed = employee_data['probation_completed']
+    
+    # Annual Leave Calculation
+    if years_of_service >= 1:
+        annual_leave_entitlement = 22  # Subsequent years
+    else:
+        annual_leave_entitlement = 20  # First year
+    
+    # Sick Leave Calculation (only after probation)
+    if probation_completed:
+        sick_leave_entitlement = 90  # 90 calendar days per year
+    else:
+        sick_leave_entitlement = 0
+    
+    # Other leave entitlements
+    maternity_leave_entitlement = 60 if employee_data['name'] else 60  # All female employees
+    parental_leave_entitlement = 5  # Both male and female
+    bereavement_leave_entitlement = 5  # Maximum for spouse
+    
+    return {
+        'annual_leave': {
+            'entitlement': annual_leave_entitlement,
+            'taken': employee_data['annual_leave_taken'],
+            'remaining': annual_leave_entitlement - employee_data['annual_leave_taken']
+        },
+        'sick_leave': {
+            'entitlement': sick_leave_entitlement,
+            'taken': employee_data['sick_leave_taken'],
+            'remaining': sick_leave_entitlement - employee_data['sick_leave_taken']
+        },
+        'maternity_leave': {
+            'entitlement': maternity_leave_entitlement,
+            'taken': employee_data['maternity_leave_taken'],
+            'remaining': maternity_leave_entitlement - employee_data['maternity_leave_taken']
+        },
+        'parental_leave': {
+            'entitlement': parental_leave_entitlement,
+            'taken': employee_data['parental_leave_taken'],
+            'remaining': parental_leave_entitlement - employee_data['parental_leave_taken']
+        },
+        'bereavement_leave': {
+            'entitlement': bereavement_leave_entitlement,
+            'taken': employee_data['bereavement_leave_taken'],
+            'remaining': bereavement_leave_entitlement - employee_data['bereavement_leave_taken']
+        }
+    }
+
+def create_notification_links(form_type, employee_name, manager_name, form_data):
+    """Create various notification service links for sending requests"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # Create email body
+    email_body = f"""Dear {manager_name},
+
+I would like to submit a {form_type} request:
+
+REQUEST DETAILS:
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date: {datetime.now().strftime('%B %d, %Y')}
+"""
+    
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            email_body += f"• {formatted_key}: {value}\n"
+    
+    email_body += f"""
+
+Please review and approve this request.
+
+Best regards,
+{employee_name}
+
+Generated by LGL Employee Helper
+Alistar Personnel"""
+    
+    # URL encode for links
+    subject_encoded = urllib.parse.quote(email_subject)
+    body_encoded = urllib.parse.quote(email_body)
+    manager_email = "concessioac@gmail.com"
+    
+    return {
+        'gmail_url': f"https://mail.google.com/mail/?view=cm&to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'outlook_url': f"https://outlook.live.com/mail/0/deeplink/compose?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'yahoo_url': f"https://compose.mail.yahoo.com/?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'subject': email_subject,
+        'body': email_body,
+        'manager_email': manager_email
+    }
+
+def generate_email_alternatives(form_type, employee_name, manager_name, form_data):
+    """Generate multiple email alternatives for form submission"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # Simple text email for copying
+    text_email = f"""Subject: {email_subject}
+To: concessioac@gmail.com
+
+Dear {manager_name},
+
+I would like to submit a {form_type} request with the following details:
+
+📋 REQUEST DETAILS:
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date Submitted: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}
+• Status: Pending Approval
+"""
+    
+    # Add form-specific details
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            text_email += f"• {formatted_key}: {value}\n"
+    
+    text_email += f"""
+
+Please review this request and let me know your decision.
+
+For approval, please reply with: APPROVED - {form_type} Request - {employee_name}
+For rejection, please reply with: REJECTED - {form_type} Request - {employee_name}
+
+Thank you for your consideration.
+
+Best regards,
+{employee_name}
+
+---
+This request was generated by the LGL Employee Helper System
+Alistar Personnel | 605, Park Avenue, Dubai Silicon Oasis
+HR Contact: concessioac@gmail.com"""
+    
+    # Mailto URL for email clients
+    mailto_url = f"mailto:concessioac@gmail.com?subject={email_subject.replace(' ', '%20')}&body={text_email.replace(' ', '%20').replace('\n', '%0A')}"
+    
+    # WhatsApp message format
+    whatsapp_message = f"""*{form_type} Request - {employee_name}*
+
+Dear {manager_name},
+
+I would like to submit a {form_type} request:
+
+📋 *REQUEST DETAILS:*
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date: {datetime.now().strftime('%B %d, %Y')}
+"""
+    
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            whatsapp_message += f"• {formatted_key}: {value}\n"
+    
+    whatsapp_message += f"""
+
+Please review and approve.
+
+Thanks,
+{employee_name}
+
+_Generated by LGL Employee Helper_"""
+    
+    return {
+        'subject': email_subject,
+        'text_email': text_email,
+        'mailto_url': mailto_url,
+        'whatsapp_message': whatsapp_message
+    }
+    """Generate a formatted email for various form types with HTML formatting"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # HTML Email Template
+    html_template = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }}
+        .container {{ max-width: 600px; margin: 0 auto; background-color: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; }}
+        .header {{ background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 30px; text-align: center; }}
+        .header h1 {{ margin: 0; font-size: 24px; }}
+        .header p {{ margin: 5px 0 0 0; opacity: 0.9; }}
+        .content {{ padding: 30px; }}
+        .form-details {{ background-color: #f8f9fa; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #3498db; }}
+        .detail-row {{ margin: 10px 0; display: flex; }}
+        .detail-label {{ font-weight: bold; min-width: 150px; color: #2c3e50; }}
+        .detail-value {{ color: #34495e; }}
+        .action-buttons {{ text-align: center; margin: 30px 0; }}
+        .approve-btn {{ background-color: #27ae60; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .reject-btn {{ background-color: #e74c3c; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .footer {{ background-color: #34495e; color: white; padding: 20px; text-align: center; font-size: 12px; }}
+        .status {{ display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; background-color: #f39c12; color: white; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Alistar Personnel</h1>
+            <p>{form_type} Request Approval</p>
+        </div>
+        
+        <div class="content">
+            <h2>Dear {manager_name},</h2>
+            <p>You have received a new <strong>{form_type}</strong> request that requires your approval.</p>
+            
+            <div class="form-details">
+                <h3>📋 Request Details</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Employee:</span>
+                    <span class="detail-value">{employee_name}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Request Type:</span>
+                    <span class="detail-value">{form_type}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date Submitted:</span>
+                    <span class="detail-value">{datetime.now().strftime('%B %d, %Y at %I:%M %p')}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="status">Pending Approval</span>
+                </div>
+"""
+    
+    # Add form-specific details
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            html_template += f"""
+                <div class="detail-row">
+                    <span class="detail-label">{formatted_key}:</span>
+                    <span class="detail-value">{value}</span>
+                </div>"""
+    
+    html_template += f"""
+            </div>
+            
+            <div class="action-buttons">
+                <a href="mailto:concessioac@gmail.com?subject=APPROVED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been APPROVED.%0A%0AApproval Details:%0A• Approved by: {manager_name}%0A• Approval Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Comments: [Add any comments here]%0A%0APlease contact HR if you have any questions.%0A%0ABest regards,%0A{manager_name}" class="approve-btn">✅ APPROVE</a>
+                
+                <a href="mailto:concessioac@gmail.com?subject=REJECTED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been REJECTED.%0A%0ARejection Details:%0A• Rejected by: {manager_name}%0A• Rejection Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Reason: [Please provide reason here]%0A%0APlease contact me if you have any questions or would like to discuss this further.%0A%0ABest regards,%0A{manager_name}" class="reject-btn">❌ REJECT</a>
+            </div>
+            
+            <p><strong>Instructions:</strong></p>
+            <ul>
+                <li>Click the appropriate button above to approve or reject this request</li>
+                <li>An email will be automatically generated to notify the employee</li>
+                <li>Please add any additional comments before sending</li>
+                <li>For questions, contact HR at concessioac@gmail.com</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>📧 This request was generated by the LGL Employee Helper System</p>
+            <p>Alistar Personnel | 605, Park Avenue, Dubai Silicon Oasis</p>
+        </div>
+    </div>
+</body>
+</html>"""
+    
+    return email_subject, html_template
+
+# Form Types Configuration
+FORM_TYPES = {
+    'leave_request': {
+        'title': '🏖️ Leave Request',
+        'description': 'Request time off for vacation, sick leave, maternity, etc.',
+        'icon': '🏖️',
+        'fields': ['leave_type', 'start_date', 'end_date', 'reason', 'emergency_contact']
+    },
+    'visa_request': {
+        'title': '📋 Visa & Immigration Request',
+        'description': 'Request visa sponsorship or dependent visa support',
+        'icon': '📋',
+        'fields': ['visa_type', 'dependent_details', 'urgency', 'reason']
+    },
+    'health_insurance': {
+        'title': '🏥 Health Insurance Request',
+        'description': 'Request health insurance changes or dependent coverage',
+        'icon': '🏥',
+        'fields': ['insurance_type', 'dependent_info', 'medical_history', 'preferred_provider']
+    },
+    'performance_review': {
+        'title': '📈 Performance Review Request',
+        'description': 'Request performance appraisal or schedule review meeting',
+        'icon': '📈',
+        'fields': ['review_type', 'preferred_date', 'self_assessment', 'goals']
+    },
+    'training_request': {
+        'title': '🎓 Training & Development Request',
+        'description': 'Request professional development or training opportunities',
+        'icon': '🎓',
+        'fields': ['training_type', 'course_name', 'provider', 'cost_estimate', 'justification']
+    },
+    'grievance_report': {
+        'title': '⚠️ Grievance Report',
+        'description': 'Report workplace issues or file a formal complaint',
+        'icon': '⚠️',
+        'fields': ['issue_type', 'incident_date', 'involved_parties', 'description', 'witnesses']
+    },
+    'equipment_request': {
+        'title': '💻 Equipment Request',
+        'description': 'Request office equipment, technology, or supplies',
+        'icon': '💻',
+        'fields': ['equipment_type', 'specification', 'justification', 'urgency']
+    },
+    'policy_clarification': {
+        'title': '📜 Policy Clarification Request',
+        'description': 'Request clarification on company policies or procedures',
+        'icon': '📜',
+        'fields': ['policy_area', 'specific_question', 'situation_context']
+    },
+    'schedule_change': {
+        'title': '⏰ Schedule Change Request',
+        'description': 'Request changes to working hours or schedule',
+        'icon': '⏰',
+        'fields': ['change_type', 'proposed_schedule', 'effective_date', 'reason']
+    },
+    'resignation_notice': {
+        'title': '📝 Resignation Notice',
+        'description': 'Submit formal resignation and notice period',
+        'icon': '📝',
+        'fields': ['last_working_day', 'notice_period', 'reason', 'transition_plan']
+    }
+}
+
+# Employee Handbook Data
+HANDBOOK_DATA = {
+    'leave': {
+        'title': 'Annual Leave Policy',
+        'content': """📅 **Annual Leave Entitlement:**
+
+```
+import streamlit as st
+import re
+import time
+import random
+import pandas as pd
+from datetime import datetime, date, timedelta
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import urllib.parse
+import json
+
+# Configure the page
+st.set_page_config(
+    page_title="LGL Employee Helper",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# Enhanced CSS styling with ALL UI improvements
+st.markdown("""
+<style>
+    /* Main header styling with blue background and white text */
+    .main-header {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        padding: 2rem;
+        border-radius: 15px;
+        color: white !important;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .main-header h1 {
+        color: white !important;
+        font-size: 2.5rem !important;
+        margin: 0 !important;
+    }
+    
+    .main-header p {
+        color: white !important;
+        opacity: 0.9 !important;
+    }
+    
+    /* Button styling - blue background with white text and bigger size */
+    .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: 12px !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        width: 100% !important;
+        height: 70px !important;
+        box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3) !important;
+        transition: all 0.3s ease !important;
+        text-align: center !important;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #2980b9 0%, #1f4e79 100%) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4) !important;
+    }
+    
+    .stButton > button:focus {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5) !important;
+    }
+    
+    /* Main content selectbox styling */
+    .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        margin-bottom: 1rem !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Selectbox dropdown styling */
+    .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Sidebar selectbox styling - FIXED ALIGNMENT */
+    div[data-testid="stSidebar"] .stSelectbox > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 6px !important;
+        padding: 0.375rem 0.75rem !important;
+        font-size: 0.875rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 500 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Sidebar selectbox dropdown options */
+    div[data-testid="stSidebar"] .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Text input styling */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Text area styling */
+    .stTextArea > div > div > textarea {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextArea label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Date input styling */
+    .stDateInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stDateInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Chat message styling */
+    .bot-message {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border-left: 4px solid #3498db !important;
+        margin: 1rem 0 !important;
+        color: #2c3e50 !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1) !important;
+    }
+    
+    .user-message {
+        background: linear-gradient(135deg, #3498db, #2980b9) !important;
+        color: white !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        margin: 1rem 0 !important;
+        text-align: right !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2) !important;
+    }
+    
+    /* Form styling */
+    .stForm {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border: 2px solid #e9ecef !important;
+        margin: 1rem 0 !important;
+    }
+    
+    /* Metric styling */
+    .stMetric {
+        background: white !important;
+        padding: 1rem !important;
+        border-radius: 8px !important;
+        border: 1px solid #e9ecef !important;
+        text-align: center !important;
+    }
+    
+    .stMetric label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stMetric [data-testid="metric-value"] {
+        color: #3498db !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Sidebar button styling */
+    .css-1d391kg .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        width: 100% !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Responsive and alignment fixes */
+    .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix column overflow issues */
+    .row-widget {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Ensure sidebar elements don't overflow */
+    div[data-testid="stSidebar"] .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .stSelectbox > div > div,
+        .stTextInput > div > div > input,
+        .stTextArea > div > div > textarea {
+            font-size: 0.875rem !important;
+        }
+        
+        .main-header h1 {
+            font-size: 2rem !important;
+        }
+        
+        .stButton > button {
+            height: 60px !important;
+            font-size: 1rem !important;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Employee Database - Sample Data for Leave Tracking
+EMPLOYEE_DATA = {
+    'loyed': {
+        'name': 'Loyed',
+        'department': 'Logistics',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP001',
+        'join_date': '2023-01-15',
+        'contract_type': 'Unlimited',
+        'position': 'Logistics Coordinator',
+        'annual_leave_taken': 10,
+        'sick_leave_taken': 2,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.8
+    },
+    'eva': {
+        'name': 'Eva',
+        'department': 'Commercial Services',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP002',
+        'join_date': '2022-08-10',
+        'contract_type': 'Unlimited',
+        'position': 'Commercial Services Specialist',
+        'annual_leave_taken': 12,
+        'sick_leave_taken': 3,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 2.3
+    },
+    'jaq': {
+        'name': 'Jaq',
+        'department': 'Commercial Sales',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP003',
+        'join_date': '2024-01-20',
+        'contract_type': 'Limited',
+        'position': 'Sales Executive',
+        'annual_leave_taken': 5,
+        'sick_leave_taken': 7,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 0.7
+    },
+    'rajeev': {
+        'name': 'Rajeev',
+        'department': 'Vessel Operations',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP004',
+        'join_date': '2021-05-03',
+        'contract_type': 'Unlimited',
+        'position': 'Operations Manager',
+        'annual_leave_taken': 4,
+        'sick_leave_taken': 6,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 5,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 3.6
+    },
+    'sarah': {
+        'name': 'Sarah',
+        'department': 'Human Resources',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP005',
+        'join_date': '2020-11-12',
+        'contract_type': 'Unlimited',
+        'position': 'HR Manager',
+        'annual_leave_taken': 8,
+        'sick_leave_taken': 1,
+        'maternity_leave_taken': 45,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 3,
+        'probation_completed': True,
+        'years_of_service': 4.1
+    },
+    'ahmed': {
+        'name': 'Ahmed',
+        'department': 'Finance',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP006',
+        'join_date': '2023-09-01',
+        'contract_type': 'Limited',
+        'position': 'Financial Analyst',
+        'annual_leave_taken': 6,
+        'sick_leave_taken': 0,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.3
+    }
+}
+
+def calculate_leave_entitlements(employee_data):
+    """Calculate leave entitlements based on employee data and handbook policies"""
+    years_of_service = employee_data['years_of_service']
+    probation_completed = employee_data['probation_completed']
+    
+    # Annual Leave Calculation
+    if years_of_service >= 1:
+        annual_leave_entitlement = 22  # Subsequent years
+    else:
+        annual_leave_entitlement = 20  # First year
+    
+    # Sick Leave Calculation (only after probation)
+    if probation_completed:
+        sick_leave_entitlement = 90  # 90 calendar days per year
+    else:
+        sick_leave_entitlement = 0
+    
+    # Other leave entitlements
+    maternity_leave_entitlement = 60 if employee_data['name'] else 60  # All female employees
+    parental_leave_entitlement = 5  # Both male and female
+    bereavement_leave_entitlement = 5  # Maximum for spouse
+    
+    return {
+        'annual_leave': {
+            'entitlement': annual_leave_entitlement,
+            'taken': employee_data['annual_leave_taken'],
+            'remaining': annual_leave_entitlement - employee_data['annual_leave_taken']
+        },
+        'sick_leave': {
+            'entitlement': sick_leave_entitlement,
+            'taken': employee_data['sick_leave_taken'],
+            'remaining': sick_leave_entitlement - employee_data['sick_leave_taken']
+        },
+        'maternity_leave': {
+            'entitlement': maternity_leave_entitlement,
+            'taken': employee_data['maternity_leave_taken'],
+            'remaining': maternity_leave_entitlement - employee_data['maternity_leave_taken']
+        },
+        'parental_leave': {
+            'entitlement': parental_leave_entitlement,
+            'taken': employee_data['parental_leave_taken'],
+            'remaining': parental_leave_entitlement - employee_data['parental_leave_taken']
+        },
+        'bereavement_leave': {
+            'entitlement': bereavement_leave_entitlement,
+            'taken': employee_data['bereavement_leave_taken'],
+            'remaining': bereavement_leave_entitlement - employee_data['bereavement_leave_taken']
+        }
+    }
+
+def create_notification_links(form_type, employee_name, manager_name, form_data):
+    """Create various notification service links for sending requests"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # Create email body
+    email_body = f"""Dear {manager_name},
+
+I would like to submit a {form_type} request:
+
+REQUEST DETAILS:
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date: {datetime.now().strftime('%B %d, %Y')}
+"""
+    
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            email_body += f"• {formatted_key}: {value}\n"
+    
+    email_body += f"""
+
+Please review and approve this request.
+
+Best regards,
+{employee_name}
+
+Generated by LGL Employee Helper
+Alistar Personnel"""
+    
+    # URL encode for links
+    subject_encoded = urllib.parse.quote(email_subject)
+    body_encoded = urllib.parse.quote(email_body)
+    manager_email = "concessioac@gmail.com"
+    
+    return {
+        'gmail_url': f"https://mail.google.com/mail/?view=cm&to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'outlook_url': f"https://outlook.live.com/mail/0/deeplink/compose?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'yahoo_url': f"https://compose.mail.yahoo.com/?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'subject': email_subject,
+        'body': email_body,
+        'manager_email': manager_email
+    }
+
+def generate_email_alternatives(form_type, employee_name, manager_name, form_data):
+    """Generate multiple email alternatives for form submission"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # Simple text email for copying
+    text_email = f"""Subject: {email_subject}
+To: concessioac@gmail.com
+
+Dear {manager_name},
+
+I would like to submit a {form_type} request with the following details:
+
+📋 REQUEST DETAILS:
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date Submitted: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}
+• Status: Pending Approval
+"""
+    
+    # Add form-specific details
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            text_email += f"• {formatted_key}: {value}\n"
+    
+    text_email += f"""
+
+Please review this request and let me know your decision.
+
+For approval, please reply with: APPROVED - {form_type} Request - {employee_name}
+For rejection, please reply with: REJECTED - {form_type} Request - {employee_name}
+
+Thank you for your consideration.
+
+Best regards,
+{employee_name}
+
+---
+This request was generated by the LGL Employee Helper System
+Alistar Personnel | 605, Park Avenue, Dubai Silicon Oasis
+HR Contact: concessioac@gmail.com"""
+    
+    # Mailto URL for email clients
+    mailto_url = f"mailto:concessioac@gmail.com?subject={email_subject.replace(' ', '%20')}&body={text_email.replace(' ', '%20').replace('\n', '%0A')}"
+    
+    # WhatsApp message format
+    whatsapp_message = f"""*{form_type} Request - {employee_name}*
+
+Dear {manager_name},
+
+I would like to submit a {form_type} request:
+
+📋 *REQUEST DETAILS:*
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date: {datetime.now().strftime('%B %d, %Y')}
+"""
+    
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            whatsapp_message += f"• {formatted_key}: {value}\n"
+    
+    whatsapp_message += f"""
+
+Please review and approve.
+
+Thanks,
+{employee_name}
+
+_Generated by LGL Employee Helper_"""
+    
+    return {
+        'subject': email_subject,
+        'text_email': text_email,
+        'mailto_url': mailto_url,
+        'whatsapp_message': whatsapp_message
+    }
+    """Generate a formatted email for various form types with HTML formatting"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # HTML Email Template
+    html_template = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }}
+        .container {{ max-width: 600px; margin: 0 auto; background-color: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; }}
+        .header {{ background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 30px; text-align: center; }}
+        .header h1 {{ margin: 0; font-size: 24px; }}
+        .header p {{ margin: 5px 0 0 0; opacity: 0.9; }}
+        .content {{ padding: 30px; }}
+        .form-details {{ background-color: #f8f9fa; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #3498db; }}
+        .detail-row {{ margin: 10px 0; display: flex; }}
+        .detail-label {{ font-weight: bold; min-width: 150px; color: #2c3e50; }}
+        .detail-value {{ color: #34495e; }}
+        .action-buttons {{ text-align: center; margin: 30px 0; }}
+        .approve-btn {{ background-color: #27ae60; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .reject-btn {{ background-color: #e74c3c; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .footer {{ background-color: #34495e; color: white; padding: 20px; text-align: center; font-size: 12px; }}
+        .status {{ display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; background-color: #f39c12; color: white; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Alistar Personnel</h1>
+            <p>{form_type} Request Approval</p>
+        </div>
+        
+        <div class="content">
+            <h2>Dear {manager_name},</h2>
+            <p>You have received a new <strong>{form_type}</strong> request that requires your approval.</p>
+            
+            <div class="form-details">
+                <h3>📋 Request Details</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Employee:</span>
+                    <span class="detail-value">{employee_name}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Request Type:</span>
+                    <span class="detail-value">{form_type}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date Submitted:</span>
+                    <span class="detail-value">{datetime.now().strftime('%B %d, %Y at %I:%M %p')}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="status">Pending Approval</span>
+                </div>
+"""
+    
+    # Add form-specific details
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            html_template += f"""
+                <div class="detail-row">
+                    <span class="detail-label">{formatted_key}:</span>
+                    <span class="detail-value">{value}</span>
+                </div>"""
+    
+    html_template += f"""
+            </div>
+            
+            <div class="action-buttons">
+                <a href="mailto:concessioac@gmail.com?subject=APPROVED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been APPROVED.%0A%0AApproval Details:%0A• Approved by: {manager_name}%0A• Approval Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Comments: [Add any comments here]%0A%0APlease contact HR if you have any questions.%0A%0ABest regards,%0A{manager_name}" class="approve-btn">✅ APPROVE</a>
+                
+                <a href="mailto:concessioac@gmail.com?subject=REJECTED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been REJECTED.%0A%0ARejection Details:%0A• Rejected by: {manager_name}%0A• Rejection Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Reason: [Please provide reason here]%0A%0APlease contact me if you have any questions or would like to discuss this further.%0A%0ABest regards,%0A{manager_name}" class="reject-btn">❌ REJECT</a>
+            </div>
+            
+            <p><strong>Instructions:</strong></p>
+            <ul>
+                <li>Click the appropriate button above to approve or reject this request</li>
+                <li>An email will be automatically generated to notify the employee</li>
+                <li>Please add any additional comments before sending</li>
+                <li>For questions, contact HR at concessioac@gmail.com</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>📧 This request was generated by the LGL Employee Helper System</p>
+            <p>Alistar Personnel | 605, Park Avenue, Dubai Silicon Oasis</p>
+        </div>
+    </div>
+</body>
+</html>"""
+    
+    return email_subject, html_template
+
+# Form Types Configuration
+FORM_TYPES = {
+    'leave_request': {
+        'title': '🏖️ Leave Request',
+        'description': 'Request time off for vacation, sick leave, maternity, etc.',
+        'icon': '🏖️',
+        'fields': ['leave_type', 'start_date', 'end_date', 'reason', 'emergency_contact']
+    },
+    'visa_request': {
+        'title': '📋 Visa & Immigration Request',
+        'description': 'Request visa sponsorship or dependent visa support',
+        'icon': '📋',
+        'fields': ['visa_type', 'dependent_details', 'urgency', 'reason']
+    },
+    'health_insurance': {
+        'title': '🏥 Health Insurance Request',
+        'description': 'Request health insurance changes or dependent coverage',
+        'icon': '🏥',
+        'fields': ['insurance_type', 'dependent_info', 'medical_history', 'preferred_provider']
+    },
+    'performance_review': {
+        'title': '📈 Performance Review Request',
+        'description': 'Request performance appraisal or schedule review meeting',
+        'icon': '📈',
+        'fields': ['review_type', 'preferred_date', 'self_assessment', 'goals']
+    },
+    'training_request': {
+        'title': '🎓 Training & Development Request',
+        'description': 'Request professional development or training opportunities',
+        'icon': '🎓',
+        'fields': ['training_type', 'course_name', 'provider', 'cost_estimate', 'justification']
+    },
+    'grievance_report': {
+        'title': '⚠️ Grievance Report',
+        'description': 'Report workplace issues or file a formal complaint',
+        'icon': '⚠️',
+        'fields': ['issue_type', 'incident_date', 'involved_parties', 'description', 'witnesses']
+    },
+    'equipment_request': {
+        'title': '💻 Equipment Request',
+        'description': 'Request office equipment, technology, or supplies',
+        'icon': '💻',
+        'fields': ['equipment_type', 'specification', 'justification', 'urgency']
+    },
+    'policy_clarification': {
+        'title': '📜 Policy Clarification Request',
+        'description': 'Request clarification on company policies or procedures',
+        'icon': '📜',
+        'fields': ['policy_area', 'specific_question', 'situation_context']
+    },
+    'schedule_change': {
+        'title': '⏰ Schedule Change Request',
+        'description': 'Request changes to working hours or schedule',
+        'icon': '⏰',
+        'fields': ['change_type', 'proposed_schedule', 'effective_date', 'reason']
+    },
+    'resignation_notice': {
+        'title': '📝 Resignation Notice',
+        'description': 'Submit formal resignation and notice period',
+        'icon': '📝',
+        'fields': ['last_working_day', 'notice_period', 'reason', 'transition_plan']
+    }
+}
+
+# Employee Handbook Data
+HANDBOOK_DATA = {
+    'leave': {
+        'title': 'Annual Leave Policy',
+        'content': """📅 **Annual Leave Entitlement:**
+
+```
+import streamlit as st
+import re
+import time
+import random
+import pandas as pd
+from datetime import datetime, date, timedelta
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import urllib.parse
+import json
+
+# Configure the page
+st.set_page_config(
+    page_title="LGL Employee Helper",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# Enhanced CSS styling with ALL UI improvements
+st.markdown("""
+<style>
+    /* Main header styling with blue background and white text */
+    .main-header {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        padding: 2rem;
+        border-radius: 15px;
+        color: white !important;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .main-header h1 {
+        color: white !important;
+        font-size: 2.5rem !important;
+        margin: 0 !important;
+    }
+    
+    .main-header p {
+        color: white !important;
+        opacity: 0.9 !important;
+    }
+    
+    /* Button styling - blue background with white text and bigger size */
+    .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: 12px !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        width: 100% !important;
+        height: 70px !important;
+        box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3) !important;
+        transition: all 0.3s ease !important;
+        text-align: center !important;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #2980b9 0%, #1f4e79 100%) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4) !important;
+    }
+    
+    .stButton > button:focus {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5) !important;
+    }
+    
+    /* Main content selectbox styling */
+    .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        margin-bottom: 1rem !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Selectbox dropdown styling */
+    .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Sidebar selectbox styling - FIXED ALIGNMENT */
+    div[data-testid="stSidebar"] .stSelectbox > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 6px !important;
+        padding: 0.375rem 0.75rem !important;
+        font-size: 0.875rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 500 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Sidebar selectbox dropdown options */
+    div[data-testid="stSidebar"] .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Text input styling */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Text area styling */
+    .stTextArea > div > div > textarea {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextArea label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Date input styling */
+    .stDateInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stDateInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Chat message styling */
+    .bot-message {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border-left: 4px solid #3498db !important;
+        margin: 1rem 0 !important;
+        color: #2c3e50 !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1) !important;
+    }
+    
+    .user-message {
+        background: linear-gradient(135deg, #3498db, #2980b9) !important;
+        color: white !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        margin: 1rem 0 !important;
+        text-align: right !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2) !important;
+    }
+    
+    /* Form styling */
+    .stForm {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border: 2px solid #e9ecef !important;
+        margin: 1rem 0 !important;
+    }
+    
+    /* Metric styling */
+    .stMetric {
+        background: white !important;
+        padding: 1rem !important;
+        border-radius: 8px !important;
+        border: 1px solid #e9ecef !important;
+        text-align: center !important;
+    }
+    
+    .stMetric label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stMetric [data-testid="metric-value"] {
+        color: #3498db !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Sidebar button styling */
+    .css-1d391kg .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        width: 100% !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Responsive and alignment fixes */
+    .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix column overflow issues */
+    .row-widget {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Ensure sidebar elements don't overflow */
+    div[data-testid="stSidebar"] .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .stSelectbox > div > div,
+        .stTextInput > div > div > input,
+        .stTextArea > div > div > textarea {
+            font-size: 0.875rem !important;
+        }
+        
+        .main-header h1 {
+            font-size: 2rem !important;
+        }
+        
+        .stButton > button {
+            height: 60px !important;
+            font-size: 1rem !important;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Employee Database - Sample Data for Leave Tracking
+EMPLOYEE_DATA = {
+    'loyed': {
+        'name': 'Loyed',
+        'department': 'Logistics',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP001',
+        'join_date': '2023-01-15',
+        'contract_type': 'Unlimited',
+        'position': 'Logistics Coordinator',
+        'annual_leave_taken': 10,
+        'sick_leave_taken': 2,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.8
+    },
+    'eva': {
+        'name': 'Eva',
+        'department': 'Commercial Services',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP002',
+        'join_date': '2022-08-10',
+        'contract_type': 'Unlimited',
+        'position': 'Commercial Services Specialist',
+        'annual_leave_taken': 12,
+        'sick_leave_taken': 3,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 2.3
+    },
+    'jaq': {
+        'name': 'Jaq',
+        'department': 'Commercial Sales',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP003',
+        'join_date': '2024-01-20',
+        'contract_type': 'Limited',
+        'position': 'Sales Executive',
+        'annual_leave_taken': 5,
+        'sick_leave_taken': 7,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 0.7
+    },
+    'rajeev': {
+        'name': 'Rajeev',
+        'department': 'Vessel Operations',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP004',
+        'join_date': '2021-05-03',
+        'contract_type': 'Unlimited',
+        'position': 'Operations Manager',
+        'annual_leave_taken': 4,
+        'sick_leave_taken': 6,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 5,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 3.6
+    },
+    'sarah': {
+        'name': 'Sarah',
+        'department': 'Human Resources',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP005',
+        'join_date': '2020-11-12',
+        'contract_type': 'Unlimited',
+        'position': 'HR Manager',
+        'annual_leave_taken': 8,
+        'sick_leave_taken': 1,
+        'maternity_leave_taken': 45,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 3,
+        'probation_completed': True,
+        'years_of_service': 4.1
+    },
+    'ahmed': {
+        'name': 'Ahmed',
+        'department': 'Finance',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP006',
+        'join_date': '2023-09-01',
+        'contract_type': 'Limited',
+        'position': 'Financial Analyst',
+        'annual_leave_taken': 6,
+        'sick_leave_taken': 0,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.3
+    }
+}
+
+def calculate_leave_entitlements(employee_data):
+    """Calculate leave entitlements based on employee data and handbook policies"""
+    years_of_service = employee_data['years_of_service']
+    probation_completed = employee_data['probation_completed']
+    
+    # Annual Leave Calculation
+    if years_of_service >= 1:
+        annual_leave_entitlement = 22  # Subsequent years
+    else:
+        annual_leave_entitlement = 20  # First year
+    
+    # Sick Leave Calculation (only after probation)
+    if probation_completed:
+        sick_leave_entitlement = 90  # 90 calendar days per year
+    else:
+        sick_leave_entitlement = 0
+    
+    # Other leave entitlements
+    maternity_leave_entitlement = 60 if employee_data['name'] else 60  # All female employees
+    parental_leave_entitlement = 5  # Both male and female
+    bereavement_leave_entitlement = 5  # Maximum for spouse
+    
+    return {
+        'annual_leave': {
+            'entitlement': annual_leave_entitlement,
+            'taken': employee_data['annual_leave_taken'],
+            'remaining': annual_leave_entitlement - employee_data['annual_leave_taken']
+        },
+        'sick_leave': {
+            'entitlement': sick_leave_entitlement,
+            'taken': employee_data['sick_leave_taken'],
+            'remaining': sick_leave_entitlement - employee_data['sick_leave_taken']
+        },
+        'maternity_leave': {
+            'entitlement': maternity_leave_entitlement,
+            'taken': employee_data['maternity_leave_taken'],
+            'remaining': maternity_leave_entitlement - employee_data['maternity_leave_taken']
+        },
+        'parental_leave': {
+            'entitlement': parental_leave_entitlement,
+            'taken': employee_data['parental_leave_taken'],
+            'remaining': parental_leave_entitlement - employee_data['parental_leave_taken']
+        },
+        'bereavement_leave': {
+            'entitlement': bereavement_leave_entitlement,
+            'taken': employee_data['bereavement_leave_taken'],
+            'remaining': bereavement_leave_entitlement - employee_data['bereavement_leave_taken']
+        }
+    }
+
+def create_notification_links(form_type, employee_name, manager_name, form_data):
+    """Create various notification service links for sending requests"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # Create email body
+    email_body = f"""Dear {manager_name},
+
+I would like to submit a {form_type} request:
+
+REQUEST DETAILS:
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date: {datetime.now().strftime('%B %d, %Y')}
+"""
+    
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            email_body += f"• {formatted_key}: {value}\n"
+    
+    email_body += f"""
+
+Please review and approve this request.
+
+Best regards,
+{employee_name}
+
+Generated by LGL Employee Helper
+Alistar Personnel"""
+    
+    # URL encode for links
+    subject_encoded = urllib.parse.quote(email_subject)
+    body_encoded = urllib.parse.quote(email_body)
+    manager_email = "concessioac@gmail.com"
+    
+    return {
+        'gmail_url': f"https://mail.google.com/mail/?view=cm&to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'outlook_url': f"https://outlook.live.com/mail/0/deeplink/compose?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'yahoo_url': f"https://compose.mail.yahoo.com/?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'subject': email_subject,
+        'body': email_body,
+        'manager_email': manager_email
+    }
+
+def generate_email_alternatives(form_type, employee_name, manager_name, form_data):
+    """Generate multiple email alternatives for form submission"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # Simple text email for copying
+    text_email = f"""Subject: {email_subject}
+To: concessioac@gmail.com
+
+Dear {manager_name},
+
+I would like to submit a {form_type} request with the following details:
+
+📋 REQUEST DETAILS:
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date Submitted: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}
+• Status: Pending Approval
+"""
+    
+    # Add form-specific details
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            text_email += f"• {formatted_key}: {value}\n"
+    
+    text_email += f"""
+
+Please review this request and let me know your decision.
+
+For approval, please reply with: APPROVED - {form_type} Request - {employee_name}
+For rejection, please reply with: REJECTED - {form_type} Request - {employee_name}
+
+Thank you for your consideration.
+
+Best regards,
+{employee_name}
+
+---
+This request was generated by the LGL Employee Helper System
+Alistar Personnel | 605, Park Avenue, Dubai Silicon Oasis
+HR Contact: concessioac@gmail.com"""
+    
+    # Mailto URL for email clients
+    mailto_url = f"mailto:concessioac@gmail.com?subject={email_subject.replace(' ', '%20')}&body={text_email.replace(' ', '%20').replace('\n', '%0A')}"
+    
+    # WhatsApp message format
+    whatsapp_message = f"""*{form_type} Request - {employee_name}*
+
+Dear {manager_name},
+
+I would like to submit a {form_type} request:
+
+📋 *REQUEST DETAILS:*
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date: {datetime.now().strftime('%B %d, %Y')}
+"""
+    
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            whatsapp_message += f"• {formatted_key}: {value}\n"
+    
+    whatsapp_message += f"""
+
+Please review and approve.
+
+Thanks,
+{employee_name}
+
+_Generated by LGL Employee Helper_"""
+    
+    return {
+        'subject': email_subject,
+        'text_email': text_email,
+        'mailto_url': mailto_url,
+        'whatsapp_message': whatsapp_message
+    }
+    """Generate a formatted email for various form types with HTML formatting"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # HTML Email Template
+    html_template = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }}
+        .container {{ max-width: 600px; margin: 0 auto; background-color: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; }}
+        .header {{ background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 30px; text-align: center; }}
+        .header h1 {{ margin: 0; font-size: 24px; }}
+        .header p {{ margin: 5px 0 0 0; opacity: 0.9; }}
+        .content {{ padding: 30px; }}
+        .form-details {{ background-color: #f8f9fa; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #3498db; }}
+        .detail-row {{ margin: 10px 0; display: flex; }}
+        .detail-label {{ font-weight: bold; min-width: 150px; color: #2c3e50; }}
+        .detail-value {{ color: #34495e; }}
+        .action-buttons {{ text-align: center; margin: 30px 0; }}
+        .approve-btn {{ background-color: #27ae60; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .reject-btn {{ background-color: #e74c3c; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .footer {{ background-color: #34495e; color: white; padding: 20px; text-align: center; font-size: 12px; }}
+        .status {{ display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; background-color: #f39c12; color: white; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Alistar Personnel</h1>
+            <p>{form_type} Request Approval</p>
+        </div>
+        
+        <div class="content">
+            <h2>Dear {manager_name},</h2>
+            <p>You have received a new <strong>{form_type}</strong> request that requires your approval.</p>
+            
+            <div class="form-details">
+                <h3>📋 Request Details</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Employee:</span>
+                    <span class="detail-value">{employee_name}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Request Type:</span>
+                    <span class="detail-value">{form_type}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date Submitted:</span>
+                    <span class="detail-value">{datetime.now().strftime('%B %d, %Y at %I:%M %p')}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="status">Pending Approval</span>
+                </div>
+"""
+    
+    # Add form-specific details
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            html_template += f"""
+                <div class="detail-row">
+                    <span class="detail-label">{formatted_key}:</span>
+                    <span class="detail-value">{value}</span>
+                </div>"""
+    
+    html_template += f"""
+            </div>
+            
+            <div class="action-buttons">
+                <a href="mailto:concessioac@gmail.com?subject=APPROVED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been APPROVED.%0A%0AApproval Details:%0A• Approved by: {manager_name}%0A• Approval Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Comments: [Add any comments here]%0A%0APlease contact HR if you have any questions.%0A%0ABest regards,%0A{manager_name}" class="approve-btn">✅ APPROVE</a>
+                
+                <a href="mailto:concessioac@gmail.com?subject=REJECTED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been REJECTED.%0A%0ARejection Details:%0A• Rejected by: {manager_name}%0A• Rejection Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Reason: [Please provide reason here]%0A%0APlease contact me if you have any questions or would like to discuss this further.%0A%0ABest regards,%0A{manager_name}" class="reject-btn">❌ REJECT</a>
+            </div>
+            
+            <p><strong>Instructions:</strong></p>
+            <ul>
+                <li>Click the appropriate button above to approve or reject this request</li>
+                <li>An email will be automatically generated to notify the employee</li>
+                <li>Please add any additional comments before sending</li>
+                <li>For questions, contact HR at concessioac@gmail.com</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>📧 This request was generated by the LGL Employee Helper System</p>
+            <p>Alistar Personnel | 605, Park Avenue, Dubai Silicon Oasis</p>
+        </div>
+    </div>
+</body>
+</html>"""
+    
+    return email_subject, html_template
+
+# Form Types Configuration
+FORM_TYPES = {
+    'leave_request': {
+        'title': '🏖️ Leave Request',
+        'description': 'Request time off for vacation, sick leave, maternity, etc.',
+        'icon': '🏖️',
+        'fields': ['leave_type', 'start_date', 'end_date', 'reason', 'emergency_contact']
+    },
+    'visa_request': {
+        'title': '📋 Visa & Immigration Request',
+        'description': 'Request visa sponsorship or dependent visa support',
+        'icon': '📋',
+        'fields': ['visa_type', 'dependent_details', 'urgency', 'reason']
+    },
+    'health_insurance': {
+        'title': '🏥 Health Insurance Request',
+        'description': 'Request health insurance changes or dependent coverage',
+        'icon': '🏥',
+        'fields': ['insurance_type', 'dependent_info', 'medical_history', 'preferred_provider']
+    },
+    'performance_review': {
+        'title': '📈 Performance Review Request',
+        'description': 'Request performance appraisal or schedule review meeting',
+        'icon': '📈',
+        'fields': ['review_type', 'preferred_date', 'self_assessment', 'goals']
+    },
+    'training_request': {
+        'title': '🎓 Training & Development Request',
+        'description': 'Request professional development or training opportunities',
+        'icon': '🎓',
+        'fields': ['training_type', 'course_name', 'provider', 'cost_estimate', 'justification']
+    },
+    'grievance_report': {
+        'title': '⚠️ Grievance Report',
+        'description': 'Report workplace issues or file a formal complaint',
+        'icon': '⚠️',
+        'fields': ['issue_type', 'incident_date', 'involved_parties', 'description', 'witnesses']
+    },
+    'equipment_request': {
+        'title': '💻 Equipment Request',
+        'description': 'Request office equipment, technology, or supplies',
+        'icon': '💻',
+        'fields': ['equipment_type', 'specification', 'justification', 'urgency']
+    },
+    'policy_clarification': {
+        'title': '📜 Policy Clarification Request',
+        'description': 'Request clarification on company policies or procedures',
+        'icon': '📜',
+        'fields': ['policy_area', 'specific_question', 'situation_context']
+    },
+    'schedule_change': {
+        'title': '⏰ Schedule Change Request',
+        'description': 'Request changes to working hours or schedule',
+        'icon': '⏰',
+        'fields': ['change_type', 'proposed_schedule', 'effective_date', 'reason']
+    },
+    'resignation_notice': {
+        'title': '📝 Resignation Notice',
+        'description': 'Submit formal resignation and notice period',
+        'icon': '📝',
+        'fields': ['last_working_day', 'notice_period', 'reason', 'transition_plan']
+    }
+}
+
+# Employee Handbook Data
+HANDBOOK_DATA = {
+    'leave': {
+        'title': 'Annual Leave Policy',
+        'content': """📅 **Annual Leave Entitlement:**
+
+```
+import streamlit as st
+import re
+import time
+import random
+import pandas as pd
+from datetime import datetime, date, timedelta
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import urllib.parse
+import json
+
+# Configure the page
+st.set_page_config(
+    page_title="LGL Employee Helper",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# Enhanced CSS styling with ALL UI improvements
+st.markdown("""
+<style>
+    /* Main header styling with blue background and white text */
+    .main-header {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        padding: 2rem;
+        border-radius: 15px;
+        color: white !important;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .main-header h1 {
+        color: white !important;
+        font-size: 2.5rem !important;
+        margin: 0 !important;
+    }
+    
+    .main-header p {
+        color: white !important;
+        opacity: 0.9 !important;
+    }
+    
+    /* Button styling - blue background with white text and bigger size */
+    .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: 12px !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        width: 100% !important;
+        height: 70px !important;
+        box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3) !important;
+        transition: all 0.3s ease !important;
+        text-align: center !important;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #2980b9 0%, #1f4e79 100%) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4) !important;
+    }
+    
+    .stButton > button:focus {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5) !important;
+    }
+    
+    /* Main content selectbox styling */
+    .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        margin-bottom: 1rem !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Selectbox dropdown styling */
+    .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Sidebar selectbox styling - FIXED ALIGNMENT */
+    div[data-testid="stSidebar"] .stSelectbox > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 6px !important;
+        padding: 0.375rem 0.75rem !important;
+        font-size: 0.875rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 500 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Sidebar selectbox dropdown options */
+    div[data-testid="stSidebar"] .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Text input styling */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Text area styling */
+    .stTextArea > div > div > textarea {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextArea label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Date input styling */
+    .stDateInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stDateInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Chat message styling */
+    .bot-message {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border-left: 4px solid #3498db !important;
+        margin: 1rem 0 !important;
+        color: #2c3e50 !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1) !important;
+    }
+    
+    .user-message {
+        background: linear-gradient(135deg, #3498db, #2980b9) !important;
+        color: white !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        margin: 1rem 0 !important;
+        text-align: right !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2) !important;
+    }
+    
+    /* Form styling */
+    .stForm {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border: 2px solid #e9ecef !important;
+        margin: 1rem 0 !important;
+    }
+    
+    /* Metric styling */
+    .stMetric {
+        background: white !important;
+        padding: 1rem !important;
+        border-radius: 8px !important;
+        border: 1px solid #e9ecef !important;
+        text-align: center !important;
+    }
+    
+    .stMetric label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stMetric [data-testid="metric-value"] {
+        color: #3498db !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Sidebar button styling */
+    .css-1d391kg .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        width: 100% !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Responsive and alignment fixes */
+    .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix column overflow issues */
+    .row-widget {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Ensure sidebar elements don't overflow */
+    div[data-testid="stSidebar"] .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .stSelectbox > div > div,
+        .stTextInput > div > div > input,
+        .stTextArea > div > div > textarea {
+            font-size: 0.875rem !important;
+        }
+        
+        .main-header h1 {
+            font-size: 2rem !important;
+        }
+        
+        .stButton > button {
+            height: 60px !important;
+            font-size: 1rem !important;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Employee Database - Sample Data for Leave Tracking
+EMPLOYEE_DATA = {
+    'loyed': {
+        'name': 'Loyed',
+        'department': 'Logistics',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP001',
+        'join_date': '2023-01-15',
+        'contract_type': 'Unlimited',
+        'position': 'Logistics Coordinator',
+        'annual_leave_taken': 10,
+        'sick_leave_taken': 2,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.8
+    },
+    'eva': {
+        'name': 'Eva',
+        'department': 'Commercial Services',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP002',
+        'join_date': '2022-08-10',
+        'contract_type': 'Unlimited',
+        'position': 'Commercial Services Specialist',
+        'annual_leave_taken': 12,
+        'sick_leave_taken': 3,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 2.3
+    },
+    'jaq': {
+        'name': 'Jaq',
+        'department': 'Commercial Sales',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP003',
+        'join_date': '2024-01-20',
+        'contract_type': 'Limited',
+        'position': 'Sales Executive',
+        'annual_leave_taken': 5,
+        'sick_leave_taken': 7,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 0.7
+    },
+    'rajeev': {
+        'name': 'Rajeev',
+        'department': 'Vessel Operations',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP004',
+        'join_date': '2021-05-03',
+        'contract_type': 'Unlimited',
+        'position': 'Operations Manager',
+        'annual_leave_taken': 4,
+        'sick_leave_taken': 6,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 5,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 3.6
+    },
+    'sarah': {
+        'name': 'Sarah',
+        'department': 'Human Resources',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP005',
+        'join_date': '2020-11-12',
+        'contract_type': 'Unlimited',
+        'position': 'HR Manager',
+        'annual_leave_taken': 8,
+        'sick_leave_taken': 1,
+        'maternity_leave_taken': 45,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 3,
+        'probation_completed': True,
+        'years_of_service': 4.1
+    },
+    'ahmed': {
+        'name': 'Ahmed',
+        'department': 'Finance',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP006',
+        'join_date': '2023-09-01',
+        'contract_type': 'Limited',
+        'position': 'Financial Analyst',
+        'annual_leave_taken': 6,
+        'sick_leave_taken': 0,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.3
+    }
+}
+
+def calculate_leave_entitlements(employee_data):
+    """Calculate leave entitlements based on employee data and handbook policies"""
+    years_of_service = employee_data['years_of_service']
+    probation_completed = employee_data['probation_completed']
+    
+    # Annual Leave Calculation
+    if years_of_service >= 1:
+        annual_leave_entitlement = 22  # Subsequent years
+    else:
+        annual_leave_entitlement = 20  # First year
+    
+    # Sick Leave Calculation (only after probation)
+    if probation_completed:
+        sick_leave_entitlement = 90  # 90 calendar days per year
+    else:
+        sick_leave_entitlement = 0
+    
+    # Other leave entitlements
+    maternity_leave_entitlement = 60 if employee_data['name'] else 60  # All female employees
+    parental_leave_entitlement = 5  # Both male and female
+    bereavement_leave_entitlement = 5  # Maximum for spouse
+    
+    return {
+        'annual_leave': {
+            'entitlement': annual_leave_entitlement,
+            'taken': employee_data['annual_leave_taken'],
+            'remaining': annual_leave_entitlement - employee_data['annual_leave_taken']
+        },
+        'sick_leave': {
+            'entitlement': sick_leave_entitlement,
+            'taken': employee_data['sick_leave_taken'],
+            'remaining': sick_leave_entitlement - employee_data['sick_leave_taken']
+        },
+        'maternity_leave': {
+            'entitlement': maternity_leave_entitlement,
+            'taken': employee_data['maternity_leave_taken'],
+            'remaining': maternity_leave_entitlement - employee_data['maternity_leave_taken']
+        },
+        'parental_leave': {
+            'entitlement': parental_leave_entitlement,
+            'taken': employee_data['parental_leave_taken'],
+            'remaining': parental_leave_entitlement - employee_data['parental_leave_taken']
+        },
+        'bereavement_leave': {
+            'entitlement': bereavement_leave_entitlement,
+            'taken': employee_data['bereavement_leave_taken'],
+            'remaining': bereavement_leave_entitlement - employee_data['bereavement_leave_taken']
+        }
+    }
+
+def create_notification_links(form_type, employee_name, manager_name, form_data):
+    """Create various notification service links for sending requests"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # Create email body
+    email_body = f"""Dear {manager_name},
+
+I would like to submit a {form_type} request:
+
+REQUEST DETAILS:
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date: {datetime.now().strftime('%B %d, %Y')}
+"""
+    
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            email_body += f"• {formatted_key}: {value}\n"
+    
+    email_body += f"""
+
+Please review and approve this request.
+
+Best regards,
+{employee_name}
+
+Generated by LGL Employee Helper
+Alistar Personnel"""
+    
+    # URL encode for links
+    subject_encoded = urllib.parse.quote(email_subject)
+    body_encoded = urllib.parse.quote(email_body)
+    manager_email = "concessioac@gmail.com"
+    
+    return {
+        'gmail_url': f"https://mail.google.com/mail/?view=cm&to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'outlook_url': f"https://outlook.live.com/mail/0/deeplink/compose?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'yahoo_url': f"https://compose.mail.yahoo.com/?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'subject': email_subject,
+        'body': email_body,
+        'manager_email': manager_email
+    }
+
+def generate_email_alternatives(form_type, employee_name, manager_name, form_data):
+    """Generate multiple email alternatives for form submission"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # Simple text email for copying
+    text_email = f"""Subject: {email_subject}
+To: concessioac@gmail.com
+
+Dear {manager_name},
+
+I would like to submit a {form_type} request with the following details:
+
+📋 REQUEST DETAILS:
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date Submitted: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}
+• Status: Pending Approval
+"""
+    
+    # Add form-specific details
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            text_email += f"• {formatted_key}: {value}\n"
+    
+    text_email += f"""
+
+Please review this request and let me know your decision.
+
+For approval, please reply with: APPROVED - {form_type} Request - {employee_name}
+For rejection, please reply with: REJECTED - {form_type} Request - {employee_name}
+
+Thank you for your consideration.
+
+Best regards,
+{employee_name}
+
+---
+This request was generated by the LGL Employee Helper System
+Alistar Personnel | 605, Park Avenue, Dubai Silicon Oasis
+HR Contact: concessioac@gmail.com"""
+    
+    # Mailto URL for email clients
+    mailto_url = f"mailto:concessioac@gmail.com?subject={email_subject.replace(' ', '%20')}&body={text_email.replace(' ', '%20').replace('\n', '%0A')}"
+    
+    # WhatsApp message format
+    whatsapp_message = f"""*{form_type} Request - {employee_name}*
+
+Dear {manager_name},
+
+I would like to submit a {form_type} request:
+
+📋 *REQUEST DETAILS:*
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date: {datetime.now().strftime('%B %d, %Y')}
+"""
+    
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            whatsapp_message += f"• {formatted_key}: {value}\n"
+    
+    whatsapp_message += f"""
+
+Please review and approve.
+
+Thanks,
+{employee_name}
+
+_Generated by LGL Employee Helper_"""
+    
+    return {
+        'subject': email_subject,
+        'text_email': text_email,
+        'mailto_url': mailto_url,
+        'whatsapp_message': whatsapp_message
+    }
+    """Generate a formatted email for various form types with HTML formatting"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # HTML Email Template
+    html_template = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }}
+        .container {{ max-width: 600px; margin: 0 auto; background-color: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; }}
+        .header {{ background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 30px; text-align: center; }}
+        .header h1 {{ margin: 0; font-size: 24px; }}
+        .header p {{ margin: 5px 0 0 0; opacity: 0.9; }}
+        .content {{ padding: 30px; }}
+        .form-details {{ background-color: #f8f9fa; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #3498db; }}
+        .detail-row {{ margin: 10px 0; display: flex; }}
+        .detail-label {{ font-weight: bold; min-width: 150px; color: #2c3e50; }}
+        .detail-value {{ color: #34495e; }}
+        .action-buttons {{ text-align: center; margin: 30px 0; }}
+        .approve-btn {{ background-color: #27ae60; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .reject-btn {{ background-color: #e74c3c; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .footer {{ background-color: #34495e; color: white; padding: 20px; text-align: center; font-size: 12px; }}
+        .status {{ display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; background-color: #f39c12; color: white; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Alistar Personnel</h1>
+            <p>{form_type} Request Approval</p>
+        </div>
+        
+        <div class="content">
+            <h2>Dear {manager_name},</h2>
+            <p>You have received a new <strong>{form_type}</strong> request that requires your approval.</p>
+            
+            <div class="form-details">
+                <h3>📋 Request Details</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Employee:</span>
+                    <span class="detail-value">{employee_name}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Request Type:</span>
+                    <span class="detail-value">{form_type}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date Submitted:</span>
+                    <span class="detail-value">{datetime.now().strftime('%B %d, %Y at %I:%M %p')}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="status">Pending Approval</span>
+                </div>
+"""
+    
+    # Add form-specific details
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            html_template += f"""
+                <div class="detail-row">
+                    <span class="detail-label">{formatted_key}:</span>
+                    <span class="detail-value">{value}</span>
+                </div>"""
+    
+    html_template += f"""
+            </div>
+            
+            <div class="action-buttons">
+                <a href="mailto:concessioac@gmail.com?subject=APPROVED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been APPROVED.%0A%0AApproval Details:%0A• Approved by: {manager_name}%0A• Approval Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Comments: [Add any comments here]%0A%0APlease contact HR if you have any questions.%0A%0ABest regards,%0A{manager_name}" class="approve-btn">✅ APPROVE</a>
+                
+                <a href="mailto:concessioac@gmail.com?subject=REJECTED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been REJECTED.%0A%0ARejection Details:%0A• Rejected by: {manager_name}%0A• Rejection Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Reason: [Please provide reason here]%0A%0APlease contact me if you have any questions or would like to discuss this further.%0A%0ABest regards,%0A{manager_name}" class="reject-btn">❌ REJECT</a>
+            </div>
+            
+            <p><strong>Instructions:</strong></p>
+            <ul>
+                <li>Click the appropriate button above to approve or reject this request</li>
+                <li>An email will be automatically generated to notify the employee</li>
+                <li>Please add any additional comments before sending</li>
+                <li>For questions, contact HR at concessioac@gmail.com</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>📧 This request was generated by the LGL Employee Helper System</p>
+            <p>Alistar Personnel | 605, Park Avenue, Dubai Silicon Oasis</p>
+        </div>
+    </div>
+</body>
+</html>"""
+    
+    return email_subject, html_template
+
+# Form Types Configuration
+FORM_TYPES = {
+    'leave_request': {
+        'title': '🏖️ Leave Request',
+        'description': 'Request time off for vacation, sick leave, maternity, etc.',
+        'icon': '🏖️',
+        'fields': ['leave_type', 'start_date', 'end_date', 'reason', 'emergency_contact']
+    },
+    'visa_request': {
+        'title': '📋 Visa & Immigration Request',
+        'description': 'Request visa sponsorship or dependent visa support',
+        'icon': '📋',
+        'fields': ['visa_type', 'dependent_details', 'urgency', 'reason']
+    },
+    'health_insurance': {
+        'title': '🏥 Health Insurance Request',
+        'description': 'Request health insurance changes or dependent coverage',
+        'icon': '🏥',
+        'fields': ['insurance_type', 'dependent_info', 'medical_history', 'preferred_provider']
+    },
+    'performance_review': {
+        'title': '📈 Performance Review Request',
+        'description': 'Request performance appraisal or schedule review meeting',
+        'icon': '📈',
+        'fields': ['review_type', 'preferred_date', 'self_assessment', 'goals']
+    },
+    'training_request': {
+        'title': '🎓 Training & Development Request',
+        'description': 'Request professional development or training opportunities',
+        'icon': '🎓',
+        'fields': ['training_type', 'course_name', 'provider', 'cost_estimate', 'justification']
+    },
+    'grievance_report': {
+        'title': '⚠️ Grievance Report',
+        'description': 'Report workplace issues or file a formal complaint',
+        'icon': '⚠️',
+        'fields': ['issue_type', 'incident_date', 'involved_parties', 'description', 'witnesses']
+    },
+    'equipment_request': {
+        'title': '💻 Equipment Request',
+        'description': 'Request office equipment, technology, or supplies',
+        'icon': '💻',
+        'fields': ['equipment_type', 'specification', 'justification', 'urgency']
+    },
+    'policy_clarification': {
+        'title': '📜 Policy Clarification Request',
+        'description': 'Request clarification on company policies or procedures',
+        'icon': '📜',
+        'fields': ['policy_area', 'specific_question', 'situation_context']
+    },
+    'schedule_change': {
+        'title': '⏰ Schedule Change Request',
+        'description': 'Request changes to working hours or schedule',
+        'icon': '⏰',
+        'fields': ['change_type', 'proposed_schedule', 'effective_date', 'reason']
+    },
+    'resignation_notice': {
+        'title': '📝 Resignation Notice',
+        'description': 'Submit formal resignation and notice period',
+        'icon': '📝',
+        'fields': ['last_working_day', 'notice_period', 'reason', 'transition_plan']
+    }
+}
+
+# Employee Handbook Data
+HANDBOOK_DATA = {
+    'leave': {
+        'title': 'Annual Leave Policy',
+        'content': """📅 **Annual Leave Entitlement:**
+
+```
+import streamlit as st
+import re
+import time
+import random
+import pandas as pd
+from datetime import datetime, date, timedelta
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import urllib.parse
+import json
+
+# Configure the page
+st.set_page_config(
+    page_title="LGL Employee Helper",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# Enhanced CSS styling with ALL UI improvements
+st.markdown("""
+<style>
+    /* Main header styling with blue background and white text */
+    .main-header {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        padding: 2rem;
+        border-radius: 15px;
+        color: white !important;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .main-header h1 {
+        color: white !important;
+        font-size: 2.5rem !important;
+        margin: 0 !important;
+    }
+    
+    .main-header p {
+        color: white !important;
+        opacity: 0.9 !important;
+    }
+    
+    /* Button styling - blue background with white text and bigger size */
+    .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: 12px !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        width: 100% !important;
+        height: 70px !important;
+        box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3) !important;
+        transition: all 0.3s ease !important;
+        text-align: center !important;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #2980b9 0%, #1f4e79 100%) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4) !important;
+    }
+    
+    .stButton > button:focus {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5) !important;
+    }
+    
+    /* Main content selectbox styling */
+    .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        margin-bottom: 1rem !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Selectbox dropdown styling */
+    .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Sidebar selectbox styling - FIXED ALIGNMENT */
+    div[data-testid="stSidebar"] .stSelectbox > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 6px !important;
+        padding: 0.375rem 0.75rem !important;
+        font-size: 0.875rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 500 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Sidebar selectbox dropdown options */
+    div[data-testid="stSidebar"] .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Text input styling */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Text area styling */
+    .stTextArea > div > div > textarea {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextArea label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Date input styling */
+    .stDateInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stDateInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Chat message styling */
+    .bot-message {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border-left: 4px solid #3498db !important;
+        margin: 1rem 0 !important;
+        color: #2c3e50 !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1) !important;
+    }
+    
+    .user-message {
+        background: linear-gradient(135deg, #3498db, #2980b9) !important;
+        color: white !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        margin: 1rem 0 !important;
+        text-align: right !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2) !important;
+    }
+    
+    /* Form styling */
+    .stForm {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border: 2px solid #e9ecef !important;
+        margin: 1rem 0 !important;
+    }
+    
+    /* Metric styling */
+    .stMetric {
+        background: white !important;
+        padding: 1rem !important;
+        border-radius: 8px !important;
+        border: 1px solid #e9ecef !important;
+        text-align: center !important;
+    }
+    
+    .stMetric label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stMetric [data-testid="metric-value"] {
+        color: #3498db !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Sidebar button styling */
+    .css-1d391kg .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        width: 100% !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Responsive and alignment fixes */
+    .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix column overflow issues */
+    .row-widget {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Ensure sidebar elements don't overflow */
+    div[data-testid="stSidebar"] .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .stSelectbox > div > div,
+        .stTextInput > div > div > input,
+        .stTextArea > div > div > textarea {
+            font-size: 0.875rem !important;
+        }
+        
+        .main-header h1 {
+            font-size: 2rem !important;
+        }
+        
+        .stButton > button {
+            height: 60px !important;
+            font-size: 1rem !important;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Employee Database - Sample Data for Leave Tracking
+EMPLOYEE_DATA = {
+    'loyed': {
+        'name': 'Loyed',
+        'department': 'Logistics',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP001',
+        'join_date': '2023-01-15',
+        'contract_type': 'Unlimited',
+        'position': 'Logistics Coordinator',
+        'annual_leave_taken': 10,
+        'sick_leave_taken': 2,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.8
+    },
+    'eva': {
+        'name': 'Eva',
+        'department': 'Commercial Services',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP002',
+        'join_date': '2022-08-10',
+        'contract_type': 'Unlimited',
+        'position': 'Commercial Services Specialist',
+        'annual_leave_taken': 12,
+        'sick_leave_taken': 3,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 2.3
+    },
+    'jaq': {
+        'name': 'Jaq',
+        'department': 'Commercial Sales',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP003',
+        'join_date': '2024-01-20',
+        'contract_type': 'Limited',
+        'position': 'Sales Executive',
+        'annual_leave_taken': 5,
+        'sick_leave_taken': 7,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 0.7
+    },
+    'rajeev': {
+        'name': 'Rajeev',
+        'department': 'Vessel Operations',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP004',
+        'join_date': '2021-05-03',
+        'contract_type': 'Unlimited',
+        'position': 'Operations Manager',
+        'annual_leave_taken': 4,
+        'sick_leave_taken': 6,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 5,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 3.6
+    },
+    'sarah': {
+        'name': 'Sarah',
+        'department': 'Human Resources',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP005',
+        'join_date': '2020-11-12',
+        'contract_type': 'Unlimited',
+        'position': 'HR Manager',
+        'annual_leave_taken': 8,
+        'sick_leave_taken': 1,
+        'maternity_leave_taken': 45,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 3,
+        'probation_completed': True,
+        'years_of_service': 4.1
+    },
+    'ahmed': {
+        'name': 'Ahmed',
+        'department': 'Finance',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP006',
+        'join_date': '2023-09-01',
+        'contract_type': 'Limited',
+        'position': 'Financial Analyst',
+        'annual_leave_taken': 6,
+        'sick_leave_taken': 0,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.3
+    }
+}
+
+def calculate_leave_entitlements(employee_data):
+    """Calculate leave entitlements based on employee data and handbook policies"""
+    years_of_service = employee_data['years_of_service']
+    probation_completed = employee_data['probation_completed']
+    
+    # Annual Leave Calculation
+    if years_of_service >= 1:
+        annual_leave_entitlement = 22  # Subsequent years
+    else:
+        annual_leave_entitlement = 20  # First year
+    
+    # Sick Leave Calculation (only after probation)
+    if probation_completed:
+        sick_leave_entitlement = 90  # 90 calendar days per year
+    else:
+        sick_leave_entitlement = 0
+    
+    # Other leave entitlements
+    maternity_leave_entitlement = 60 if employee_data['name'] else 60  # All female employees
+    parental_leave_entitlement = 5  # Both male and female
+    bereavement_leave_entitlement = 5  # Maximum for spouse
+    
+    return {
+        'annual_leave': {
+            'entitlement': annual_leave_entitlement,
+            'taken': employee_data['annual_leave_taken'],
+            'remaining': annual_leave_entitlement - employee_data['annual_leave_taken']
+        },
+        'sick_leave': {
+            'entitlement': sick_leave_entitlement,
+            'taken': employee_data['sick_leave_taken'],
+            'remaining': sick_leave_entitlement - employee_data['sick_leave_taken']
+        },
+        'maternity_leave': {
+            'entitlement': maternity_leave_entitlement,
+            'taken': employee_data['maternity_leave_taken'],
+            'remaining': maternity_leave_entitlement - employee_data['maternity_leave_taken']
+        },
+        'parental_leave': {
+            'entitlement': parental_leave_entitlement,
+            'taken': employee_data['parental_leave_taken'],
+            'remaining': parental_leave_entitlement - employee_data['parental_leave_taken']
+        },
+        'bereavement_leave': {
+            'entitlement': bereavement_leave_entitlement,
+            'taken': employee_data['bereavement_leave_taken'],
+            'remaining': bereavement_leave_entitlement - employee_data['bereavement_leave_taken']
+        }
+    }
+
+def create_notification_links(form_type, employee_name, manager_name, form_data):
+    """Create various notification service links for sending requests"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # Create email body
+    email_body = f"""Dear {manager_name},
+
+I would like to submit a {form_type} request:
+
+REQUEST DETAILS:
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date: {datetime.now().strftime('%B %d, %Y')}
+"""
+    
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            email_body += f"• {formatted_key}: {value}\n"
+    
+    email_body += f"""
+
+Please review and approve this request.
+
+Best regards,
+{employee_name}
+
+Generated by LGL Employee Helper
+Alistar Personnel"""
+    
+    # URL encode for links
+    subject_encoded = urllib.parse.quote(email_subject)
+    body_encoded = urllib.parse.quote(email_body)
+    manager_email = "concessioac@gmail.com"
+    
+    return {
+        'gmail_url': f"https://mail.google.com/mail/?view=cm&to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'outlook_url': f"https://outlook.live.com/mail/0/deeplink/compose?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'yahoo_url': f"https://compose.mail.yahoo.com/?to={manager_email}&subject={subject_encoded}&body={body_encoded}",
+        'subject': email_subject,
+        'body': email_body,
+        'manager_email': manager_email
+    }
+
+def generate_email_alternatives(form_type, employee_name, manager_name, form_data):
+    """Generate multiple email alternatives for form submission"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # Simple text email for copying
+    text_email = f"""Subject: {email_subject}
+To: concessioac@gmail.com
+
+Dear {manager_name},
+
+I would like to submit a {form_type} request with the following details:
+
+📋 REQUEST DETAILS:
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date Submitted: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}
+• Status: Pending Approval
+"""
+    
+    # Add form-specific details
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            text_email += f"• {formatted_key}: {value}\n"
+    
+    text_email += f"""
+
+Please review this request and let me know your decision.
+
+For approval, please reply with: APPROVED - {form_type} Request - {employee_name}
+For rejection, please reply with: REJECTED - {form_type} Request - {employee_name}
+
+Thank you for your consideration.
+
+Best regards,
+{employee_name}
+
+---
+This request was generated by the LGL Employee Helper System
+Alistar Personnel | 605, Park Avenue, Dubai Silicon Oasis
+HR Contact: concessioac@gmail.com"""
+    
+    # Mailto URL for email clients
+    mailto_url = f"mailto:concessioac@gmail.com?subject={email_subject.replace(' ', '%20')}&body={text_email.replace(' ', '%20').replace('\n', '%0A')}"
+    
+    # WhatsApp message format
+    whatsapp_message = f"""*{form_type} Request - {employee_name}*
+
+Dear {manager_name},
+
+I would like to submit a {form_type} request:
+
+📋 *REQUEST DETAILS:*
+• Employee: {employee_name}
+• Request Type: {form_type}
+• Date: {datetime.now().strftime('%B %d, %Y')}
+"""
+    
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            whatsapp_message += f"• {formatted_key}: {value}\n"
+    
+    whatsapp_message += f"""
+
+Please review and approve.
+
+Thanks,
+{employee_name}
+
+_Generated by LGL Employee Helper_"""
+    
+    return {
+        'subject': email_subject,
+        'text_email': text_email,
+        'mailto_url': mailto_url,
+        'whatsapp_message': whatsapp_message
+    }
+    """Generate a formatted email for various form types with HTML formatting"""
+    email_subject = f"{form_type} Request - {employee_name}"
+    
+    # HTML Email Template
+    html_template = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }}
+        .container {{ max-width: 600px; margin: 0 auto; background-color: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; }}
+        .header {{ background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 30px; text-align: center; }}
+        .header h1 {{ margin: 0; font-size: 24px; }}
+        .header p {{ margin: 5px 0 0 0; opacity: 0.9; }}
+        .content {{ padding: 30px; }}
+        .form-details {{ background-color: #f8f9fa; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #3498db; }}
+        .detail-row {{ margin: 10px 0; display: flex; }}
+        .detail-label {{ font-weight: bold; min-width: 150px; color: #2c3e50; }}
+        .detail-value {{ color: #34495e; }}
+        .action-buttons {{ text-align: center; margin: 30px 0; }}
+        .approve-btn {{ background-color: #27ae60; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .reject-btn {{ background-color: #e74c3c; color: white; padding: 12px 24px; border: none; border-radius: 5px; margin: 0 10px; text-decoration: none; display: inline-block; font-weight: bold; }}
+        .footer {{ background-color: #34495e; color: white; padding: 20px; text-align: center; font-size: 12px; }}
+        .status {{ display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; background-color: #f39c12; color: white; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Alistar Personnel</h1>
+            <p>{form_type} Request Approval</p>
+        </div>
+        
+        <div class="content">
+            <h2>Dear {manager_name},</h2>
+            <p>You have received a new <strong>{form_type}</strong> request that requires your approval.</p>
+            
+            <div class="form-details">
+                <h3>📋 Request Details</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Employee:</span>
+                    <span class="detail-value">{employee_name}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Request Type:</span>
+                    <span class="detail-value">{form_type}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date Submitted:</span>
+                    <span class="detail-value">{datetime.now().strftime('%B %d, %Y at %I:%M %p')}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="status">Pending Approval</span>
+                </div>
+"""
+    
+    # Add form-specific details
+    for key, value in form_data.items():
+        if key not in ['employee_name', 'manager_name', 'form_type']:
+            formatted_key = key.replace('_', ' ').title()
+            html_template += f"""
+                <div class="detail-row">
+                    <span class="detail-label">{formatted_key}:</span>
+                    <span class="detail-value">{value}</span>
+                </div>"""
+    
+    html_template += f"""
+            </div>
+            
+            <div class="action-buttons">
+                <a href="mailto:concessioac@gmail.com?subject=APPROVED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been APPROVED.%0A%0AApproval Details:%0A• Approved by: {manager_name}%0A• Approval Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Comments: [Add any comments here]%0A%0APlease contact HR if you have any questions.%0A%0ABest regards,%0A{manager_name}" class="approve-btn">✅ APPROVE</a>
+                
+                <a href="mailto:concessioac@gmail.com?subject=REJECTED - {form_type} Request - {employee_name}&body=Dear {employee_name},%0A%0AYour {form_type} request has been REJECTED.%0A%0ARejection Details:%0A• Rejected by: {manager_name}%0A• Rejection Date: {datetime.now().strftime('%Y-%m-%d')}%0A• Reason: [Please provide reason here]%0A%0APlease contact me if you have any questions or would like to discuss this further.%0A%0ABest regards,%0A{manager_name}" class="reject-btn">❌ REJECT</a>
+            </div>
+            
+            <p><strong>Instructions:</strong></p>
+            <ul>
+                <li>Click the appropriate button above to approve or reject this request</li>
+                <li>An email will be automatically generated to notify the employee</li>
+                <li>Please add any additional comments before sending</li>
+                <li>For questions, contact HR at concessioac@gmail.com</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>📧 This request was generated by the LGL Employee Helper System</p>
+            <p>Alistar Personnel | 605, Park Avenue, Dubai Silicon Oasis</p>
+        </div>
+    </div>
+</body>
+</html>"""
+    
+    return email_subject, html_template
+
+# Form Types Configuration
+FORM_TYPES = {
+    'leave_request': {
+        'title': '🏖️ Leave Request',
+        'description': 'Request time off for vacation, sick leave, maternity, etc.',
+        'icon': '🏖️',
+        'fields': ['leave_type', 'start_date', 'end_date', 'reason', 'emergency_contact']
+    },
+    'visa_request': {
+        'title': '📋 Visa & Immigration Request',
+        'description': 'Request visa sponsorship or dependent visa support',
+        'icon': '📋',
+        'fields': ['visa_type', 'dependent_details', 'urgency', 'reason']
+    },
+    'health_insurance': {
+        'title': '🏥 Health Insurance Request',
+        'description': 'Request health insurance changes or dependent coverage',
+        'icon': '🏥',
+        'fields': ['insurance_type', 'dependent_info', 'medical_history', 'preferred_provider']
+    },
+    'performance_review': {
+        'title': '📈 Performance Review Request',
+        'description': 'Request performance appraisal or schedule review meeting',
+        'icon': '📈',
+        'fields': ['review_type', 'preferred_date', 'self_assessment', 'goals']
+    },
+    'training_request': {
+        'title': '🎓 Training & Development Request',
+        'description': 'Request professional development or training opportunities',
+        'icon': '🎓',
+        'fields': ['training_type', 'course_name', 'provider', 'cost_estimate', 'justification']
+    },
+    'grievance_report': {
+        'title': '⚠️ Grievance Report',
+        'description': 'Report workplace issues or file a formal complaint',
+        'icon': '⚠️',
+        'fields': ['issue_type', 'incident_date', 'involved_parties', 'description', 'witnesses']
+    },
+    'equipment_request': {
+        'title': '💻 Equipment Request',
+        'description': 'Request office equipment, technology, or supplies',
+        'icon': '💻',
+        'fields': ['equipment_type', 'specification', 'justification', 'urgency']
+    },
+    'policy_clarification': {
+        'title': '📜 Policy Clarification Request',
+        'description': 'Request clarification on company policies or procedures',
+        'icon': '📜',
+        'fields': ['policy_area', 'specific_question', 'situation_context']
+    },
+    'schedule_change': {
+        'title': '⏰ Schedule Change Request',
+        'description': 'Request changes to working hours or schedule',
+        'icon': '⏰',
+        'fields': ['change_type', 'proposed_schedule', 'effective_date', 'reason']
+    },
+    'resignation_notice': {
+        'title': '📝 Resignation Notice',
+        'description': 'Submit formal resignation and notice period',
+        'icon': '📝',
+        'fields': ['last_working_day', 'notice_period', 'reason', 'transition_plan']
+    }
+}
+
+# Employee Handbook Data
+HANDBOOK_DATA = {
+    'leave': {
+        'title': 'Annual Leave Policy',
+        'content': """📅 **Annual Leave Entitlement:**
+
+```
+import streamlit as st
+import re
+import time
+import random
+import pandas as pd
+from datetime import datetime, date, timedelta
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import urllib.parse
+import json
+
+# Configure the page
+st.set_page_config(
+    page_title="LGL Employee Helper",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# Enhanced CSS styling with ALL UI improvements
+st.markdown("""
+<style>
+    /* Main header styling with blue background and white text */
+    .main-header {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        padding: 2rem;
+        border-radius: 15px;
+        color: white !important;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .main-header h1 {
+        color: white !important;
+        font-size: 2.5rem !important;
+        margin: 0 !important;
+    }
+    
+    .main-header p {
+        color: white !important;
+        opacity: 0.9 !important;
+    }
+    
+    /* Button styling - blue background with white text and bigger size */
+    .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.75rem 1.5rem !important;
+        border-radius: 12px !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        width: 100% !important;
+        height: 70px !important;
+        box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3) !important;
+        transition: all 0.3s ease !important;
+        text-align: center !important;
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #2980b9 0%, #1f4e79 100%) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4) !important;
+    }
+    
+    .stButton > button:focus {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5) !important;
+    }
+    
+    /* Main content selectbox styling */
+    .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        margin-bottom: 1rem !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Selectbox dropdown styling */
+    .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Sidebar selectbox styling - FIXED ALIGNMENT */
+    div[data-testid="stSidebar"] .stSelectbox > div {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 6px !important;
+        padding: 0.375rem 0.75rem !important;
+        font-size: 0.875rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox > div > div > div {
+        color: #4a5568 !important;
+    }
+    
+    div[data-testid="stSidebar"] .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 500 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Sidebar selectbox dropdown options */
+    div[data-testid="stSidebar"] .stSelectbox option {
+        color: #4a5568 !important;
+        background-color: white !important;
+    }
+    
+    /* Text input styling */
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Text area styling */
+    .stTextArea > div > div > textarea {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stTextArea label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Date input styling */
+    .stDateInput > div > div > input {
+        background-color: white !important;
+        color: #4a5568 !important;
+        border: 2px solid #3498db !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .stDateInput label {
+        color: #2d3748 !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Chat message styling */
+    .bot-message {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border-left: 4px solid #3498db !important;
+        margin: 1rem 0 !important;
+        color: #2c3e50 !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1) !important;
+    }
+    
+    .user-message {
+        background: linear-gradient(135deg, #3498db, #2980b9) !important;
+        color: white !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        margin: 1rem 0 !important;
+        text-align: right !important;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2) !important;
+    }
+    
+    /* Form styling */
+    .stForm {
+        background: #f8f9fa !important;
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+        border: 2px solid #e9ecef !important;
+        margin: 1rem 0 !important;
+    }
+    
+    /* Metric styling */
+    .stMetric {
+        background: white !important;
+        padding: 1rem !important;
+        border-radius: 8px !important;
+        border: 1px solid #e9ecef !important;
+        text-align: center !important;
+    }
+    
+    .stMetric label {
+        color: #2c3e50 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stMetric [data-testid="metric-value"] {
+        color: #3498db !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Sidebar button styling */
+    .css-1d391kg .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+        color: white !important;
+        border: none !important;
+        width: 100% !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Responsive and alignment fixes */
+    .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix column overflow issues */
+    .row-widget {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Ensure sidebar elements don't overflow */
+    div[data-testid="stSidebar"] .element-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .stSelectbox > div > div,
+        .stTextInput > div > div > input,
+        .stTextArea > div > div > textarea {
+            font-size: 0.875rem !important;
+        }
+        
+        .main-header h1 {
+            font-size: 2rem !important;
+        }
+        
+        .stButton > button {
+            height: 60px !important;
+            font-size: 1rem !important;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Employee Database - Sample Data for Leave Tracking
+EMPLOYEE_DATA = {
+    'loyed': {
+        'name': 'Loyed',
+        'department': 'Logistics',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP001',
+        'join_date': '2023-01-15',
+        'contract_type': 'Unlimited',
+        'position': 'Logistics Coordinator',
+        'annual_leave_taken': 10,
+        'sick_leave_taken': 2,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.8
+    },
+    'eva': {
+        'name': 'Eva',
+        'department': 'Commercial Services',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP002',
+        'join_date': '2022-08-10',
+        'contract_type': 'Unlimited',
+        'position': 'Commercial Services Specialist',
+        'annual_leave_taken': 12,
+        'sick_leave_taken': 3,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 2.3
+    },
+    'jaq': {
+        'name': 'Jaq',
+        'department': 'Commercial Sales',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP003',
+        'join_date': '2024-01-20',
+        'contract_type': 'Limited',
+        'position': 'Sales Executive',
+        'annual_leave_taken': 5,
+        'sick_leave_taken': 7,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 0.7
+    },
+    'rajeev': {
+        'name': 'Rajeev',
+        'department': 'Vessel Operations',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP004',
+        'join_date': '2021-05-03',
+        'contract_type': 'Unlimited',
+        'position': 'Operations Manager',
+        'annual_leave_taken': 4,
+        'sick_leave_taken': 6,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 5,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 3.6
+    },
+    'sarah': {
+        'name': 'Sarah',
+        'department': 'Human Resources',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP005',
+        'join_date': '2020-11-12',
+        'contract_type': 'Unlimited',
+        'position': 'HR Manager',
+        'annual_leave_taken': 8,
+        'sick_leave_taken': 1,
+        'maternity_leave_taken': 45,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 3,
+        'probation_completed': True,
+        'years_of_service': 4.1
+    },
+    'ahmed': {
+        'name': 'Ahmed',
+        'department': 'Finance',
+        'approval_manager': 'Alistar Concessio',
+        'employee_id': 'EMP006',
+        'join_date': '2023-09-01',
+        'contract_type': 'Limited',
+        'position': 'Financial Analyst',
+        'annual_leave_taken': 6,
+        'sick_leave_taken': 0,
+        'maternity_leave_taken': 0,
+        'parental_leave_taken': 0,
+        'bereavement_leave_taken': 0,
+        'probation_completed': True,
+        'years_of_service': 1.3
+    }
+}
 • **First Year:** 20 working days (after probation completion)
 • **Subsequent Years:** 22 working days from second year onward
 • **Notice Required:** Minimum twice the duration of leave requested
@@ -2000,11 +6559,11 @@ You have **{remaining} days** of sick leave remaining this year.
         'footer': "💡 Could you please choose one of these topics or rephrase your question?\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊"
     }
 
-# Main header
+# Main header with blue background
 st.markdown("""
 <div class="main-header">
-    <h1>🤖 LGL Employee Helper</h1>
-    <p style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.9;">Alistar's Personnel Employee Handbook</p>
+    <h1 style="margin: 0; font-size: 2.5rem; color: white;">🤖 LGL Employee Helper</h1>
+    <p style="margin: 0.5rem 0 0 0; font-size: 1.2rem; opacity: 0.9; color: white;">Alistar's Personnel Employee Handbook</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -2470,20 +7029,10 @@ if 'show_form' in st.session_state and st.session_state.show_form and st.session
             st.success(f"✅ {form_config['title']} submitted successfully!")
             
             # Display multiple sending options
-            st.markdown("""
-            <div class="quick-actions">
-                <h3>📧 Choose Your Preferred Method to Send Request</h3>
-                <p style="color: var(--gray-500);">Select the most convenient way to send your request to your manager</p>
-            </div>
-            """)
+            st.markdown("### 📧 **Choose Your Preferred Method to Send Request:**")
             
             # Method 1: Web-based Email Services
-            st.markdown("""
-            <div class="email-option-card">
-                <h4 style="color: var(--gray-800); margin-bottom: 0.5rem;">🌍 Web Email Services <span style="background: var(--success-500); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">EASIEST</span></h4>
-                <p style="color: var(--gray-600); margin-bottom: 1rem;">One-click to open pre-filled emails in your favorite email service</p>
-            </div>
-            """)
+            st.markdown("#### 🌍 **Option 1: Web Email Services (Easiest)**")
             col1, col2, col3 = st.columns(3)
             
             with col1:
@@ -2497,23 +7046,13 @@ if 'show_form' in st.session_state and st.session_state.show_form and st.session
             
             st.info("📊 Click any button above to open a new tab with your request pre-filled. Just review and click Send!")
             
-            # Method 2: Email Client
-            st.markdown("""
-            <div class="email-option-card">
-                <h4 style="color: var(--gray-800); margin-bottom: 0.5rem;">📫 Desktop Email Client</h4>
-                <p style="color: var(--gray-600); margin-bottom: 1rem;">Opens your default email app (Outlook, Gmail, Apple Mail) with pre-filled content</p>
-            </div>
-            """)
-            st.markdown(f'<a href="{email_options["mailto_url"]}" target="_blank"><button style="background: linear-gradient(135deg, var(--primary-500), var(--primary-600)); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600; font-family: Inter, sans-serif;">📧 Open in Email Client</button></a>', unsafe_allow_html=True)
-            st.info("📊 This will open your default email client with the email pre-filled.")
+            # Method 2: Email Client (Outlook, Gmail, etc.)
+            st.markdown("#### 📫 **Option 2: Desktop Email Client**")
+            st.markdown(f'<a href="{email_options["mailto_url"]}" target="_blank"><button style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%;">📧 Open in Email Client</button></a>', unsafe_allow_html=True)
+            st.info("📊 This will open your default email client (Outlook, Gmail, Apple Mail, etc.) with the email pre-filled.")
             
             # Method 3: Copy & Paste
-            st.markdown("""
-            <div class="email-option-card">
-                <h4 style="color: var(--gray-800); margin-bottom: 0.5rem;">📋 Copy & Paste Method</h4>
-                <p style="color: var(--gray-600); margin-bottom: 1rem;">Copy formatted email content for any email client or webmail service</p>
-            </div>
-            """)
+            st.markdown("#### 📋 **Option 3: Copy & Paste Email**")
             with st.expander("📝 Click to Copy Email Content", expanded=False):
                 st.code(email_options['text_email'], language=None)
                 st.markdown(f"""
@@ -2525,20 +7064,15 @@ if 'show_form' in st.session_state and st.session_state.show_form and st.session
                 """)
             
             # Method 4: WhatsApp Alternative
-            st.markdown("""
-            <div class="email-option-card">
-                <h4 style="color: var(--gray-800); margin-bottom: 0.5rem;">📱 Mobile-Friendly Options</h4>
-                <p style="color: var(--gray-600); margin-bottom: 1rem;">Optimized formats for WhatsApp, SMS, and mobile messaging apps</p>
-            </div>
-            """)
+            st.markdown("#### 📱 **Option 4: WhatsApp/SMS Format**")
             with st.expander("📱 Mobile-Friendly Format", expanded=False):
                 st.code(email_options['whatsapp_message'], language=None)
                 st.info("Copy this shorter format for WhatsApp, SMS, or other messaging apps.")
             
             # Instructions
             st.markdown("""
-            <div class="instruction-box">
-                📎 <strong>Important Instructions:</strong><br><br>
+            <div style="background: #e7f3ff; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #2196f3; color: #1565c0; margin-top: 1.5rem;">
+                📎 <strong>Important Instructions:</strong><br>
                 • <strong>Email Address:</strong> concessioac@gmail.com<br>
                 • <strong>Response Time:</strong> Your manager will review and respond<br>
                 • <strong>Urgent Requests:</strong> Contact your manager directly<br>
@@ -2559,13 +7093,44 @@ elif 'show_leave_form' in st.session_state and st.session_state.show_leave_form 
     st.session_state.show_leave_form = False
     st.rerun()
 
-# Quick action buttons with modern design
+# Enhanced Quick action buttons section
 st.markdown("""
-<div class="quick-actions">
-    <h3>🚀 Quick Topics</h3>
-    <p style="color: var(--gray-500); margin-bottom: 1rem;">Get instant answers to common questions</p>
+<div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 2rem; border-radius: 15px; margin: 2rem 0; border: 2px solid #e9ecef;">
+    <h3 style="color: #2c3e50; text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem;">🚀 Quick Topics</h3>
 </div>
 """, unsafe_allow_html=True)
+
+# Special "How to Apply for Leave" section - prominent display
+st.markdown("""
+<div style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center; box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);">
+    <h2 style="color: white; margin-bottom: 1rem; font-size: 1.8rem;">📧 How Can I Apply for Leave?</h2>
+    <p style="color: white; font-size: 1.1rem; opacity: 0.9; margin-bottom: 1.5rem;">Click below to start your leave application process or learn about leave policies</p>
+</div>
+""", unsafe_allow_html=True)
+
+# Create special leave application buttons
+col_leave1, col_leave2 = st.columns(2)
+
+with col_leave1:
+    if st.button("📋 Start Leave Application", key="apply_leave_btn", help="Begin the process to apply for leave"):
+        # Trigger leave application process
+        question = 'I want to apply for leave'
+        st.session_state.messages.append({'role': 'user', 'content': question})
+        response = process_user_question('apply for leave')
+        content = response['content'] if isinstance(response, dict) else response
+        st.session_state.messages.append({'role': 'assistant', 'content': content, 'response_data': response})
+        st.session_state.processing = False
+        st.rerun()
+
+with col_leave2:
+    if st.button("📚 Learn About Leave Policies", key="learn_leave_btn", help="Learn about different types of leave and policies"):
+        question = 'Tell me about leave policies'
+        st.session_state.messages.append({'role': 'user', 'content': question})
+        response = process_user_question('annual leave')
+        content = response['content'] if isinstance(response, dict) else response
+        st.session_state.messages.append({'role': 'assistant', 'content': content, 'response_data': response})
+        st.session_state.processing = False
+        st.rerun()
 
 col1, col2, col3 = st.columns(3)
 
@@ -2635,12 +7200,7 @@ with col3:
 # Employee Data Table Section (for admin/HR view)
 st.markdown("---")
 if st.checkbox("📈 Show Employee Leave Tracking Data (HR View)"):
-    st.markdown("""
-    <div class="quick-actions">
-        <h3>📈 Employee Leave Tracking Database</h3>
-        <p style="color: var(--gray-500);">Comprehensive overview of employee leave balances and usage</p>
-    </div>
-    """)
+    st.markdown("### 📈 Employee Leave Tracking Database")
     
     # Create dataframe for display
     employee_df = []
@@ -2699,12 +7259,7 @@ if st.checkbox("📈 Show Employee Leave Tracking Data (HR View)"):
     )
 
 # Chat input using form to prevent auto-rerun
-st.markdown("""
-<div class="quick-actions">
-    <h3>💬 Chat with LGL Assistant</h3>
-    <p style="color: var(--gray-500);">Ask me anything about the Employee Handbook policies and procedures</p>
-</div>
-""", unsafe_allow_html=True)
+st.markdown("### 💬 Chat with LGL Assistant")
 
 # Display chat messages
 for i, message in enumerate(st.session_state.messages):
@@ -2898,10 +7453,9 @@ with st.form(key='chat_form', clear_on_submit=True):
 # Footer
 st.markdown("---")
 st.markdown("""
-<div style="text-align: center; padding: 2rem; background: white; border-radius: 12px; border: 1px solid var(--gray-200); margin-top: 2rem;">
-    <h4 style="color: var(--gray-800); margin-bottom: 0.5rem; font-weight: 600;">🏢 Alistar Personnel</h4>
-    <p style="color: var(--gray-600); margin-bottom: 0.5rem;">Employee Handbook Assistant</p>
-    <p style="color: var(--gray-500); font-size: 0.875rem;">📍 605, Park Avenue, Dubai Silicon Oasis</p>
-    <p style="color: var(--gray-400); font-size: 0.75rem; margin-top: 1rem;"><em>For additional HR support, please contact the HR Department</em></p>
+<div style="text-align: center; color: #666; padding: 2rem;">
+    <p>🏢 <strong>Alistar Handbook</strong> - Employee Handbook Assistant</p>
+    <p>📍 605, Park Avenue , Dubai Silicon Oasis</p>
+    <p><em>For additional HR support, please contact the HR Department</em></p>
 </div>
 """, unsafe_allow_html=True)
