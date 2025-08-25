@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LGL Employee Helper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { max-width: 800px; width: 100%; background: rgba(255, 255, 255, 0.95); border-radius: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); backdrop-filter: blur(10px); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: white; padding: 30px; text-align: center; }
+        .logo { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px; }
+        .logo i { font-size: 2.5rem; color: #ecf0f1; }
+        .header h1 { font-size: 2rem; font-weight: 600; margin: 0; }
+        .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 300; }
+        .chat-container { height: 600px; display: flex; flex-direction: column; }
+        .chat-header { display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #e0e0e0; background: #f8f9fa; }
+        .bot-avatar { width: 50px; height: 50px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; }
+        .bot-avatar i { color: white; font-size: 1.2rem; }
+        .bot-info h3 { font-size: 1.1rem; margin-bottom: 5px; }
+        .status { font-size: 0.85rem; padding: 2px 8px; border-radius: 10px; }
+        .status.online { background: #2ecc71; color: white; }
+        .chat-messages { flex: 1; padding: 20px; overflow-y: auto; background: #fafafa; }
+        .message { display: flex; margin-bottom: 20px; animation: fadeInUp 0.3s ease; }
+        .message-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0; }
+        .bot-message .message-avatar { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .user-message { flex-direction: row-reverse; }
+        .user-message .message-avatar { background: linear-gradient(135deg, #2c3e50, #3498db); color: white; margin-right: 0; margin-left: 12px; }
+        .message-content { max-width: 70%; padding: 15px 18px; border-radius: 18px; line-height: 1.5; }
+        .bot-message .message-content { background: white; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); }
+        .user-message .message-content { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .quick-actions { padding: 20px; border-top: 1px solid #e0e0e0; background: white; }
+        .quick-actions h4 { margin-bottom: 15px; color: #2c3e50; font-size: 1rem; }
+        .action-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .action-btn { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: linear-gradient(135deg, #ecf0f1, #bdc3c7); border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 500; color: #2c3e50; }
+        .action-btn:hover { background: linear-gradient(135deg, #667eea, #764ba2); color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); }
+        .action-btn i { font-size: 1rem; }
+        .chat-input-container { padding: 20px; background: white; border-top: 1px solid #e0e0e0; }
+        .chat-input-wrapper { display: flex; align-items: center; background: #f8f9fa; border-radius: 25px; padding: 8px; border: 2px solid transparent; transition: all 0.3s ease; }
+        .chat-input-wrapper:focus-within { border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+        #chatInput { flex: 1; border: none; background: transparent; padding: 12px 16px; font-size: 1rem; outline: none; font-family: inherit; }
+        #chatInput::placeholder { color: #999; }
+        #sendButton { width: 40px; height: 40px; background: linear-gradient(135deg, #667eea, #764ba2); border: none; border-radius: 50%; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        #sendButton:hover { transform: scale(1.1); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        .option-btn { background: #e8f4fd; color: #1976d2; border: 1px solid #1976d2; padding: 8px 16px; border-radius: 20px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; font-weight: 500; margin: 5px; }
+        .option-btn:hover { background: #1976d2; color: white; transform: translateY(-1px); }
+        .loading { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; z-index: 1000; }
+        .loading-spinner { width: 50px; height: 50px; border: 3px solid rgba(255, 255, 255, 0.3); border-top: 3px solid white; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>LGL Employee Helper</h1>
+            </div>
+            <p class="subtitle">Your intelligent guide to the Employee Handbook</p>
+        </header>
+
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="bot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="bot-info">
+                    <h3>LGL Assistant</h3>
+                    <span class="status online">Online</span>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>👋 Hello! I am your <strong>LGL Employee Helper</strong>. Ask me anything about the ES Training DMCC Employee Handbook!</p>
+                        <p>I can help you with policies, procedures, benefits, and much more. What would you like to know?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-actions" id="quickActions">
+                <h4>Quick Topics:</h4>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="handleQuickAction('leave')">
+                        <i class="fas fa-calendar-alt"></i>
+                        Annual Leave
+                    </button>
+                    <button class="action-btn" onclick="handleQuickAction('sick')">
+                        <i class="fas fa-heartbeat"></i>
+                        Sick Leave
+                    </button>
+                    <button class="action-btn" onclick="handleQuickAction('working hours')">
+                        <i class="fas fa-clock"></i>
+                        Working Hours
+                    </button>
+                    <button class="action-btn" onclick="handleQuickAction('benefits')">
+                        <i class="fas fa-gift"></i>
+                        Employee Benefits
+                    </button>
+                    <button class="action-btn" onclick="handleQuickAction('conduct')">
+                        <i class="fas fa-handshake"></i>
+                        Code of Conduct
+                    </button>
+                    <button class="action-btn" onclick="handleQuickAction('disciplinary')">
+                        <i class="fas fa-gavel"></i>
+                        Disciplinary Procedures
+                    </button>
+                </div>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <input type="text" id="chatInput" placeholder="Type your question here..." autocomplete="off">
+                    <button id="sendButton" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="input-suggestions" id="inputSuggestions"></div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>Searching through the handbook...</p>
+        </div>
+    </div>
+
+    <script>
+        // Simplified Employee Helper
+        const TOPICS = {
+            'leave': 'Annual Leave: 20 days first year, 22 days subsequent years. Apply with notice twice the duration requested.',
+            'sick': 'Sick Leave: 90 days per year - 15 days full pay, 30 days half pay, 45 days no pay. Medical certificate required after 2 days.',
+            'working hours': 'Working Hours: Admin (Mon-Fri 9am-6pm), Academic (2+ sessions: 9am-12pm, 12pm-3pm, 3pm-6pm)',
+            'benefits': 'Benefits: Health insurance, visa sponsorship, annual leave, sick leave, maternity leave, national holidays.',
+            'conduct': 'Code of Conduct: Professional dress, mutual respect, no offensive language, maintain confidentiality, safeguarding rules.',
+            'disciplinary': 'Disciplinary: Verbal warning (6 months), written warnings (12 months), investigation process, right to appeal.'
+        };
+
+        let employeeHelper;
+
+        class EmployeeHelper {
+            constructor() {
+                this.chatMessages = document.getElementById('chatMessages');
+                this.chatInput = document.getElementById('chatInput');
+                this.sendButton = document.getElementById('sendButton');
+                this.loading = document.getElementById('loading');
+                this.quickActions = document.getElementById('quickActions');
+                
+                this.initializeEventListeners();
+                setTimeout(() => this.quickActions.style.display = 'none', 5000);
+            }
+
+            initializeEventListeners() {
+                this.chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+                this.sendButton.addEventListener('click', () => this.sendMessage());
+            }
+
+            sendMessage() {
+                const message = this.chatInput.value.trim();
+                if (!message) return;
+                
+                this.chatInput.value = '';
+                this.quickActions.style.display = 'none';
+                this.addMessage(message, 'user');
+                
+                this.showLoading();
+                setTimeout(() => {
+                    const response = this.processMessage(message);
+                    this.hideLoading();
+                    this.addMessage(response, 'bot');
+                }, 1000);
+            }
+
+            processMessage(message) {
+                const lowercaseMessage = message.toLowerCase();
+                
+                for (const [topic, info] of Object.entries(TOPICS)) {
+                    if (lowercaseMessage.includes(topic)) {
+                        return `📋 **${topic.toUpperCase()}**\n\n${info}\n\n📖 Reference: ES Training DMCC Employee Handbook\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊`;
+                    }
+                }
+                
+                return `I understand you're asking about the Employee Handbook. I can help with:\n\n• Annual Leave\n• Sick Leave\n• Working Hours\n• Employee Benefits\n• Code of Conduct\n• Disciplinary Procedures\n\nPlease ask about any of these topics!\n\n*Have a great day! I am always here to guide you. Do you want to know more?* 😊`;
+            }
+
+            addMessage(content, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}-message`;
+                
+                const avatarDiv = document.createElement('div');
+                avatarDiv.className = 'message-avatar';
+                avatarDiv.innerHTML = sender === 'bot' ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user"></i>';
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'message-content';
+                
+                let formattedContent = content
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/\n/g, '<br>');
+                
+                contentDiv.innerHTML = formattedContent;
+                
+                messageDiv.appendChild(avatarDiv);
+                messageDiv.appendChild(contentDiv);
+                
+                this.chatMessages.appendChild(messageDiv);
+                this.scrollToBottom();
+            }
+
+            showLoading() { this.loading.style.display = 'flex'; }
+            hideLoading() { this.loading.style.display = 'none'; }
+            scrollToBottom() { this.chatMessages.scrollTop = this.chatMessages.scrollHeight; }
+        }
+
+        function handleQuickAction(topic) {
+            employeeHelper.addMessage(`Tell me about ${topic}`, 'user');
+            setTimeout(() => {
+                const response = employeeHelper.processMessage(topic);
+                employeeHelper.addMessage(response, 'bot');
+            }, 500);
+        }
+
+        function sendMessage() { employeeHelper.sendMessage(); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            employeeHelper = new EmployeeHelper();
+        });
+    </script>
+</body>
+</html>
